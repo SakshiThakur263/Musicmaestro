@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
+const dns = require('dns');
 const dotenv = require('dotenv');
 const path = require('path');
+
+try {
+  dns.setServers(['8.8.8.8', '1.1.1.1']);
+} catch (_) {
+  // Ignore if DNS servers cannot be overridden
+}
 const Artist = require('../models/Artist');
 const Category = require('../models/Category');
 const Review = require('../models/Review');
