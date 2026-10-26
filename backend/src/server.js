@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const path = require('path');
+const fs = require('fs');
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '../.env') });
@@ -38,7 +39,12 @@ connectDB().then(async () => {
 });
 
 // Middleware
-app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+    contentSecurityPolicy: false,
+  })
+);
 app.use(
   cors({
     origin: '*',
@@ -76,6 +82,15 @@ app.use('/api/*', (req, res) => {
     message: `API endpoint ${req.originalUrl} not found`,
   });
 });
+
+// Serve built frontend in production if available
+const frontendDistPath = path.join(__dirname, '../../frontend/dist');
+if (fs.existsSync(frontendDistPath)) {
+  app.use(express.static(frontendDistPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendDistPath, 'index.html'));
+  });
+}
 
 // Global error handler
 app.use(errorHandler);
