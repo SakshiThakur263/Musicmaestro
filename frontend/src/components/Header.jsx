@@ -95,35 +95,13 @@ const Header = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Logo matching WOM Reference Screenshot */}
-            <Link to="/" className="flex flex-col items-center group -space-y-1">
-              <div className="flex items-center tracking-tight font-black select-none font-raleway text-3xl md:text-4xl">
-                {/* W in Golden Yellow */}
-                <span className="text-[#f4a51c] drop-shadow-[0_2px_8px_rgba(244,165,28,0.6)] group-hover:scale-105 transition-transform">
-                  W
-                </span>
-
-                {/* O as Artistic Treble Clef in Cyan with musical notes */}
-                <span className="relative mx-1 inline-flex items-center justify-center">
-                  <svg
-                    className="w-8 h-8 md:w-9 md:h-9 text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)] animate-pulse"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M12 2C11.4 2 11 2.5 11 3.2V13.1C10.4 12.7 9.7 12.5 9 12.5C7.3 12.5 6 13.8 6 15.5C6 17.2 7.3 18.5 9 18.5C10.7 18.5 12 17.2 12 15.5V6.5L18 5V11.1C17.4 10.7 16.7 10.5 16 10.5C14.3 10.5 13 11.8 13 13.5C13 15.2 14.3 16.5 16 16.5C17.7 16.5 19 15.2 19 13.5V3.5C19 2.7 18.3 2.1 17.5 2.2L12 3.2V2Z" />
-                  </svg>
-                </span>
-
-                {/* M in Magenta/Pink */}
-                <span className="text-[#ec4899] drop-shadow-[0_2px_8px_rgba(236,72,153,0.6)] group-hover:scale-105 transition-transform">
-                  M
-                </span>
-              </div>
-
-              {/* Subtext: WORLD OF MUSICIANS */}
-              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.22em] text-cyan-300 drop-shadow-sm font-raleway">
-                WORLD OF MUSICIANS
-              </span>
+            {/* Music Maestro Logo */}
+            <Link to="/" className="flex items-center group">
+              <img
+                src="/music-maestro-logo.png"
+                alt="Music Maestro — Art of Performance & Celebration"
+                className="h-12 md:h-14 w-auto object-contain rounded-lg border border-[#f4a51c]/30 shadow-[0_2px_14px_rgba(244,165,28,0.25)] group-hover:scale-105 transition-transform duration-200"
+              />
             </Link>
 
             {/* Desktop Navigation matching Screenshot */}
@@ -322,11 +300,12 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden bg-black/95 backdrop-blur-xl flex flex-col p-6 animate-fadeIn">
           <div className="flex items-center justify-between pb-6 border-b border-white/10">
-            <Link to="/" className="flex items-center gap-1 font-bold text-2xl text-white font-raleway">
-              <span className="text-[#f4a51c]">W</span>
-              <span className="text-cyan-400">O</span>
-              <span className="text-[#ec4899]">M</span>
-              <span className="text-[10px] text-cyan-300 tracking-wider ml-1">WORLD OF MUSICIANS</span>
+            <Link to="/" className="flex items-center gap-2">
+              <img
+                src="/music-maestro-logo.png"
+                alt="Music Maestro"
+                className="h-11 w-auto object-contain rounded-lg border border-[#f4a51c]/30"
+              />
             </Link>
             <button
               onClick={() => setMobileMenuOpen(false)}

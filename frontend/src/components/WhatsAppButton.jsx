@@ -4,7 +4,7 @@ const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
   const phoneNumber = '917710046478';
   const prefilledMessage = encodeURIComponent(
-    'Hello, World Of Musicians! I would like to enquire about artist booking for an upcoming event.'
+    'Hello, Music Maestro! I would like to enquire about artist booking for an upcoming event.'
   );
 
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${prefilledMessage}`;

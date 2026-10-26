@@ -47,10 +47,10 @@ const About = () => {
             Our Story & Vision
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold font-raleway text-white">
-            About World of Musicians
+            About Music Maestro
           </h1>
           <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            World of Musicians is India’s premier artist booking platform, curating unforgettable live music experiences for corporate galas, royal weddings, and major festivals.
+            Music Maestro is India’s premier artist booking platform, curating unforgettable live music experiences for corporate galas, royal weddings, and major festivals.
           </p>
         </div>
       </div>

@@ -27,7 +27,7 @@ const Footer = () => {
       <div className="border-b border-wom-darkBorder/60 bg-gradient-to-r from-black via-[#111622] to-black py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <h3 className="text-xl font-bold text-white">Elevate Your Vision With World of Musicians</h3>
+            <h3 className="text-xl font-bold text-white">Elevate Your Vision With Music Maestro</h3>
             <p className="text-xs text-gray-400 mt-1">Book world-class artists, live bands, and DJs for your next landmark event.</p>
           </div>
           <div className="flex items-center gap-3">
@@ -51,16 +51,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Col 1: About & Legal Disclaimer from reference site */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-wom-gold flex items-center justify-center">
-                <Music className="w-5 h-5 text-black" />
-              </div>
-              <span className="font-extrabold text-lg text-white font-raleway tracking-tight">
-                WORLD OF MUSICIANS
-              </span>
+            <Link to="/" className="inline-block">
+              <img
+                src="/music-maestro-logo.png"
+                alt="Music Maestro — Art of Performance & Celebration"
+                className="h-14 w-auto object-contain rounded-lg border border-wom-gold/30 shadow-md"
+              />
             </Link>
             <p className="text-xs leading-relaxed text-gray-400">
-              Having a listing or profile on this website does not mean the talent is affiliated with or endorsed by us. We are not the exclusive agency or management for any celebrity or artist featured here. World Of Musicians is solely a booking agency for paid events. We do not process requests for donations of time, media interviews, or provide celebrity contact information.
+              Having a listing or profile on this website does not mean the talent is affiliated with or endorsed by us. We are not the exclusive agency or management for any celebrity or artist featured here. Music Maestro is solely a booking agency for paid events. We do not process requests for donations of time, media interviews, or provide celebrity contact information.
             </p>
           </div>
 
@@ -205,7 +204,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-wom-darkBorder flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
           <p>
-            Copyright © 2026 World Of Musicians | Developed with modern full-stack architecture inspired by WorldOfMusicians.com
+            Copyright © 2026 Music Maestro | Art of Performance & Celebration
           </p>
 
           <button

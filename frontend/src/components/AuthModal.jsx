@@ -90,7 +90,7 @@ const AuthModal = () => {
         <div className="flex items-center justify-between px-6 py-4 border-b border-wom-darkBorder bg-[#0f131c]">
           <h3 className="text-xl font-bold text-white flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-wom-gold inline-block animate-pulse"></span>
-            {activeTab === 'login' ? 'Sign In to World of Musicians' : 'Create an Account'}
+            {activeTab === 'login' ? 'Sign In to Music Maestro' : 'Create an Account'}
           </h3>
           <button
             onClick={closeAuthModal}
