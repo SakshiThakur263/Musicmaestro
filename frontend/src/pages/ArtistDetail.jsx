@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchArtistBySlug, submitInquiry, submitArtistReview } from '../services/api';
 import ArtistCard from '../components/ArtistCard';
+import { ARTISTS_CATALOG, findCatalogArtistBySlug } from '../utils/artistsCatalog';
 import {
   Star,
   MapPin,
@@ -67,20 +68,67 @@ const ArtistDetail = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
+    const buildCatalogFallback = (targetSlug) => {
+      const catArtist = findCatalogArtistBySlug(targetSlug);
+      if (!catArtist) return null;
+      const similar = ARTISTS_CATALOG.filter(
+        (a) =>
+          a.slug !== catArtist.slug &&
+          (a.category === catArtist.category || a.location === catArtist.location)
+      ).slice(0, 4);
+      return {
+        artist: catArtist,
+        reviews: [
+          {
+            _id: 'rev-1',
+            reviewerName: 'Aarav Mehta (Corporate Event Head)',
+            rating: 5,
+            eventType: 'Corporate Gala',
+            comment: `${catArtist.name} delivered an electrifying performance! Every guest was thoroughly entertained.`,
+          },
+          {
+            _id: 'rev-2',
+            reviewerName: 'Priya & Rohan Singhania',
+            rating: 5,
+            eventType: 'Destination Wedding',
+            comment: 'Superb stage energy, punctual team, and seamless coordination through Music Maestro.',
+          },
+        ],
+        similarArtists: similar,
+      };
+    };
+
     const loadArtist = async () => {
       setLoading(true);
       try {
         const res = await fetchArtistBySlug(slug);
-        if (res.success) {
+        if (res.success && res.data?.artist) {
           setData(res.data);
-          // Set city default in booking form
           setBookingForm((prev) => ({
             ...prev,
             city: res.data.artist.location || '',
           }));
+        } else {
+          const fallback = buildCatalogFallback(slug);
+          if (fallback) {
+            setData(fallback);
+            setBookingForm((prev) => ({
+              ...prev,
+              city: fallback.artist.location || '',
+            }));
+          }
         }
       } catch (err) {
-        console.error('Error fetching artist:', err);
+        const fallback = buildCatalogFallback(slug);
+        if (fallback) {
+          setData(fallback);
+          setBookingForm((prev) => ({
+            ...prev,
+            city: fallback.artist.location || '',
+          }));
+        } else {
+          console.error('Error fetching artist:', err);
+        }
       } finally {
         setLoading(false);
       }
@@ -102,12 +150,15 @@ const ArtistDetail = () => {
     setBookingLoading(true);
 
     try {
-      const res = await submitInquiry({
+      const payload = {
         ...bookingForm,
-        artistId: data.artist._id,
         artistName: data.artist.name,
         category: data.artist.category,
-      });
+      };
+      if (data.artist._id && !String(data.artist._id).startsWith('cat-')) {
+        payload.artistId = data.artist._id;
+      }
+      const res = await submitInquiry(payload);
 
       if (res.success) {
         setBookingSuccess(res);

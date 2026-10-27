@@ -198,6 +198,7 @@ const WIDE_SHOWCASE_ITEMS = [
 const SPEAKERS_ANCHORS_ITEMS = [
   {
     name: 'Saloni Karn',
+    slug: 'saloni-karn',
     role: 'Celebrity Anchor & Emcee',
     location: 'Mumbai',
     image:
@@ -205,6 +206,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
   },
   {
     name: 'Emcee Shaina Khan',
+    slug: 'emcee-shaina-khan',
     role: 'Corporate & Wedding Host',
     location: 'Mumbai',
     image:
@@ -212,6 +214,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
   },
   {
     name: 'Ajay Dhol',
+    slug: 'ajay-dhol',
     role: 'Percussion & Wedding Dhol',
     location: 'Delhi',
     image:
@@ -219,6 +222,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
   },
   {
     name: 'Arush',
+    slug: 'arush',
     role: 'Live Entertainer & Host',
     location: 'Mumbai',
     image:
@@ -226,6 +230,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
   },
   {
     name: 'Kapil',
+    slug: 'kapil',
     role: 'Standup Comedian & Anchor',
     location: 'Bangalore',
     image:
@@ -233,6 +238,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
   },
   {
     name: 'Karan',
+    slug: 'karan',
     role: 'Stage Host & Performer',
     location: 'Jaipur',
     image:
@@ -739,7 +745,7 @@ const Home = () => {
               {WIDE_SHOWCASE_ITEMS.map((item, index) => (
                 <Link
                   key={index}
-                  to={`/event-inquiry?artist=${encodeURIComponent(item.name)}&category=${encodeURIComponent(item.category)}`}
+                  to={`/artist/${item.slug}`}
                   className="group relative rounded-2xl overflow-hidden bg-[#222222] aspect-[4/4] flex flex-col justify-end p-5 border border-white/10 hover:border-[#f4a51c] transition-all duration-300 shadow-lg"
                 >
                   <img
@@ -815,7 +821,7 @@ const Home = () => {
             {SPEAKERS_ANCHORS_ITEMS.map((item, idx) => (
               <Link
                 key={idx}
-                to={`/event-inquiry?artist=${encodeURIComponent(item.name)}&category=Others`}
+                to={`/artist/${item.slug}`}
                 className="snap-start flex-shrink-0 w-[270px] sm:w-[310px] group relative rounded-2xl overflow-hidden bg-[#1c1c1c] border border-white/10 hover:border-[#f4a51c] transition-all duration-300 shadow-lg"
               >
                 <div className="aspect-[520/397] w-full overflow-hidden relative">

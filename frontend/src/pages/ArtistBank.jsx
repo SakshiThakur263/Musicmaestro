@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, useParams, Link } from 'react-router-dom';
 import { fetchArtists, fetchCategories } from '../services/api';
 import ArtistCard from '../components/ArtistCard';
+import { ARTISTS_CATALOG } from '../utils/artistsCatalog';
 import {
   Search,
   Filter,
@@ -17,12 +18,21 @@ import {
 
 const ArtistBank = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const routeParams = useParams();
 
-  // State from URL query or defaults
+  // State from URL query / route params or defaults
   const [keyword, setKeyword] = useState(searchParams.get('search') || '');
   const [category, setCategory] = useState(searchParams.get('category') || 'All');
-  const [subcategory, setSubcategory] = useState(searchParams.get('subcategory') || 'All');
-  const [location, setLocation] = useState(searchParams.get('location') || 'All');
+  const [subcategory, setSubcategory] = useState(
+    searchParams.get('subcategory') ||
+      (routeParams.subcategory ? routeParams.subcategory.replace(/-/g, ' ') : 'All')
+  );
+  const [location, setLocation] = useState(
+    searchParams.get('location') ||
+      (routeParams.city
+        ? routeParams.city.charAt(0).toUpperCase() + routeParams.city.slice(1)
+        : 'All')
+  );
   const [sortBy, setSortBy] = useState(searchParams.get('sort') || 'rating');
   const [featuredOnly, setFeaturedOnly] = useState(searchParams.get('featured') === 'true');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'list'
@@ -37,18 +47,36 @@ const ArtistBank = () => {
   const [loading, setLoading] = useState(true);
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  // Available locations in dataset
-  const locationsList = ['All', 'Mumbai', 'Delhi', 'Jaipur', 'Pune', 'Goa', 'Bangalore'];
+  // Available locations in dataset (including all 6 Home page cities)
+  const locationsList = [
+    'All',
+    'Mumbai',
+    'Delhi',
+    'Amritsar',
+    'Bangalore',
+    'Jaipur',
+    'Agra',
+    'Pune',
+    'Goa',
+  ];
 
   // Sync local filter state when URL query params change (e.g., from header/footer links)
   useEffect(() => {
     setKeyword(searchParams.get('search') || '');
     setCategory(searchParams.get('category') || 'All');
-    setSubcategory(searchParams.get('subcategory') || 'All');
-    setLocation(searchParams.get('location') || 'All');
+    setSubcategory(
+      searchParams.get('subcategory') ||
+        (routeParams.subcategory ? routeParams.subcategory.replace(/-/g, ' ') : 'All')
+    );
+    setLocation(
+      searchParams.get('location') ||
+        (routeParams.city
+          ? routeParams.city.charAt(0).toUpperCase() + routeParams.city.slice(1)
+          : 'All')
+    );
     setSortBy(searchParams.get('sort') || 'rating');
     setFeaturedOnly(searchParams.get('featured') === 'true');
-  }, [searchParams]);
+  }, [searchParams, routeParams.city, routeParams.subcategory]);
 
   // Load categories
   useEffect(() => {
@@ -66,10 +94,38 @@ const ArtistBank = () => {
     loadCategories();
   }, []);
 
+  // Helper to filter local catalog for enrichment/fallback
+  const filterLocalCatalog = () => {
+    return ARTISTS_CATALOG.filter((item) => {
+      if (featuredOnly && !item.featured) return false;
+      if (category && category !== 'All') {
+        if (item.category.toLowerCase() !== category.toLowerCase()) return false;
+      }
+      if (subcategory && subcategory !== 'All') {
+        const subNeedle = subcategory.toLowerCase().replace(/s$/, '');
+        const itemSub = (item.subcategory || '').toLowerCase();
+        const itemGenres = (item.genres || []).join(' ').toLowerCase();
+        if (!itemSub.includes(subNeedle) && !itemGenres.includes(subNeedle)) {
+          return false;
+        }
+      }
+      if (location && location !== 'All') {
+        if (!item.location.toLowerCase().includes(location.toLowerCase())) return false;
+      }
+      if (keyword.trim()) {
+        const kw = keyword.trim().toLowerCase();
+        const hay = `${item.name} ${item.category} ${item.subcategory} ${item.location} ${item.bio} ${(item.genres || []).join(' ')}`.toLowerCase();
+        if (!hay.includes(kw)) return false;
+      }
+      return true;
+    });
+  };
+
   // Fetch artists when filters or page change
   useEffect(() => {
     const loadArtists = async () => {
       setLoading(true);
+      const localMatches = filterLocalCatalog();
       try {
         const queryParams = {
           page: currentPage,
@@ -84,13 +140,23 @@ const ArtistBank = () => {
         if (featuredOnly) queryParams.featured = 'true';
 
         const res = await fetchArtists(queryParams);
-        if (res.success) {
-          setArtists(res.data);
-          setTotalCount(res.total);
-          setTotalPages(res.totalPages);
+        if (res.success && res.data && res.data.length > 0) {
+          // Merge API results with local catalog items not already in API results
+          const existingSlugs = new Set(res.data.map((a) => a.slug));
+          const extraLocal = localMatches.filter((a) => !existingSlugs.has(a.slug));
+          const merged = currentPage === 1 ? [...res.data, ...extraLocal] : res.data;
+          setArtists(merged);
+          setTotalCount(Math.max(res.total + extraLocal.length, merged.length));
+          setTotalPages(res.totalPages || 1);
+        } else {
+          setArtists(localMatches);
+          setTotalCount(localMatches.length);
+          setTotalPages(1);
         }
-      } catch (err) {
-        console.error('Failed to load artists:', err);
+      } catch {
+        setArtists(localMatches);
+        setTotalCount(localMatches.length);
+        setTotalPages(1);
       } finally {
         setLoading(false);
       }

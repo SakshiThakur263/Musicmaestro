@@ -45,12 +45,14 @@ const getArtists = async (req, res, next) => {
 
     // Category filter
     if (category && category !== 'All' && category !== '0') {
-      query.category = { $regex: new RegExp(`^${category}$`, 'i') };
+      const escapedCat = category.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query.category = { $regex: new RegExp(`^${escapedCat}$`, 'i') };
     }
 
     // Subcategory filter
     if (subcategory && subcategory !== 'All') {
-      query.subcategory = { $regex: new RegExp(`^${subcategory}$`, 'i') };
+      const normalizedSub = subcategory.replace(/s$/i, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query.subcategory = { $regex: new RegExp(normalizedSub, 'i') };
     }
 
     // Location filter
