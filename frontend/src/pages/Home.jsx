@@ -277,26 +277,44 @@ const POPULAR_VIDEOS = [
   {
     id: 'HqJzui2afNw',
     title: 'Do Dil x Ek Ladki Ko – Live Unplugged Bollywood Mashup',
+    mp4Url: '/videos/live-band.mp4',
+    fallbackMp4: 'https://worldofmusicians.com/wp-content/uploads/2024/04/dance-YJLive.mp4',
+    poster: 'https://i.ytimg.com/vi/HqJzui2afNw/hqdefault.jpg',
   },
   {
     id: 'jeUZm0jnKOs',
     title: 'Anup Jalota Live Concert – Soulful Ghazal & Bhajan Evening',
+    mp4Url: 'https://worldofmusicians.com/wp-content/uploads/2024/04/Kartik.mp4',
+    fallbackMp4: '/videos/live-band.mp4',
+    poster: 'https://i.ytimg.com/vi/jeUZm0jnKOs/hqdefault.jpg',
   },
   {
     id: 'OLQ9bBcydLs',
     title: 'Shankar Mahadevan Classical Fusion Live Performance',
+    mp4Url: 'https://worldofmusicians.com/wp-content/uploads/2024/04/Rohan.mp4',
+    fallbackMp4: '/videos/live-band.mp4',
+    poster: 'https://i.ytimg.com/vi/OLQ9bBcydLs/hqdefault.jpg',
   },
   {
     id: 'doi_Ss4WaT0',
     title: 'Pratibha Singh Baghel Live at Jazbaat – Soulful Ghazals & Music',
+    mp4Url: 'https://worldofmusicians.com/wp-content/uploads/2024/04/Soham.mp4',
+    fallbackMp4: '/videos/live-band.mp4',
+    poster: 'https://i.ytimg.com/vi/doi_Ss4WaT0/hqdefault.jpg',
   },
   {
     id: 'P-Ay-ThLric',
     title: 'Jazbaat Live Musical Concert – Classical & Bollywood Symphony',
+    mp4Url: '/videos/dj-concert.mp4',
+    fallbackMp4: 'https://worldofmusicians.com/wp-content/uploads/2024/06/dj-concert-hd-no-copyright-video.mp4',
+    poster: 'https://i.ytimg.com/vi/P-Ay-ThLric/hqdefault.jpg',
   },
   {
     id: '_dgNRR8Tpew',
     title: 'Madhur Live Band – High-Energy Bollywood & Sufi Medley',
+    mp4Url: 'https://worldofmusicians.com/wp-content/uploads/2024/04/dance-YJLive.mp4',
+    fallbackMp4: '/videos/dj-concert.mp4',
+    poster: 'https://i.ytimg.com/vi/_dgNRR8Tpew/hqdefault.jpg',
   },
 ];
 
@@ -380,11 +398,42 @@ const Home = () => {
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [activePopularVideo, setActivePopularVideo] = useState(null);
 
   // Carousel refs
   const exclusiveCarouselRef = useRef(null);
   const wideCarouselRef = useRef(null);
   const speakersCarouselRef = useRef(null);
+
+  // Ensure Hero background video autoplays reliably on mobile browsers & WebViews
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    videoEl.defaultMuted = true;
+    videoEl.muted = true;
+    videoEl.setAttribute('muted', '');
+    videoEl.setAttribute('playsinline', '');
+    videoEl.setAttribute('webkit-playsinline', '');
+
+    const attemptPlay = () => {
+      if (videoEl.paused) {
+        videoEl
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
+      }
+    };
+
+    attemptPlay();
+    videoEl.addEventListener('loadeddata', attemptPlay);
+    document.addEventListener('touchstart', attemptPlay, { once: true, passive: true });
+
+    return () => {
+      videoEl.removeEventListener('loadeddata', attemptPlay);
+      document.removeEventListener('touchstart', attemptPlay);
+    };
+  }, []);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -504,22 +553,25 @@ const Home = () => {
       {/* =====================================================================
           1. HERO SECTION WITH FULLSCREEN VIDEO & LIVE TYPED HEADLINE
       ====================================================================== */}
-      <section className="relative min-h-[95svh] sm:min-h-[100svh] flex items-center justify-center pt-36 sm:pt-40 lg:pt-32 pb-16 sm:pb-24 px-4 overflow-hidden">
-        {/* Fullscreen Video Background */}
+      <section className="relative min-h-[95svh] sm:min-h-[100svh] flex items-center justify-center pt-36 sm:pt-40 lg:pt-32 pb-16 sm:pb-24 px-4 overflow-hidden bg-[#050b24]">
+        {/* Fullscreen Video Background (Works on Mobile & Desktop with Audio on Unmute) */}
         <video
           ref={videoRef}
-          src="/hero-video.mp4"
           autoPlay
           loop
-          muted={isMuted}
+          muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none brightness-75 scale-105"
-        />
+          preload="auto"
+          poster="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=80"
+          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none brightness-95 scale-105"
+        >
+          <source src="/videos/dj-concert.mp4" type="video/mp4" />
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
 
-        {/* Deep Royal Concert Blue Stage Vignette Overlay matching Screenshot 1 */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#040928]/85 via-[#071344]/60 to-[#121212] z-[1]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(29,78,216,0.32)_0%,transparent_60%)] z-[1]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,6,23,0.65)_100%)] z-[1]" />
+        {/* Deep Royal Concert Blue Stage Vignette Overlay (Balanced so video shines through on mobile) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#040928]/60 via-[#071344]/40 to-[#121212]/90 z-[1]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(29,78,216,0.28)_0%,transparent_60%)] z-[1]" />
 
         <div className="relative max-w-5xl mx-auto text-center z-10 w-full mt-1 sm:mt-4">
           {/* Dynamic Typed Headline matching Screenshot 1 */}
@@ -908,29 +960,86 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {POPULAR_VIDEOS.map((vid) => (
-            <div
-              key={vid.id}
-              className="rounded-2xl overflow-hidden bg-[#1b1b1b] border border-white/10 hover:border-[#f4a51c] transition shadow-xl group"
-            >
-              <div className="aspect-video w-full bg-black relative">
-                <iframe
-                  src={`https://www.youtube.com/embed/${vid.id}?rel=0`}
-                  title={vid.title}
-                  className="w-full h-full border-0"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  loading="lazy"
-                />
+          {POPULAR_VIDEOS.map((vid) => {
+            const isActive = activePopularVideo === vid.id;
+            return (
+              <div
+                key={vid.id}
+                className="rounded-2xl overflow-hidden bg-[#1b1b1b] border border-white/10 hover:border-[#f4a51c] transition shadow-xl group"
+              >
+                <div className="aspect-video w-full bg-black relative overflow-hidden">
+                  {isActive ? (
+                    <video
+                      controls
+                      autoPlay
+                      playsInline
+                      poster={vid.poster}
+                      className="w-full h-full object-cover bg-black"
+                    >
+                      <source src={vid.mp4Url} type="video/mp4" />
+                      <source src={vid.fallbackMp4} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setActivePopularVideo(vid.id)}
+                      className="w-full h-full relative block text-left group/vid focus:outline-none"
+                      aria-label={`Play ${vid.title}`}
+                    >
+                      <img
+                        src={vid.poster}
+                        alt={vid.title}
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80';
+                        }}
+                        className="w-full h-full object-cover group-hover/vid:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/60" />
+
+                      {/* Top YouTube-style Title Bar */}
+                      <div className="absolute top-0 left-0 right-0 p-3 flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="w-7 h-7 rounded-full bg-[#f4a51c] text-black font-extrabold text-xs flex items-center justify-center flex-shrink-0 shadow">
+                            MM
+                          </span>
+                          <span className="text-xs text-white font-medium truncate drop-shadow">
+                            {vid.title}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Center Iconic Red YouTube Play Button */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-11 rounded-xl bg-[#FF0000] group-hover/vid:bg-[#e60000] group-hover/vid:scale-110 transition-all duration-200 flex items-center justify-center shadow-[0_6px_24px_rgba(0,0,0,0.75)]">
+                          <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+                        </div>
+                      </div>
+
+                      {/* Bottom-Left Watch Badge */}
+                      <div className="absolute bottom-2.5 left-3 px-2.5 py-1 rounded bg-black/80 text-white text-[11px] font-medium flex items-center gap-1.5 backdrop-blur-sm">
+                        <Play className="w-3 h-3 text-[#FF0000] fill-[#FF0000]" />
+                        <span>Tap to Play Musical Video</span>
+                      </div>
+                    </button>
+                  )}
+                </div>
+                <div className="p-4 flex items-center justify-between gap-2">
+                  <h4 className="text-xs sm:text-sm font-bold text-gray-200 group-hover:text-[#f4a51c] transition line-clamp-1">
+                    {vid.title}
+                  </h4>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${vid.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] text-[#f4a51c] hover:underline flex-shrink-0 font-semibold"
+                  >
+                    YouTube &rarr;
+                  </a>
+                </div>
               </div>
-              <div className="p-4">
-                <h4 className="text-xs sm:text-sm font-bold text-gray-200 group-hover:text-[#f4a51c] transition line-clamp-1">
-                  {vid.title}
-                </h4>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

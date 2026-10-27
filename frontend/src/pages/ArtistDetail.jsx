@@ -497,14 +497,16 @@ const ArtistDetail = () => {
                         <div key={idx} className="space-y-2">
                           <h4 className="text-sm font-semibold text-gray-200">{vid.title}</h4>
                           <div className="relative aspect-video rounded-xl overflow-hidden border border-wom-darkBorder bg-black">
-                            <iframe
-                              src={vid.embedUrl || vid.url}
-                              title={vid.title}
-                              className="w-full h-full"
-                              referrerPolicy="strict-origin-when-cross-origin"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              allowFullScreen
-                            ></iframe>
+                            <video
+                              controls
+                              playsInline
+                              preload="metadata"
+                              poster={artist.featuredImage}
+                              className="w-full h-full object-cover bg-black"
+                            >
+                              <source src="/videos/live-band.mp4" type="video/mp4" />
+                              <source src="/videos/dj-concert.mp4" type="video/mp4" />
+                            </video>
                           </div>
                         </div>
                       ))}

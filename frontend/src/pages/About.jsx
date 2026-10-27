@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const TRIBE_MEMBERS = [
@@ -63,9 +63,37 @@ const INDUSTRY_LOGOS = [
 
 const About = () => {
   const [activeLogoSlide, setActiveLogoSlide] = useState(0);
+  const heroVideoRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  // Ensure About Us Hero background video autoplays on mobile browsers & WebViews
+  useEffect(() => {
+    const videoEl = heroVideoRef.current;
+    if (!videoEl) return;
+
+    videoEl.defaultMuted = true;
+    videoEl.muted = true;
+    videoEl.setAttribute('muted', '');
+    videoEl.setAttribute('playsinline', '');
+    videoEl.setAttribute('webkit-playsinline', '');
+
+    const attemptPlay = () => {
+      if (videoEl.paused) {
+        videoEl.play().catch(() => {});
+      }
+    };
+
+    attemptPlay();
+    videoEl.addEventListener('loadeddata', attemptPlay);
+    document.addEventListener('touchstart', attemptPlay, { once: true, passive: true });
+
+    return () => {
+      videoEl.removeEventListener('loadeddata', attemptPlay);
+      document.removeEventListener('touchstart', attemptPlay);
+    };
   }, []);
 
   // Auto-advance partner logo carousel on mobile/desktop
@@ -82,18 +110,23 @@ const About = () => {
           1. HERO SECTION WITH VIDEO BACKGROUND & GOLD DIVIDER
       ====================================================================== */}
       <section className="relative min-h-[360px] sm:min-h-[420px] flex items-center justify-center pt-28 sm:pt-32 pb-14 px-4 overflow-hidden bg-[#060b26]">
-        {/* Background Video */}
+        {/* Background Video (Plays on Mobile & Desktop) */}
         <video
-          src="/hero-video.mp4"
+          ref={heroVideoRef}
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none brightness-75"
-        />
+          preload="auto"
+          poster="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=80"
+          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none brightness-95"
+        >
+          <source src="/videos/dj-concert.mp4" type="video/mp4" />
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
 
-        {/* Deep Concert Stage Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#040926]/85 via-[#07113a]/65 to-[#060b26]/90 z-[1]" />
+        {/* Deep Concert Stage Overlay (Balanced so video is clearly visible on mobile) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#040926]/55 via-[#07113a]/40 to-[#060b26]/75 z-[1]" />
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h1 className="font-raleway text-[34px] sm:text-[42px] font-medium text-white leading-[38px] tracking-wide">
