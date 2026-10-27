@@ -103,7 +103,7 @@ const SearchBanner = () => {
         <h5 className="text-xs sm:text-sm font-medium text-white/90 drop-shadow mb-4 tracking-wide">
           Or browse featured categories:
         </h5>
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4">
           {featuredPills.map((pill, idx) => {
             const Icon = pill.icon;
             return (
@@ -111,10 +111,10 @@ const SearchBanner = () => {
                 key={idx}
                 type="button"
                 onClick={() => navigate(`/artists?category=${encodeURIComponent(pill.category)}`)}
-                className="w-32 sm:w-40 py-3.5 sm:py-4 px-3 bg-black/65 hover:bg-[#f4a51c] backdrop-blur-md text-white hover:text-black border border-white/15 hover:border-[#f4a51c] rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1 flex flex-col items-center justify-center gap-2 group"
+                className="flex-1 min-w-[96px] max-w-[140px] sm:flex-initial sm:w-40 py-3 sm:py-4 px-2 sm:px-3 bg-black/65 hover:bg-[#f4a51c] backdrop-blur-md text-white hover:text-black border border-white/15 hover:border-[#f4a51c] rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1 flex flex-col items-center justify-center gap-1.5 sm:gap-2 group"
               >
-                <Icon className="w-6 h-6 text-[#f4a51c] group-hover:text-black transition-colors" />
-                <h4 className="text-xs sm:text-[13px] font-semibold tracking-wide">
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#f4a51c] group-hover:text-black transition-colors" />
+                <h4 className="text-[11px] sm:text-[13px] font-semibold tracking-wide leading-tight">
                   {pill.name}
                 </h4>
               </button>

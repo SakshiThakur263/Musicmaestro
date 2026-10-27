@@ -522,10 +522,10 @@ const Home = () => {
 
         <div className="relative max-w-5xl mx-auto text-center z-10 w-full mt-2 sm:mt-4">
           {/* Dynamic Typed Headline matching worldofmusicians.com */}
-          <div className="min-h-[56px] sm:min-h-[84px] md:min-h-[104px] flex items-center justify-center px-2">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-raleway tracking-tight text-white uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] leading-tight">
+          <div className="min-h-[84px] sm:min-h-[100px] md:min-h-[116px] flex items-center justify-center px-2">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-raleway tracking-tight text-white uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] leading-tight break-words">
               <span>{currentText}</span>
-              <span className="inline-block w-1 sm:w-1.5 h-8 sm:h-12 md:h-14 bg-[#f4a51c] ml-1.5 align-middle animate-pulse" />
+              <span className="inline-block w-1 sm:w-1.5 h-6 sm:h-10 md:h-12 bg-[#f4a51c] ml-1.5 align-middle animate-pulse" />
             </h1>
           </div>
 
@@ -635,18 +635,18 @@ const Home = () => {
           <button
             type="button"
             onClick={() => scrollCarousel(exclusiveCarouselRef, 'left')}
-            className="hidden sm:flex absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
+            className="flex absolute left-1 sm:-left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
             aria-label="Previous artists"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <button
             type="button"
             onClick={() => scrollCarousel(exclusiveCarouselRef, 'right')}
-            className="hidden sm:flex absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
+            className="flex absolute right-1 sm:-right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
             aria-label="Next artists"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
           {/* Horizontal Snap Carousel */}
@@ -799,18 +799,18 @@ const Home = () => {
           <button
             type="button"
             onClick={() => scrollCarousel(speakersCarouselRef, 'left')}
-            className="hidden sm:flex absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
+            className="flex absolute left-1 sm:-left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
             aria-label="Scroll speakers left"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <button
             type="button"
             onClick={() => scrollCarousel(speakersCarouselRef, 'right')}
-            className="hidden sm:flex absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
+            className="flex absolute right-1 sm:-right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
             aria-label="Scroll speakers right"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
           <div
@@ -1253,16 +1253,16 @@ const Home = () => {
           <h3 className="text-xl sm:text-3xl font-extrabold font-raleway text-white mb-8">
             Elevating Excellence, Collaborating with India&apos;s Finest Brands
           </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 items-center justify-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 items-center justify-items-center">
             {BRAND_LOGOS.map((brand, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl p-4 w-40 sm:w-48 h-24 flex items-center justify-center shadow-md hover:scale-105 transition"
+                className="bg-white rounded-xl p-3 sm:p-4 w-full max-w-[190px] h-20 sm:h-24 flex items-center justify-center shadow-md hover:scale-105 transition"
               >
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="max-h-16 max-w-full object-contain"
+                  className="max-h-14 sm:max-h-16 max-w-full object-contain"
                   loading="lazy"
                 />
               </div>

@@ -283,7 +283,7 @@ const EventInquiry = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-7 py-2.5 bg-[#f4a51c] hover:bg-[#e09414] text-white font-medium text-sm rounded-lg transition shadow-md disabled:opacity-50"
+                className="w-full sm:w-auto px-7 py-3 sm:py-2.5 bg-[#f4a51c] hover:bg-[#e09414] text-white font-semibold text-sm rounded-lg transition shadow-md disabled:opacity-50"
               >
                 {loading ? 'Submitting...' : 'Submit'}
               </button>
