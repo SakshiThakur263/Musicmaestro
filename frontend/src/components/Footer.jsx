@@ -107,7 +107,7 @@ const Footer = () => {
                 <img
                   src="/music-maestro-logo.png"
                   alt="Music Maestro — Art of Performance & Celebration"
-                  className="h-14 sm:h-16 w-auto object-contain rounded-lg"
+                  className="h-16 sm:h-20 w-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
                 />
               </Link>
               <p className="text-[14px] sm:text-[13px] text-justify leading-[2.15] sm:leading-relaxed text-gray-100 font-normal pr-0 lg:pr-6">

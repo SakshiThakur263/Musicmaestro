@@ -122,7 +122,7 @@ const Header = () => {
               <img
                 src="/music-maestro-logo.png"
                 alt="Music Maestro — Art of Performance & Celebration"
-                className="h-12 sm:h-14 w-auto object-contain rounded-lg border border-[#f4a51c]/30 shadow-[0_2px_14px_rgba(244,165,28,0.25)] group-hover:scale-105 transition-transform duration-200"
+                className="h-12 sm:h-14 md:h-16 w-auto object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)] group-hover:scale-105 transition-transform duration-200"
               />
             </Link>
 
@@ -354,7 +354,7 @@ const Header = () => {
               <img
                 src="/music-maestro-logo.png"
                 alt="Music Maestro"
-                className="h-10 w-auto object-contain rounded-lg border border-[#f4a51c]/30"
+                className="h-11 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
               />
             </Link>
             <button
