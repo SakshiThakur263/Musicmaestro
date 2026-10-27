@@ -565,8 +565,8 @@ const Home = () => {
           poster="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=80"
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none brightness-95 scale-105"
         >
-          <source src="/videos/dj-concert.mp4" type="video/mp4" />
           <source src="/hero-video.mp4" type="video/mp4" />
+          <source src="/videos/dj-concert.mp4" type="video/mp4" />
         </video>
 
         {/* Deep Royal Concert Blue Stage Vignette Overlay (Balanced so video shines through on mobile) */}
