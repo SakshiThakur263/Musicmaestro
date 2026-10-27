@@ -1,35 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { submitInquiry } from '../services/api';
-import {
-  Calendar,
-  Users,
-  MapPin,
-  Clock,
-  Sparkles,
-  CheckCircle2,
-  AlertCircle,
-  ArrowRight,
-  ShieldCheck,
-  Send,
-  HelpCircle,
-} from 'lucide-react';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 const EventInquiry = () => {
   const [searchParams] = useSearchParams();
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    firstName: '',
+    lastName: '',
+    address: '',
     phone: '',
-    eventType: searchParams.get('eventType') || 'Wedding',
-    eventDate: '',
-    city: '',
-    guestCount: '100-300',
-    budget: 'Rs. 1,00,000 - 2,50,000',
-    artistName: searchParams.get('artist') || '',
-    category: searchParams.get('category') || 'Live Bands',
-    notes: '',
+    email: '',
+    eventType: searchParams.get('eventType') || 'Corporate',
+    guestCount: '',
+    notes: searchParams.get('artist')
+      ? `Enquiry for Artist: ${searchParams.get('artist')}`
+      : '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -47,10 +34,25 @@ const EventInquiry = () => {
     setError('');
     setLoading(true);
 
+    const fullName = `${formData.firstName} ${formData.lastName}`.trim();
+
     try {
-      const res = await submitInquiry(formData);
+      const payload = {
+        name: fullName,
+        email: formData.email,
+        phone: formData.phone,
+        eventType: formData.eventType,
+        eventDate: 'To Be Decided',
+        city: formData.address,
+        guestCount: formData.guestCount,
+        artistName: searchParams.get('artist') || 'General Entertainment Query',
+        category: searchParams.get('category') || 'Any',
+        notes: formData.notes,
+      };
+
+      const res = await submitInquiry(payload);
       if (res.success) {
-        setSuccessResponse(res);
+        setSuccessResponse({ ...res, fullName });
       }
     } catch (err) {
       setError(
@@ -62,376 +64,232 @@ const EventInquiry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
-      {/* Header Banner */}
-      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-9 sm:py-12 px-4 mb-8 sm:mb-10 text-center">
-        <div className="max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-wom-gold/15 text-wom-gold border border-wom-gold/30 rounded-full text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            Fast-Track Booking Inquiry
-          </div>
-          <h1 className="text-2xl sm:text-5xl font-extrabold font-raleway text-white">
-            Send an Event Enquiry
+    <div className="min-h-screen bg-[#2b2b2b] text-white">
+      {/* Top solid black header spacer matching screenshot */}
+      <div className="h-20 sm:h-24 bg-black w-full"></div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        {/* Heading & Subtitle matching reference screenshot */}
+        <div className="text-center mb-8 sm:mb-10">
+          <h1 className="text-3xl sm:text-4xl font-bold font-raleway text-[#f4a51c] mb-4">
+            Start Enquiry
           </h1>
-          <p className="text-xs sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
-            Tell us about your event vision. Our talent curation team will check artist availability, provide customized quotes, and arrange complete performance coordination.
+          <p className="text-sm sm:text-base text-gray-200 max-w-3xl mx-auto leading-relaxed">
+            Kindly share the specifics of your entertainment request, and we&apos;ll reach out to initiate a more in-depth discussion about your requirements and event.
           </p>
         </div>
-      </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 items-start">
-          {/* Main Form (2 cols) */}
-          <div className="lg:col-span-2">
-            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-10 shadow-2xl">
-              {successResponse ? (
-                <div className="text-center py-8 sm:py-10 space-y-5 animate-fadeIn">
-                  <div className="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mx-auto border border-green-500/40">
-                    <CheckCircle2 className="w-10 h-10" />
-                  </div>
-                  <h2 className="text-xl sm:text-3xl font-bold font-raleway text-white">
-                    Inquiry Successfully Received!
-                  </h2>
-                  <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
-                    Thank you, <strong className="text-white">{formData.name}</strong>. Your inquiry has been routed to our artist coordination desk.
-                  </p>
-
-                  <div className="p-4 bg-[#181f2c] border border-wom-darkBorder rounded-xl max-w-sm mx-auto text-left space-y-1.5 text-xs">
-                    <div className="flex justify-between gap-2">
-                      <span className="text-gray-400">Reference ID:</span>
-                      <span className="font-mono font-bold text-wom-gold">
-                        {successResponse.inquiryReference}
-                      </span>
-                    </div>
-                    <div className="flex justify-between gap-2">
-                      <span className="text-gray-400">Event Type:</span>
-                      <span className="text-white font-medium text-right">{formData.eventType}</span>
-                    </div>
-                    <div className="flex justify-between gap-2">
-                      <span className="text-gray-400">Event Date:</span>
-                      <span className="text-white font-medium">{formData.eventDate}</span>
-                    </div>
-                    <div className="flex justify-between gap-2">
-                      <span className="text-gray-400">City / Venue:</span>
-                      <span className="text-white font-medium text-right">{formData.city}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-gray-400 max-w-md mx-auto">
-                    We will get in touch with you at <strong className="text-white">{formData.phone}</strong> or{' '}
-                    <strong className="text-white break-all">{formData.email}</strong> within 24 hours.
-                  </p>
-
-                  <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
-                    <button
-                      onClick={() => setSuccessResponse(null)}
-                      className="w-full sm:w-auto px-6 py-2.5 bg-[#181f2c] border border-wom-darkBorder hover:border-wom-gold text-white text-xs font-semibold rounded-xl transition"
-                    >
-                      Submit Another Inquiry
-                    </button>
-                    <Link
-                      to="/artists"
-                      className="w-full sm:w-auto px-6 py-2.5 bg-wom-gold text-black font-bold text-xs rounded-xl shadow-gold transition text-center"
-                    >
-                      Browse More Artists
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {error && (
-                    <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-xs rounded-lg flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                      <span>{error}</span>
-                    </div>
-                  )}
-
-                  {/* Section 1: Event Details */}
-                  <div className="space-y-4">
-                    <h3 className="text-base font-bold text-wom-gold uppercase tracking-wider font-raleway border-b border-wom-darkBorder pb-2">
-                      1. Event Details
-                    </h3>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-300 mb-1">
-                          Event Type *
-                        </label>
-                        <select
-                          name="eventType"
-                          value={formData.eventType}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold cursor-pointer"
-                        >
-                          <option value="Wedding">Wedding / Sangeet / Reception</option>
-                          <option value="Corporate">Corporate Conference / Annual Gala</option>
-                          <option value="Sangeet / Cocktails">Sangeet / Cocktails Night</option>
-                          <option value="Private Party">Private Party / Milestone Birthday</option>
-                          <option value="College Fest">College Cultural Fest</option>
-                          <option value="Concert / Festival">Public Concert / Music Festival</option>
-                          <option value="Other">Other Event</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-300 mb-1">
-                          Date of Event *
-                        </label>
-                        <input
-                          type="date"
-                          name="eventDate"
-                          required
-                          value={formData.eventDate}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-300 mb-1">
-                          City & Venue *
-                        </label>
-                        <input
-                          type="text"
-                          name="city"
-                          required
-                          placeholder="e.g. Mumbai, Taj Lands End"
-                          value={formData.city}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-300 mb-1">
-                          Expected Guest Count
-                        </label>
-                        <select
-                          name="guestCount"
-                          value={formData.guestCount}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold cursor-pointer"
-                        >
-                          <option value="Under 50">Under 50 guests (Intimate)</option>
-                          <option value="50-150">50 - 150 guests</option>
-                          <option value="150-500">150 - 500 guests (Grand)</option>
-                          <option value="500-1500">500 - 1,500 guests (Large)</option>
-                          <option value="1500+">1,500+ guests (Mega Event/Concert)</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Section 2: Artist Requirement */}
-                  <div className="space-y-4 pt-2">
-                    <h3 className="text-base font-bold text-wom-gold uppercase tracking-wider font-raleway border-b border-wom-darkBorder pb-2">
-                      2. Entertainment Requirement
-                    </h3>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-300 mb-1">
-                          Artist Category Preference
-                        </label>
-                        <select
-                          name="category"
-                          value={formData.category}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold cursor-pointer"
-                        >
-                          <option value="Live Bands">Live Bands & Bollywood Ensembles</option>
-                          <option value="Solo Performer">Solo Singers / Guitarists / Violinists</option>
-                          <option value="DJ Services">DJ & Percussion Services</option>
-                          <option value="Sufi & Qawwali">Sufi & Qawwali Troupe</option>
-                          <option value="Others">Anchors / Stand Up Comedians</option>
-                          <option value="Any">Any / Multiple Acts</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-300 mb-1">
-                          Specific Artist Name (Optional)
-                        </label>
-                        <input
-                          type="text"
-                          name="artistName"
-                          placeholder="e.g. Manmeet, Sonu Nigam, Ibex..."
-                          value={formData.artistName}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-300 mb-1">
-                        Estimated Entertainment Budget (INR)
-                      </label>
-                      <select
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold cursor-pointer"
-                      >
-                        <option value="Rs. 25,000 - 50,000">Rs. 25,000 - 50,000</option>
-                        <option value="Rs. 50,000 - 1,00,000">Rs. 50,000 - 1,00,000</option>
-                        <option value="Rs. 1,00,000 - 2,50,000">Rs. 1,00,000 - 2,50,000</option>
-                        <option value="Rs. 2,50,000 - 5,00,000">Rs. 2,50,000 - 5,00,000</option>
-                        <option value="Rs. 5,00,000 - 15,00,000">Rs. 5,00,000 - 15,00,000</option>
-                        <option value="Rs. 15,00,000+ (Celebrity Headline)">
-                          Rs. 15,00,000+ (Celebrity Headline)
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Section 3: Contact Details */}
-                  <div className="space-y-4 pt-2">
-                    <h3 className="text-base font-bold text-wom-gold uppercase tracking-wider font-raleway border-b border-wom-darkBorder pb-2">
-                      3. Organizer Contact Details
-                    </h3>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-300 mb-1">
-                        Your Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        placeholder="e.g. Vikram Mehra"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-300 mb-1">
-                          Email Address *
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          required
-                          placeholder="vikram@example.com"
-                          value={formData.email}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-300 mb-1">
-                          Phone / WhatsApp Number *
-                        </label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          required
-                          placeholder="+91 98765 43210"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-300 mb-1">
-                        Additional Notes / Special Instructions
-                      </label>
-                      <textarea
-                        name="notes"
-                        rows="3"
-                        placeholder="Please share any preferred songs, stage setup details, or specific timeline constraints..."
-                        value={formData.notes}
-                        onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
-                      ></textarea>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full py-4 bg-wom-gold hover:bg-wom-goldHover text-black font-extrabold text-sm rounded-xl transition shadow-gold flex items-center justify-center gap-2 disabled:opacity-50"
-                  >
-                    {loading ? (
-                      <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                    ) : (
-                      <>
-                        <span>Submit Official Booking Inquiry</span>
-                        <Send className="w-4 h-4" />
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-[11px] text-gray-400 text-center">
-                    By submitting, your details will be safely processed in accordance with our Privacy Policy. No spam guaranteed.
-                  </p>
-                </form>
-              )}
+        {successResponse ? (
+          <div className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-6 sm:p-10 text-center space-y-5 shadow-2xl animate-fadeIn">
+            <div className="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mx-auto border border-green-500/40">
+              <CheckCircle2 className="w-10 h-10" />
             </div>
-          </div>
+            <h2 className="text-xl sm:text-3xl font-bold font-raleway text-white">
+              Enquiry Submitted Successfully!
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
+              Thank you, <strong className="text-white">{successResponse.fullName}</strong>. Your entertainment request has been received by our team.
+            </p>
 
-          {/* Right Column: Benefits & FAQ */}
-          <div className="space-y-6">
-            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-6 space-y-4">
-              <h3 className="text-base font-bold text-white font-raleway flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-wom-gold" />
-                The Music Maestro Booking Assurance
-              </h3>
-              <ul className="space-y-3 text-xs text-gray-300">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span>
-                    <strong>100% Verified Talent:</strong> All artists on our roster undergo sound checks and professional vetting.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Backup Security:</strong> Guaranteed artist replacement in unprecedented emergency scenarios.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Technical Rider Management:</strong> We coordinate sound, microphones, and stage gear directly with your venue.
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Quick Contact Box */}
-            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-6 space-y-3">
-              <h4 className="text-sm font-bold text-white font-raleway">
-                Corporate Office
-              </h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                202/19, Oshiwara Andheri West, Mumbai
-              </p>
-              <div className="pt-2 text-xs space-y-1">
-                <div>
-                  <span className="text-gray-400">Phone / WhatsApp: </span>
-                  <a href="https://wa.me/919009999434" target="_blank" rel="noopener noreferrer" className="text-wom-gold font-bold hover:underline">
-                    +91 9009999434
-                  </a>
-                </div>
-                <div>
-                  <span className="text-gray-400">Email: </span>
-                  <a href="mailto:musicmaestroevent@gmail.com" className="text-wom-gold font-bold hover:underline break-all">
-                    musicmaestroevent@gmail.com
-                  </a>
-                </div>
+            <div className="p-4 bg-[#2b2b2b] border border-white/10 rounded-xl max-w-sm mx-auto text-left space-y-1.5 text-xs">
+              <div className="flex justify-between gap-2">
+                <span className="text-gray-400">Reference ID:</span>
+                <span className="font-mono font-bold text-[#f4a51c]">
+                  {successResponse.inquiryReference}
+                </span>
+              </div>
+              <div className="flex justify-between gap-2">
+                <span className="text-gray-400">Type of Event:</span>
+                <span className="text-white font-medium text-right">{formData.eventType}</span>
+              </div>
+              <div className="flex justify-between gap-2">
+                <span className="text-gray-400">Location:</span>
+                <span className="text-white font-medium text-right">{formData.address}</span>
+              </div>
+              <div className="flex justify-between gap-2">
+                <span className="text-gray-400">Number Of Pax:</span>
+                <span className="text-white font-medium text-right">{formData.guestCount}</span>
               </div>
             </div>
+
+            <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
+              <button
+                onClick={() => {
+                  setSuccessResponse(null);
+                  setFormData({
+                    firstName: '',
+                    lastName: '',
+                    address: '',
+                    phone: '',
+                    email: '',
+                    eventType: 'Corporate',
+                    guestCount: '',
+                    notes: '',
+                  });
+                }}
+                className="w-full sm:w-auto px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-lg transition"
+              >
+                Submit Another Enquiry
+              </button>
+              <Link
+                to="/artists"
+                className="w-full sm:w-auto px-6 py-2.5 bg-[#f4a51c] hover:bg-[#e09414] text-white font-semibold text-xs rounded-lg shadow-md transition text-center"
+              >
+                Browse Artist Bank
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="p-3.5 bg-red-500/20 border border-red-500/40 text-red-200 text-xs sm:text-sm rounded-md flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-400" />
+                <span>{error}</span>
+              </div>
+            )}
+
+            {/* Row 1: Name (First & Last) */}
+            <div>
+              <label className="block text-sm font-medium text-[#f4a51c] mb-2">
+                Name <span className="text-red-500">*</span>
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  placeholder="First"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white text-gray-800 placeholder-gray-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#f4a51c]"
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  placeholder="Last"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white text-gray-800 placeholder-gray-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#f4a51c]"
+                />
+              </div>
+            </div>
+
+            {/* Row 2: Address */}
+            <div>
+              <label className="block text-sm font-medium text-[#f4a51c] mb-2">
+                Address <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="address"
+                required
+                placeholder="Event Location"
+                value={formData.address}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-white text-gray-800 placeholder-gray-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#f4a51c]"
+              />
+            </div>
+
+            {/* Row 3: Phone Number & Email */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div>
+                <label className="block text-sm font-medium text-[#f4a51c] mb-2">
+                  Phone Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  placeholder="Eg. +91 9878 756 542"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white text-gray-800 placeholder-gray-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#f4a51c]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[#f4a51c] mb-2">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Enter your email address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white text-gray-800 placeholder-gray-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#f4a51c]"
+                />
+              </div>
+            </div>
+
+            {/* Row 4: Type of Event & Number Of Pax */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div>
+                <label className="block text-sm font-medium text-[#f4a51c] mb-2">
+                  Type of Event <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="eventType"
+                  required
+                  value={formData.eventType}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white text-gray-800 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#f4a51c] cursor-pointer"
+                >
+                  <option value="Corporate">Corporate</option>
+                  <option value="Wedding">Wedding</option>
+                  <option value="Private Party">Private Party</option>
+                  <option value="Sangeet / Cocktails">Sangeet / Cocktails</option>
+                  <option value="College Fest">College Fest</option>
+                  <option value="Concert / Festival">Concert / Festival</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[#f4a51c] mb-2">
+                  Number Of Pax <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="guestCount"
+                  required
+                  placeholder="Enter the number of guests you have"
+                  value={formData.guestCount}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-white text-gray-800 placeholder-gray-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#f4a51c]"
+                />
+              </div>
+            </div>
+
+            {/* Row 5: Additional Details */}
+            <div>
+              <label className="block text-sm font-medium text-[#f4a51c] mb-2">
+                Additional Details <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                name="notes"
+                required
+                rows="5"
+                value={formData.notes}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-white text-gray-800 placeholder-gray-400 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#f4a51c]"
+              ></textarea>
+            </div>
+
+            {/* Submit Button */}
+            <div className="pt-1">
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-7 py-2.5 bg-[#f4a51c] hover:bg-[#e09414] text-white font-medium text-sm rounded-lg transition shadow-md disabled:opacity-50"
+              >
+                {loading ? 'Submitting...' : 'Submit'}
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );

@@ -7,11 +7,10 @@ const inquiryValidator = [
     .trim()
     .notEmpty()
     .withMessage('Phone number is required')
-    .matches(/^[0-9+\s-]{8,15}$/)
+    .matches(/^[0-9+\s()-]{8,20}$/)
     .withMessage('Please enter a valid phone number'),
   body('eventType').trim().notEmpty().withMessage('Event type is required'),
-  body('eventDate').trim().notEmpty().withMessage('Event date is required'),
-  body('city').trim().notEmpty().withMessage('City / Location is required'),
+  body('city').trim().notEmpty().withMessage('Event location / address is required'),
 ];
 
 module.exports = inquiryValidator;

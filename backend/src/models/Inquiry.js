@@ -26,7 +26,7 @@ const inquirySchema = new mongoose.Schema(
     },
     eventDate: {
       type: String,
-      required: [true, 'Event date is required'],
+      default: 'To Be Decided',
     },
     city: {
       type: String,
