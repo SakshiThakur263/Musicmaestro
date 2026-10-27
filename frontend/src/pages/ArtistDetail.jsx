@@ -827,15 +827,25 @@ const ArtistDetail = () => {
               <p className="text-xs text-gray-400">
                 Talk directly to our artist booking desk in Mumbai:
               </p>
-              <div className="text-xs font-bold text-wom-gold">
-                <a
-                  href="https://wa.me/919009999434"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                >
-                  Call / WhatsApp: +91 9009999434
-                </a>
+              <div className="text-xs font-bold text-wom-gold space-y-1">
+                <div>
+                  <a
+                    href="https://wa.me/919009999434"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    Call / WhatsApp: +91 9009999434
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="mailto:musicmaestroevent@gmail.com"
+                    className="hover:underline break-all"
+                  >
+                    Email: musicmaestroevent@gmail.com
+                  </a>
+                </div>
               </div>
             </div>
           </div>

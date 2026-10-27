@@ -245,10 +245,10 @@ const Contact = () => {
                     <strong className="text-white block mb-0.5">Email Support</strong>
                     <p className="text-gray-300 break-all">
                       <a
-                        href="mailto:connect@worldofmusicians.com"
+                        href="mailto:musicmaestroevent@gmail.com"
                         className="hover:text-wom-gold transition"
                       >
-                        connect@worldofmusicians.com
+                        musicmaestroevent@gmail.com
                       </a>
                     </p>
                   </div>

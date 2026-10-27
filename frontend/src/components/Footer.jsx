@@ -161,8 +161,8 @@ const Footer = () => {
             </div>
             <div className="flex items-center gap-2.5 text-xs">
               <Mail className="w-4 h-4 text-wom-gold flex-shrink-0" />
-              <a href="mailto:connect@worldofmusicians.com" className="hover:text-white transition">
-                connect@worldofmusicians.com
+              <a href="mailto:musicmaestroevent@gmail.com" className="hover:text-white transition">
+                musicmaestroevent@gmail.com
               </a>
             </div>
 

@@ -424,8 +424,8 @@ const EventInquiry = () => {
                 </div>
                 <div>
                   <span className="text-gray-400">Email: </span>
-                  <a href="mailto:connect@worldofmusicians.com" className="text-wom-gold font-bold hover:underline">
-                    connect@worldofmusicians.com
+                  <a href="mailto:musicmaestroevent@gmail.com" className="text-wom-gold font-bold hover:underline break-all">
+                    musicmaestroevent@gmail.com
                   </a>
                 </div>
               </div>
