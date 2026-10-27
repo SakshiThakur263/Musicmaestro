@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, ChevronDown, Music, Disc3, Headphones } from 'lucide-react';
+import { Search, MapPin, ChevronDown, Music, Disc3, Mic2 } from 'lucide-react';
 
 const SearchBanner = () => {
   const [keyword, setKeyword] = useState('');
@@ -21,89 +21,89 @@ const SearchBanner = () => {
   };
 
   const featuredPills = [
-    { name: 'Musicians/Artists', category: 'Solo Performer', icon: Headphones },
+    { name: 'Musicians/Artists', category: 'Solo Performer', icon: Mic2 },
     { name: 'Live Bands', category: 'Live Bands', icon: Music },
     { name: 'DJ Services', category: 'DJ Services', icon: Disc3 },
   ];
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      {/* Search Input Box matching WOM Screenshot */}
+      {/* White Pill Search Bar matching worldofmusicians.com */}
       <form
         onSubmit={handleSearch}
-        className="bg-white rounded-2xl md:rounded-full p-3 md:p-2 shadow-[0_15px_45px_rgba(0,0,0,0.6)] flex flex-col md:flex-row items-stretch md:items-center transition-all duration-300 hover:shadow-[0_20px_50px_rgba(244,165,28,0.25)] border border-white/30"
+        className="bg-white rounded-2xl md:rounded-full p-2.5 md:p-2 shadow-[0_18px_50px_rgba(0,0,0,0.75)] flex flex-col md:flex-row items-stretch md:items-center transition-all duration-300 border border-white/40"
       >
         {/* 1. Keyword Input */}
-        <div className="flex-1 w-full md:w-auto flex items-center justify-between px-4 md:px-5 py-2.5 md:py-2 border-b border-gray-200/80 md:border-b-0">
+        <div className="flex-1 w-full md:w-auto flex items-center justify-between px-4 md:px-6 py-3 md:py-2.5 border-b border-gray-200 md:border-b-0">
           <input
             type="text"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             placeholder="What are you looking for?"
-            className="w-full bg-transparent text-gray-800 placeholder-gray-400 text-sm focus:outline-none font-medium"
+            className="w-full bg-transparent text-gray-800 placeholder-gray-500 text-sm focus:outline-none font-medium"
           />
           <Search className="w-4 h-4 text-gray-400 flex-shrink-0 ml-2 md:hidden" />
         </div>
 
-        {/* Divider */}
+        {/* Vertical Divider */}
         <div className="hidden md:block w-px h-8 bg-gray-200 my-auto"></div>
 
         {/* 2. Location Input with Pin Icon */}
-        <div className="flex-1 w-full md:w-auto flex items-center justify-between px-4 md:px-5 py-2.5 md:py-2 border-b border-gray-200/80 md:border-b-0">
+        <div className="flex-1 w-full md:w-auto flex items-center justify-between px-4 md:px-6 py-3 md:py-2.5 border-b border-gray-200 md:border-b-0">
           <input
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="Location"
-            className="w-full bg-transparent text-gray-800 placeholder-gray-400 text-sm focus:outline-none font-medium"
+            className="w-full bg-transparent text-gray-800 placeholder-gray-500 text-sm focus:outline-none font-medium"
           />
           <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0 ml-2" />
         </div>
 
-        {/* Divider */}
+        {/* Vertical Divider */}
         <div className="hidden md:block w-px h-8 bg-gray-200 my-auto"></div>
 
         {/* 3. Category Dropdown with Chevron */}
-        <div className="flex-1 w-full md:w-auto relative flex items-center px-4 py-2.5 md:py-2">
+        <div className="flex-1 w-full md:w-auto relative flex items-center px-4 md:px-6 py-3 md:py-2.5">
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full bg-transparent text-gray-700 text-sm focus:outline-none cursor-pointer appearance-none pr-8 font-medium"
+            className="w-full bg-transparent text-gray-600 text-sm focus:outline-none cursor-pointer appearance-none pr-8 font-medium"
           >
             <option value="" className="text-gray-800">
               All Categories
             </option>
+            <option value="Solo Performer" className="text-gray-800">
+              Solo Performer
+            </option>
             <option value="Live Bands" className="text-gray-800">
               Live Bands
-            </option>
-            <option value="Solo Performer" className="text-gray-800">
-              Solo Performer / Instrumental
             </option>
             <option value="DJ Services" className="text-gray-800">
               DJ Services
             </option>
             <option value="Others" className="text-gray-800">
-              Anchors & Entertainers
+              Others / Anchors &amp; Comedians
             </option>
           </select>
           <ChevronDown className="w-4 h-4 text-gray-400 absolute right-4 md:right-6 pointer-events-none" />
         </div>
 
-        {/* 4. Orange Search Button */}
+        {/* 4. Gold/Orange Search Button */}
         <button
           type="submit"
-          className="w-full md:w-auto mt-2 md:mt-0 bg-[#f4a51c] hover:bg-[#e09414] text-white font-semibold text-sm sm:text-base px-9 py-3 md:py-3.5 rounded-xl md:rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:scale-102 active:scale-98 flex-shrink-0"
+          className="w-full md:w-auto mt-2 md:mt-0 bg-[#f4a51c] hover:bg-[#e09414] text-white font-bold text-sm sm:text-base px-10 py-3.5 rounded-xl md:rounded-full transition-all duration-200 shadow-lg hover:shadow-xl active:scale-95 flex-shrink-0"
         >
           Search
         </button>
       </form>
 
-      {/* Featured Category Pills below search */}
-      <div className="mt-6 sm:mt-8 text-center">
-        <p className="text-xs sm:text-sm font-medium text-gray-300 drop-shadow mb-3 tracking-wide">
+      {/* Highlighted Category Boxes below search matching worldofmusicians.com */}
+      <div className="mt-7 sm:mt-9 text-center">
+        <h5 className="text-xs sm:text-sm font-medium text-white/90 drop-shadow mb-4 tracking-wide">
           Or browse featured categories:
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        </h5>
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           {featuredPills.map((pill, idx) => {
             const Icon = pill.icon;
             return (
@@ -111,10 +111,12 @@ const SearchBanner = () => {
                 key={idx}
                 type="button"
                 onClick={() => navigate(`/artists?category=${encodeURIComponent(pill.category)}`)}
-                className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 bg-black/60 hover:bg-black/90 backdrop-blur-md text-white border border-white/20 hover:border-wom-gold rounded-full text-xs font-semibold transition-all duration-300 shadow-lg hover:scale-105 active:scale-95 group"
+                className="w-32 sm:w-40 py-3.5 sm:py-4 px-3 bg-black/65 hover:bg-[#f4a51c] backdrop-blur-md text-white hover:text-black border border-white/15 hover:border-[#f4a51c] rounded-xl transition-all duration-300 shadow-xl hover:-translate-y-1 flex flex-col items-center justify-center gap-2 group"
               >
-                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-300 group-hover:text-wom-gold transition-colors" />
-                <span>{pill.name}</span>
+                <Icon className="w-6 h-6 text-[#f4a51c] group-hover:text-black transition-colors" />
+                <h4 className="text-xs sm:text-[13px] font-semibold tracking-wide">
+                  {pill.name}
+                </h4>
               </button>
             );
           })}
