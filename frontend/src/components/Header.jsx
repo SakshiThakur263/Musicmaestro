@@ -16,6 +16,7 @@ import {
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const [artistBankDropdownOpen, setArtistBankDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
@@ -31,12 +32,25 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menus on route change
+  // Close menus on route or query change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setMobileCategoriesOpen(false);
     setArtistBankDropdownOpen(false);
     setUserDropdownOpen(false);
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   const megaMenuCategories = [
     {
@@ -89,18 +103,18 @@ const Header = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-black/95 backdrop-blur-md shadow-2xl border-b border-white/10 py-3'
-            : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-4'
+            ? 'bg-black/95 backdrop-blur-md shadow-2xl border-b border-white/10 py-2.5 sm:py-3'
+            : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-3 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Music Maestro Logo */}
-            <Link to="/" className="flex items-center group">
+            <Link to="/" className="flex items-center group flex-shrink-0">
               <img
                 src="/music-maestro-logo.png"
                 alt="Music Maestro — Art of Performance & Celebration"
-                className="h-12 md:h-14 w-auto object-contain rounded-lg border border-[#f4a51c]/30 shadow-[0_2px_14px_rgba(244,165,28,0.25)] group-hover:scale-105 transition-transform duration-200"
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg border border-[#f4a51c]/30 shadow-[0_2px_14px_rgba(244,165,28,0.25)] group-hover:scale-105 transition-transform duration-200"
               />
             </Link>
 
@@ -282,8 +296,26 @@ const Header = () => {
               )}
             </div>
 
-            {/* Mobile Hamburger Trigger */}
+            {/* Mobile Quick Sign-In & Hamburger Trigger */}
             <div className="lg:hidden flex items-center gap-2">
+              {!isAuthenticated ? (
+                <button
+                  onClick={() => openAuthModal('login', 'client')}
+                  className="bg-white/95 hover:bg-white text-gray-900 px-3.5 py-1.5 rounded-full font-semibold text-xs flex items-center gap-1.5 shadow-sm transition"
+                >
+                  <LogIn className="w-3.5 h-3.5 text-gray-700" />
+                  <span>Sign In</span>
+                </button>
+              ) : (
+                <Link
+                  to="/add-listing"
+                  className="w-8 h-8 rounded-full bg-wom-gold text-black flex items-center justify-center font-bold text-xs shadow-sm"
+                  title={user?.username}
+                >
+                  {user?.username?.charAt(0).toUpperCase() || 'U'}
+                </Link>
+              )}
+
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 text-gray-200 hover:text-white rounded-lg hover:bg-white/10 transition"
@@ -298,62 +330,199 @@ const Header = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden bg-black/95 backdrop-blur-xl flex flex-col p-6 animate-fadeIn">
-          <div className="flex items-center justify-between pb-6 border-b border-white/10">
-            <Link to="/" className="flex items-center gap-2">
+        <div className="fixed inset-0 z-50 lg:hidden bg-black/95 backdrop-blur-xl flex flex-col overflow-y-auto animate-fadeIn">
+          <div className="sticky top-0 z-10 bg-black/90 backdrop-blur-md flex items-center justify-between px-5 py-4 border-b border-white/10">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2">
               <img
                 src="/music-maestro-logo.png"
                 alt="Music Maestro"
-                className="h-11 w-auto object-contain rounded-lg border border-[#f4a51c]/30"
+                className="h-10 w-auto object-contain rounded-lg border border-[#f4a51c]/30"
               />
             </Link>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 text-gray-400 hover:text-white"
+              className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition"
+              aria-label="Close navigation menu"
             >
               <X className="w-6 h-6" />
             </button>
           </div>
 
-          <div className="flex flex-col gap-3 py-6 text-base font-semibold">
-            <Link to="/" className="px-4 py-2 rounded-lg bg-wom-gold text-black font-bold">
+          <div className="flex flex-col gap-2 px-5 py-5 text-base font-semibold flex-1">
+            <NavLink
+              to="/"
+              end
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) =>
+                `px-4 py-3 rounded-xl transition flex items-center justify-between ${
+                  isActive
+                    ? 'bg-wom-gold text-black font-bold shadow-gold-sm'
+                    : 'text-gray-200 hover:bg-white/5'
+                }`
+              }
+            >
               Home
-            </Link>
-            <Link to="/about" className="px-4 py-2 rounded-lg text-gray-200 hover:bg-white/5">
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) =>
+                `px-4 py-3 rounded-xl transition flex items-center justify-between ${
+                  isActive
+                    ? 'bg-wom-gold text-black font-bold shadow-gold-sm'
+                    : 'text-gray-200 hover:bg-white/5'
+                }`
+              }
+            >
               About Us
-            </Link>
-            <Link to="/artists" className="px-4 py-2 rounded-lg text-gray-200 hover:bg-white/5">
-              Artist Bank
-            </Link>
-            <Link to="/contact" className="px-4 py-2 rounded-lg text-gray-200 hover:bg-white/5">
+            </NavLink>
+
+            {/* Mobile Artist Bank with Expandable Categories */}
+            <div className="rounded-xl overflow-hidden border border-transparent">
+              <div className="flex items-center">
+                <NavLink
+                  to="/artists"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `flex-1 px-4 py-3 rounded-l-xl transition ${
+                      isActive
+                        ? 'bg-wom-gold text-black font-bold'
+                        : 'text-gray-200 hover:bg-white/5'
+                    }`
+                  }
+                >
+                  Artist Bank
+                </NavLink>
+                <button
+                  type="button"
+                  onClick={() => setMobileCategoriesOpen(!mobileCategoriesOpen)}
+                  className="px-4 py-3 text-gray-300 hover:text-wom-gold hover:bg-white/5 rounded-r-xl transition flex items-center justify-center"
+                  aria-label="Toggle Artist Categories"
+                >
+                  <ChevronDown
+                    className={`w-5 h-5 transition-transform duration-200 ${
+                      mobileCategoriesOpen ? 'rotate-180 text-wom-gold' : ''
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {mobileCategoriesOpen && (
+                <div className="mt-1 mb-2 mx-2 p-4 rounded-xl bg-[#121622] border border-white/10 space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {megaMenuCategories.map((catGroup, idx) => {
+                      const IconComp = catGroup.icon;
+                      return (
+                        <div key={idx} className="space-y-2">
+                          <div className="flex items-center gap-1.5 text-wom-gold text-xs font-bold uppercase tracking-wider border-b border-white/10 pb-1.5">
+                            <IconComp className="w-3.5 h-3.5" />
+                            <span>{catGroup.group}</span>
+                          </div>
+                          <ul className="grid grid-cols-2 sm:grid-cols-1 gap-1.5 text-xs text-gray-300 font-normal">
+                            {catGroup.items.map((item, itemIdx) => (
+                              <li key={itemIdx}>
+                                <Link
+                                  to={item.link}
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className="block py-1 hover:text-wom-gold transition truncate"
+                                >
+                                  {item.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <Link
+                    to="/artists"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block text-center py-2 px-3 bg-wom-gold/15 border border-wom-gold/30 rounded-lg text-xs font-bold text-wom-gold"
+                  >
+                    Browse All 500+ Artists &rarr;
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <NavLink
+              to="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) =>
+                `px-4 py-3 rounded-xl transition flex items-center justify-between ${
+                  isActive
+                    ? 'bg-wom-gold text-black font-bold shadow-gold-sm'
+                    : 'text-gray-200 hover:bg-white/5'
+                }`
+              }
+            >
               Contact Us
-            </Link>
-            <Link to="/add-listing" className="px-4 py-2 rounded-lg text-gray-200 hover:bg-white/5">
+            </NavLink>
+
+            <NavLink
+              to="/add-listing"
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) =>
+                `px-4 py-3 rounded-xl transition flex items-center justify-between ${
+                  isActive
+                    ? 'bg-wom-gold text-black font-bold shadow-gold-sm'
+                    : 'text-gray-200 hover:bg-white/5'
+                }`
+              }
+            >
               I'm an artist
-            </Link>
-            <Link to="/event-inquiry" className="px-4 py-2 rounded-lg text-gray-200 hover:bg-white/5">
+            </NavLink>
+
+            <NavLink
+              to="/event-inquiry"
+              onClick={() => setMobileMenuOpen(false)}
+              className={({ isActive }) =>
+                `px-4 py-3 rounded-xl transition flex items-center justify-between ${
+                  isActive
+                    ? 'bg-wom-gold text-black font-bold shadow-gold-sm'
+                    : 'text-gray-200 hover:bg-white/5'
+                }`
+              }
+            >
               Event Inquiry
-            </Link>
+            </NavLink>
           </div>
 
-          <div className="mt-auto pt-6 border-t border-white/10">
+          <div className="mt-auto p-5 border-t border-white/10 bg-black/80">
             {isAuthenticated ? (
-              <button
-                onClick={logout}
-                className="w-full py-3 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl font-bold text-sm"
-              >
-                Sign Out ({user?.username})
-              </button>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 px-2">
+                  <div className="w-9 h-9 rounded-full bg-wom-gold text-black flex items-center justify-center font-bold text-sm">
+                    {user?.username?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-bold text-white truncate">{user?.username}</p>
+                    <p className="text-xs text-gray-400 truncate">{user?.email}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full py-3 bg-red-600/20 text-red-400 border border-red-500/30 rounded-xl font-bold text-sm flex items-center justify-center gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sign Out
+                </button>
+              </div>
             ) : (
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   openAuthModal('login', 'client');
                 }}
-                className="w-full py-3 bg-white text-black rounded-full font-bold text-sm flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-white text-black rounded-full font-bold text-sm flex items-center justify-center gap-2 shadow-lg"
               >
                 <LogIn className="w-4 h-4" />
-                Sign In
+                Sign In / Register
               </button>
             )}
           </div>

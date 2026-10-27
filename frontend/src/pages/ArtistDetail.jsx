@@ -193,26 +193,26 @@ const ArtistDetail = () => {
   const allImages = artist.images && artist.images.length > 0 ? artist.images : [artist.featuredImage];
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-28 pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
       {/* 1. Header Titlebar matching WOM */}
-      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-8 px-4">
+      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-6 sm:py-8 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className="px-2.5 py-0.5 rounded bg-wom-gold/15 text-wom-gold border border-wom-gold/30 text-xs font-bold">
                 {artist.category}
               </span>
               <span className="text-xs text-gray-400">• {artist.subcategory}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-extrabold font-raleway text-white flex items-center gap-2">
-              {artist.name}
+            <h1 className="text-2xl sm:text-4xl font-extrabold font-raleway text-white flex items-center gap-2">
+              <span>{artist.name}</span>
               {artist.verified && (
-                <CheckCircle2 className="w-6 h-6 text-wom-gold" title="Verified Artist by WOM" />
+                <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-wom-gold flex-shrink-0" title="Verified Artist by WOM" />
               )}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs text-gray-400 mt-2">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-gray-400 mt-2">
               <span className="flex items-center gap-1 text-gray-300">
                 <MapPin className="w-3.5 h-3.5 text-wom-gold" />
                 {artist.location}
@@ -226,10 +226,10 @@ const ArtistDetail = () => {
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
             <button
               onClick={() => setIsBookmarked(!isBookmarked)}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold border transition ${
+              className={`flex-1 sm:flex-initial justify-center flex items-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold border transition ${
                 isBookmarked
                   ? 'bg-red-500/20 text-red-400 border-red-500/40'
                   : 'bg-[#181f2c] text-gray-300 border-wom-darkBorder hover:border-gray-500'
@@ -241,7 +241,7 @@ const ArtistDetail = () => {
 
             <button
               onClick={handleShare}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-[#181f2c] border border-wom-darkBorder hover:border-wom-gold text-gray-300 transition"
+              className="flex-1 sm:flex-initial justify-center flex items-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold bg-[#181f2c] border border-wom-darkBorder hover:border-wom-gold text-gray-300 transition"
             >
               <Share2 className="w-4 h-4" />
               {copiedLink ? 'Link Copied!' : 'Share'}
@@ -250,10 +250,10 @@ const ArtistDetail = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8">
         {/* 2. Photo Gallery Grid matching WOM single listing */}
-        <div className="relative rounded-2xl overflow-hidden mb-10 bg-[#121622] border border-wom-darkBorder">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 h-[340px] sm:h-[440px]">
+        <div className="relative rounded-2xl overflow-hidden mb-6 sm:mb-10 bg-[#121622] border border-wom-darkBorder">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 h-[240px] sm:h-[360px] md:h-[440px]">
             {/* Left Big Picture */}
             <div
               className="relative h-full overflow-hidden cursor-pointer group"
@@ -297,19 +297,38 @@ const ArtistDetail = () => {
           {/* Show All Photos Button on Top of Gallery */}
           <button
             onClick={() => setGalleryModalOpen(true)}
-            className="absolute bottom-4 right-4 px-4 py-2 bg-black/80 hover:bg-black text-white text-xs font-bold rounded-xl backdrop-blur-md border border-white/20 flex items-center gap-2 transition"
+            className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-3.5 py-2 sm:px-4 bg-black/80 hover:bg-black text-white text-xs font-bold rounded-xl backdrop-blur-md border border-white/20 flex items-center gap-2 transition"
           >
             <Images className="w-4 h-4 text-wom-gold" />
             Show All Photos ({allImages.length})
           </button>
         </div>
 
+        {/* Mobile Quick Price & Book CTA Bar */}
+        <div className="lg:hidden mb-6 p-4 bg-[#121622] border border-wom-gold/40 rounded-2xl flex items-center justify-between gap-3 shadow-lg">
+          <div>
+            <span className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold block">
+              Starting Fee
+            </span>
+            <span className="text-base font-extrabold text-wom-gold font-raleway">
+              Rs. {Number(artist.priceStarting || 25000).toLocaleString('en-IN')}
+            </span>
+          </div>
+          <a
+            href="#booking-desk"
+            className="px-5 py-2.5 bg-wom-gold hover:bg-wom-goldHover text-black font-extrabold text-xs rounded-xl shadow-gold flex items-center gap-1.5 transition"
+          >
+            <span>Hire Artist</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
         {/* 3. Main Two-Column Layout: Left Content & Right Sticky Booking Widget */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 items-start">
           {/* Left Column (2 Cols) */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6 sm:space-y-8 min-w-0">
             {/* Interactive Tabs Navigation */}
-            <div className="flex items-center gap-2 border-b border-wom-darkBorder pb-2 overflow-x-auto">
+            <div className="flex items-center gap-1.5 sm:gap-2 border-b border-wom-darkBorder pb-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
               {[
                 { id: 'overview', label: 'Overview', icon: Music },
                 { id: 'video', label: 'Videos', icon: Video },
@@ -321,13 +340,13 @@ const ArtistDetail = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 sm:gap-2 px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition whitespace-nowrap ${
                       activeTab === tab.id
                         ? 'bg-wom-gold text-black shadow-gold-sm'
                         : 'text-gray-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-4 h-4 flex-shrink-0" />
                     {tab.label}
                   </button>
                 );
@@ -336,17 +355,17 @@ const ArtistDetail = () => {
 
             {/* TAB: OVERVIEW */}
             {activeTab === 'overview' && (
-              <div className="space-y-8 animate-fadeIn">
-                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-7 space-y-4">
-                  <h3 className="text-xl font-bold text-white font-raleway">About {artist.name}</h3>
-                  <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-line">
+              <div className="space-y-6 sm:space-y-8 animate-fadeIn">
+                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-7 space-y-4">
+                  <h3 className="text-lg sm:text-xl font-bold text-white font-raleway">About {artist.name}</h3>
+                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-line">
                     {artist.bio}
                   </p>
                 </div>
 
                 {/* Performance Specifics Grid */}
-                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-7 space-y-6">
-                  <h3 className="text-lg font-bold text-white font-raleway border-b border-wom-darkBorder pb-3">
+                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-7 space-y-5 sm:space-y-6">
+                  <h3 className="text-base sm:text-lg font-bold text-white font-raleway border-b border-wom-darkBorder pb-3">
                     Performance Details
                   </h3>
 
@@ -416,8 +435,8 @@ const ArtistDetail = () => {
             {/* TAB: VIDEOS */}
             {activeTab === 'video' && (
               <div className="space-y-6 animate-fadeIn">
-                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-7">
-                  <h3 className="text-xl font-bold text-white font-raleway mb-6">
+                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-7">
+                  <h3 className="text-lg sm:text-xl font-bold text-white font-raleway mb-5 sm:mb-6">
                     Live Video Performances
                   </h3>
 
@@ -450,9 +469,9 @@ const ArtistDetail = () => {
             {/* TAB: AUDIO SAMPLES */}
             {activeTab === 'audio' && (
               <div className="space-y-6 animate-fadeIn">
-                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-7">
-                  <h3 className="text-xl font-bold text-white font-raleway mb-4">Audio Tracks & Demos</h3>
-                  <p className="text-xs text-gray-400 mb-6">
+                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-7">
+                  <h3 className="text-lg sm:text-xl font-bold text-white font-raleway mb-3 sm:mb-4">Audio Tracks & Demos</h3>
+                  <p className="text-xs text-gray-400 mb-5 sm:mb-6">
                     Listen to live acoustic clips and studio recordings from {artist.name}.
                   </p>
 
@@ -461,9 +480,9 @@ const ArtistDetail = () => {
                       artist.audioSamples.map((track, i) => (
                         <div
                           key={i}
-                          className="flex items-center justify-between p-4 bg-[#181f2c] border border-wom-darkBorder rounded-xl hover:border-wom-gold transition"
+                          className="flex items-center justify-between gap-3 p-3.5 sm:p-4 bg-[#181f2c] border border-wom-darkBorder rounded-xl hover:border-wom-gold transition"
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-3 min-w-0">
                             <button
                               onClick={() => {
                                 if (currentAudio === track.url && isPlaying) {
@@ -473,19 +492,19 @@ const ArtistDetail = () => {
                                   setIsPlaying(true);
                                 }
                               }}
-                              className="w-10 h-10 rounded-full bg-wom-gold text-black flex items-center justify-center hover:scale-105 transition shadow-gold-sm"
+                              className="w-10 h-10 flex-shrink-0 rounded-full bg-wom-gold text-black flex items-center justify-center hover:scale-105 transition shadow-gold-sm"
                             >
                               <Play className="w-5 h-5 fill-current ml-0.5" />
                             </button>
-                            <div>
-                              <span className="text-sm font-bold text-white block">{track.title}</span>
+                            <div className="min-w-0">
+                              <span className="text-xs sm:text-sm font-bold text-white block truncate">{track.title}</span>
                               <span className="text-xs text-gray-400">{track.duration || '3:20'}</span>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-2 text-xs text-wom-gold font-bold">
+                          <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-wom-gold font-bold flex-shrink-0">
                             <Volume2 className="w-4 h-4 animate-pulse" />
-                            <span>Preview</span>
+                            <span className="hidden sm:inline">Preview</span>
                           </div>
                         </div>
                       ))
@@ -501,14 +520,14 @@ const ArtistDetail = () => {
 
             {/* TAB: REVIEWS */}
             {activeTab === 'reviews' && (
-              <div className="space-y-8 animate-fadeIn">
+              <div className="space-y-6 sm:space-y-8 animate-fadeIn">
                 {/* List Existing Reviews */}
-                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-7 space-y-6">
-                  <div className="flex items-center justify-between border-b border-wom-darkBorder pb-4">
-                    <h3 className="text-xl font-bold text-white font-raleway">
+                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-7 space-y-5 sm:space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-wom-darkBorder pb-4">
+                    <h3 className="text-lg sm:text-xl font-bold text-white font-raleway">
                       Client Reviews ({reviews?.length || 0})
                     </h3>
-                    <div className="flex items-center gap-1.5 text-sm font-bold text-wom-gold">
+                    <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-wom-gold">
                       <Star className="w-4 h-4 fill-current" />
                       <span>{artist.rating} Average Rating</span>
                     </div>
@@ -521,9 +540,9 @@ const ArtistDetail = () => {
                           key={rev._id}
                           className="p-4 bg-[#181f2c] border border-wom-darkBorder rounded-xl space-y-2"
                         >
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-bold text-white">{rev.reviewerName}</span>
-                            <div className="flex items-center gap-1 text-wom-gold">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-sm font-bold text-white truncate">{rev.reviewerName}</span>
+                            <div className="flex items-center gap-1 text-wom-gold flex-shrink-0">
                               {Array.from({ length: rev.rating }).map((_, idx) => (
                                 <Star key={idx} className="w-3.5 h-3.5 fill-current" />
                               ))}
@@ -544,8 +563,8 @@ const ArtistDetail = () => {
                 </div>
 
                 {/* Add Review Form */}
-                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-7 space-y-4">
-                  <h3 className="text-lg font-bold text-white font-raleway">Leave a Verified Review</h3>
+                <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-7 space-y-4">
+                  <h3 className="text-base sm:text-lg font-bold text-white font-raleway">Leave a Verified Review</h3>
 
                   {reviewSuccess && (
                     <div className="p-3 bg-green-500/10 border border-green-500/30 text-green-400 text-xs rounded-lg">
@@ -571,7 +590,7 @@ const ArtistDetail = () => {
                             setReviewForm({ ...reviewForm, reviewerName: e.target.value })
                           }
                           placeholder="e.g. Anand Kapoor"
-                          className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                          className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                         />
                       </div>
 
@@ -584,7 +603,7 @@ const ArtistDetail = () => {
                           onChange={(e) =>
                             setReviewForm({ ...reviewForm, rating: Number(e.target.value) })
                           }
-                          className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold cursor-pointer"
+                          className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold cursor-pointer"
                         >
                           <option value="5">5 Stars - Outstanding</option>
                           <option value="4">4 Stars - Very Good</option>
@@ -602,7 +621,7 @@ const ArtistDetail = () => {
                         value={reviewForm.eventType}
                         onChange={(e) => setReviewForm({ ...reviewForm, eventType: e.target.value })}
                         placeholder="e.g. Wedding Reception, Corporate Annual Meet"
-                        className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                        className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                       />
                     </div>
 
@@ -614,14 +633,14 @@ const ArtistDetail = () => {
                         value={reviewForm.comment}
                         onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
                         placeholder="Tell others how was the artist's performance, crowd engagement, and punctuality..."
-                        className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                        className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                       ></textarea>
                     </div>
 
                     <button
                       type="submit"
                       disabled={reviewLoading}
-                      className="px-6 py-2.5 bg-wom-gold hover:bg-wom-goldHover text-black font-bold text-xs rounded-xl shadow-gold flex items-center gap-2"
+                      className="w-full sm:w-auto justify-center px-6 py-3 sm:py-2.5 bg-wom-gold hover:bg-wom-goldHover text-black font-bold text-xs rounded-xl shadow-gold flex items-center gap-2"
                     >
                       <Send className="w-3.5 h-3.5" />
                       Submit Review
@@ -633,8 +652,8 @@ const ArtistDetail = () => {
           </div>
 
           {/* Right Column: Sticky Booking Widget matching WOM */}
-          <div className="lg:sticky lg:top-28 space-y-6">
-            <div className="bg-[#121622] border-2 border-wom-gold/40 rounded-2xl p-6 shadow-2xl space-y-5">
+          <div id="booking-desk" className="lg:sticky lg:top-28 space-y-6 scroll-mt-24">
+            <div className="bg-[#121622] border-2 border-wom-gold/40 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-5">
               <div className="border-b border-wom-darkBorder pb-4">
                 <span className="text-[11px] uppercase font-bold tracking-widest text-wom-gold block">
                   Official Booking Desk
@@ -687,7 +706,7 @@ const ArtistDetail = () => {
                       name="eventType"
                       value={bookingForm.eventType}
                       onChange={handleBookingChange}
-                      className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold cursor-pointer"
+                      className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold cursor-pointer"
                     >
                       <option value="Wedding">Wedding / Sangeet</option>
                       <option value="Corporate">Corporate Annual Meet / Gala</option>
@@ -698,7 +717,7 @@ const ArtistDetail = () => {
                     </select>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
                     <div>
                       <label className="block text-xs font-semibold text-gray-300 mb-1">Event Date *</label>
                       <input
@@ -707,7 +726,7 @@ const ArtistDetail = () => {
                         required
                         value={bookingForm.eventDate}
                         onChange={handleBookingChange}
-                        className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                        className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                       />
                     </div>
                     <div>
@@ -719,7 +738,7 @@ const ArtistDetail = () => {
                         placeholder="e.g. Mumbai"
                         value={bookingForm.city}
                         onChange={handleBookingChange}
-                        className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                        className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                       />
                     </div>
                   </div>
@@ -733,11 +752,11 @@ const ArtistDetail = () => {
                       placeholder="e.g. Rahul Singhal"
                       value={bookingForm.name}
                       onChange={handleBookingChange}
-                      className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                      className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
                     <div>
                       <label className="block text-xs font-semibold text-gray-300 mb-1">Email *</label>
                       <input
@@ -747,7 +766,7 @@ const ArtistDetail = () => {
                         placeholder="your@email.com"
                         value={bookingForm.email}
                         onChange={handleBookingChange}
-                        className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                        className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                       />
                     </div>
                     <div>
@@ -759,7 +778,7 @@ const ArtistDetail = () => {
                         placeholder="+91 98765..."
                         value={bookingForm.phone}
                         onChange={handleBookingChange}
-                        className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                        className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                       />
                     </div>
                   </div>
@@ -774,7 +793,7 @@ const ArtistDetail = () => {
                       placeholder="Number of guests, performance duration, setup needs..."
                       value={bookingForm.notes}
                       onChange={handleBookingChange}
-                      className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                      className="w-full px-3 py-2.5 sm:py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                     ></textarea>
                   </div>
 
@@ -817,15 +836,15 @@ const ArtistDetail = () => {
 
         {/* 4. Similar Listings Carousel / Grid matching WOM */}
         {similarArtists && similarArtists.length > 0 && (
-          <div className="mt-20 pt-12 border-t border-wom-darkBorder">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-bold font-raleway text-white">Similar Artists You May Like</h3>
-              <Link to="/artists" className="text-xs font-bold text-wom-gold hover:underline">
+          <div className="mt-14 sm:mt-20 pt-10 sm:pt-12 border-t border-wom-darkBorder">
+            <div className="flex items-center justify-between mb-6 sm:mb-8">
+              <h3 className="text-xl sm:text-2xl font-bold font-raleway text-white">Similar Artists You May Like</h3>
+              <Link to="/artists" className="text-xs font-bold text-wom-gold hover:underline flex-shrink-0">
                 Browse all &rarr;
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
               {similarArtists.map((simArtist) => (
                 <ArtistCard key={simArtist._id} artist={simArtist} compact={true} />
               ))}
@@ -836,19 +855,27 @@ const ArtistDetail = () => {
 
       {/* Gallery Modal Lightbox */}
       {galleryModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
-          <div className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto bg-[#131822] border border-wom-darkBorder rounded-2xl p-6">
-            <div className="flex items-center justify-between pb-4 border-b border-wom-darkBorder mb-6">
-              <h3 className="text-lg font-bold text-white">{artist.name} — Photo Gallery</h3>
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-3 sm:p-4"
+          onClick={() => setGalleryModalOpen(false)}
+        >
+          <div
+            className="relative max-w-4xl w-full max-h-[90dvh] overflow-y-auto bg-[#131822] border border-wom-darkBorder rounded-2xl p-4 sm:p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 z-10 bg-[#131822]/95 backdrop-blur-md flex items-center justify-between pb-3 sm:pb-4 border-b border-wom-darkBorder mb-4 sm:mb-6">
+              <h3 className="text-base sm:text-lg font-bold text-white truncate pr-2">
+                {artist.name} — Photo Gallery
+              </h3>
               <button
                 onClick={() => setGalleryModalOpen(false)}
-                className="p-1 text-gray-400 hover:text-white"
+                className="p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 flex-shrink-0"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {allImages.map((imgUrl, idx) => (
                 <div key={idx} className="rounded-xl overflow-hidden aspect-[4/3] bg-black">
                   <img src={imgUrl} alt={`${artist.name} ${idx + 1}`} className="w-full h-full object-cover" />

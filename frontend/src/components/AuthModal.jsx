@@ -81,16 +81,19 @@ const AuthModal = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-fadeIn"
+      onClick={closeAuthModal}
+    >
       <div
-        className="relative w-full max-w-md bg-[#131822] border border-wom-darkBorder rounded-2xl shadow-2xl overflow-hidden transition-all"
+        className="relative w-full max-w-md max-h-[90dvh] flex flex-col bg-[#131822] border border-wom-darkBorder rounded-2xl shadow-2xl overflow-hidden transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header with Title and Close Button */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-wom-darkBorder bg-[#0f131c]">
-          <h3 className="text-xl font-bold text-white flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-wom-gold inline-block animate-pulse"></span>
-            {activeTab === 'login' ? 'Sign In to Music Maestro' : 'Create an Account'}
+        <div className="flex-shrink-0 flex items-center justify-between px-5 sm:px-6 py-3.5 sm:py-4 border-b border-wom-darkBorder bg-[#0f131c]">
+          <h3 className="text-base sm:text-xl font-bold text-white flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-wom-gold inline-block animate-pulse flex-shrink-0"></span>
+            <span>{activeTab === 'login' ? 'Sign In to Music Maestro' : 'Create an Account'}</span>
           </h3>
           <button
             onClick={closeAuthModal}
@@ -102,14 +105,14 @@ const AuthModal = () => {
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex border-b border-wom-darkBorder bg-[#0e1219]">
+        <div className="flex-shrink-0 flex border-b border-wom-darkBorder bg-[#0e1219]">
           <button
             type="button"
             onClick={() => {
               setActiveTab('login');
               setError('');
             }}
-            className={`flex-1 py-3 text-sm font-semibold transition border-b-2 ${
+            className={`flex-1 py-2.5 sm:py-3 text-sm font-semibold transition border-b-2 ${
               activeTab === 'login'
                 ? 'border-wom-gold text-wom-gold bg-wom-gold/5'
                 : 'border-transparent text-gray-400 hover:text-gray-200'
@@ -123,7 +126,7 @@ const AuthModal = () => {
               setActiveTab('register');
               setError('');
             }}
-            className={`flex-1 py-3 text-sm font-semibold transition border-b-2 ${
+            className={`flex-1 py-2.5 sm:py-3 text-sm font-semibold transition border-b-2 ${
               activeTab === 'register'
                 ? 'border-wom-gold text-wom-gold bg-wom-gold/5'
                 : 'border-transparent text-gray-400 hover:text-gray-200'
@@ -133,22 +136,22 @@ const AuthModal = () => {
           </button>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6 overflow-y-auto">
           {error && (
-            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-2.5 text-red-400 text-sm">
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-2.5 text-red-400 text-xs sm:text-sm">
               <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
           {successMsg && (
-            <div className="mb-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg flex items-start gap-2.5 text-green-400 text-sm">
+            <div className="mb-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg flex items-start gap-2.5 text-green-400 text-xs sm:text-sm">
               <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" />
               <span>{successMsg}</span>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
             {activeTab === 'register' && (
               <>
                 {/* Role Switcher: Client vs Artist matching reference */}
@@ -156,35 +159,35 @@ const AuthModal = () => {
                   <label className="text-xs font-semibold uppercase tracking-wider text-gray-400">
                     I want to register as:
                   </label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                     <button
                       type="button"
                       onClick={() => setRole('client')}
-                      className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg border text-sm font-medium transition ${
+                      className={`flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 px-2.5 sm:px-3 rounded-lg border text-xs sm:text-sm font-medium transition ${
                         role === 'client'
                           ? 'border-wom-gold bg-wom-gold text-black font-semibold shadow-gold-sm'
                           : 'border-wom-darkBorder bg-[#181f2c] text-gray-300 hover:border-gray-500'
                       }`}
                     >
-                      <UserIcon className="w-4 h-4" />
-                      Client / Host
+                      <UserIcon className="w-4 h-4 flex-shrink-0" />
+                      <span>Client / Host</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => setRole('artist')}
-                      className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg border text-sm font-medium transition ${
+                      className={`flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 px-2.5 sm:px-3 rounded-lg border text-xs sm:text-sm font-medium transition ${
                         role === 'artist'
                           ? 'border-wom-gold bg-wom-gold text-black font-semibold shadow-gold-sm'
                           : 'border-wom-darkBorder bg-[#181f2c] text-gray-300 hover:border-gray-500'
                       }`}
                     >
-                      <Briefcase className="w-4 h-4" />
-                      Musician / Artist
+                      <Briefcase className="w-4 h-4 flex-shrink-0" />
+                      <span>Musician / Artist</span>
                     </button>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-medium text-gray-300 mb-1">First Name</label>
                     <input

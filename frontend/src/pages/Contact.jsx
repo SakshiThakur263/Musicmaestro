@@ -61,30 +61,30 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-28 pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
       {/* Header Banner */}
-      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-14 px-4 text-center">
-        <div className="max-w-4xl mx-auto space-y-4">
+      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-10 sm:py-14 px-4 text-center">
+        <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-wom-gold/15 text-wom-gold border border-wom-gold/30 rounded-full text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
             Direct Support & Bookings
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold font-raleway text-white">
+          <h1 className="text-2xl sm:text-5xl font-extrabold font-raleway text-white">
             Contact Us & Book Top Artists
           </h1>
-          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
             Have questions about artist availability, booking terms, or technical riders? We are here to assist you anytime.
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 items-start">
           {/* Left 2 Cols: Interactive Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-6 sm:p-10 shadow-xl space-y-6">
+            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-10 shadow-xl space-y-6">
               <div>
-                <h2 className="text-2xl font-bold font-raleway text-white">
+                <h2 className="text-xl sm:text-2xl font-bold font-raleway text-white">
                   Send Us a Message
                 </h2>
                 <p className="text-xs text-gray-400 mt-1">
@@ -188,7 +188,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-8 py-3.5 bg-wom-gold hover:bg-wom-goldHover text-black font-extrabold text-sm rounded-xl transition shadow-gold flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full sm:w-auto px-8 py-3.5 bg-wom-gold hover:bg-wom-goldHover text-black font-extrabold text-sm rounded-xl transition shadow-gold flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
@@ -205,7 +205,7 @@ const Contact = () => {
 
           {/* Right 1 Col: Office Location & Direct Communication */}
           <div className="space-y-6">
-            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-7 space-y-6 shadow-xl">
+            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-7 space-y-5 sm:space-y-6 shadow-xl">
               <h3 className="text-lg font-bold text-white font-raleway border-b border-wom-darkBorder pb-3">
                 Headquarters
               </h3>
@@ -245,9 +245,9 @@ const Contact = () => {
                   <div className="w-9 h-9 rounded-xl bg-wom-gold/10 text-wom-gold flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <strong className="text-white block mb-0.5">Email Support</strong>
-                    <p className="text-gray-300">
+                    <p className="text-gray-300 break-all">
                       <a
                         href="mailto:connect@worldofmusicians.com"
                         className="hover:text-wom-gold transition"

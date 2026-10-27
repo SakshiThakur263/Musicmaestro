@@ -101,34 +101,34 @@ const AddListing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-28 pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
       {/* Banner */}
-      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-12 px-4 text-center">
+      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-9 sm:py-12 px-4 text-center">
         <div className="max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-wom-gold/15 text-wom-gold border border-wom-gold/30 rounded-full text-xs font-bold uppercase tracking-wider">
             <Mic2 className="w-3.5 h-3.5" />
             Artist Onboarding Portal
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold font-raleway text-white">
+          <h1 className="text-2xl sm:text-5xl font-extrabold font-raleway text-white">
             Add Your Artist Listing
           </h1>
-          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto">
+          <p className="text-xs sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
             Join World of Musicians. Connect with event organizers, luxury wedding planners, and corporate bookers across India.
           </p>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-        <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-6 sm:p-10 shadow-2xl">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-10">
+        <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-10 shadow-2xl">
           {successArtist ? (
-            <div className="text-center py-10 space-y-6 animate-fadeIn">
+            <div className="text-center py-8 sm:py-10 space-y-6 animate-fadeIn">
               <div className="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mx-auto border border-green-500/40">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold font-raleway text-white">
+              <h2 className="text-xl sm:text-3xl font-bold font-raleway text-white">
                 Congratulations, {successArtist.name}!
               </h2>
-              <p className="text-sm text-gray-300 max-w-md mx-auto">
+              <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
                 Your artist profile has been published and is now live in the World of Musicians Artist Bank.
               </p>
 
@@ -149,10 +149,10 @@ const AddListing = () => {
                 </div>
               </div>
 
-              <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+              <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
                 <Link
                   to={`/artist/${successArtist.slug}`}
-                  className="px-6 py-3 bg-wom-gold text-black font-extrabold text-xs rounded-xl shadow-gold transition"
+                  className="w-full sm:w-auto px-6 py-3 bg-wom-gold text-black font-extrabold text-xs rounded-xl shadow-gold transition text-center"
                 >
                   View Live Profile
                 </Link>
@@ -175,7 +175,7 @@ const AddListing = () => {
                       instagram: '',
                     });
                   }}
-                  className="px-6 py-3 bg-[#181f2c] border border-wom-darkBorder hover:border-wom-gold text-white text-xs font-semibold rounded-xl transition"
+                  className="w-full sm:w-auto px-6 py-3 bg-[#181f2c] border border-wom-darkBorder hover:border-wom-gold text-white text-xs font-semibold rounded-xl transition"
                 >
                   Add Another Profile
                 </button>

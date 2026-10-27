@@ -31,10 +31,10 @@ const SearchBanner = () => {
       {/* Search Input Box matching WOM Screenshot */}
       <form
         onSubmit={handleSearch}
-        className="bg-white rounded-full p-2 shadow-[0_15px_45px_rgba(0,0,0,0.6)] flex flex-col md:flex-row items-center transition-all duration-300 hover:shadow-[0_20px_50px_rgba(244,165,28,0.25)] border border-white/30"
+        className="bg-white rounded-2xl md:rounded-full p-3 md:p-2 shadow-[0_15px_45px_rgba(0,0,0,0.6)] flex flex-col md:flex-row items-stretch md:items-center transition-all duration-300 hover:shadow-[0_20px_50px_rgba(244,165,28,0.25)] border border-white/30"
       >
         {/* 1. Keyword Input */}
-        <div className="flex-1 w-full md:w-auto px-5 py-2">
+        <div className="flex-1 w-full md:w-auto flex items-center justify-between px-4 md:px-5 py-2.5 md:py-2 border-b border-gray-200/80 md:border-b-0">
           <input
             type="text"
             value={keyword}
@@ -42,13 +42,14 @@ const SearchBanner = () => {
             placeholder="What are you looking for?"
             className="w-full bg-transparent text-gray-800 placeholder-gray-400 text-sm focus:outline-none font-medium"
           />
+          <Search className="w-4 h-4 text-gray-400 flex-shrink-0 ml-2 md:hidden" />
         </div>
 
         {/* Divider */}
         <div className="hidden md:block w-px h-8 bg-gray-200 my-auto"></div>
 
         {/* 2. Location Input with Pin Icon */}
-        <div className="flex-1 w-full md:w-auto flex items-center justify-between px-5 py-2">
+        <div className="flex-1 w-full md:w-auto flex items-center justify-between px-4 md:px-5 py-2.5 md:py-2 border-b border-gray-200/80 md:border-b-0">
           <input
             type="text"
             value={location}
@@ -63,7 +64,7 @@ const SearchBanner = () => {
         <div className="hidden md:block w-px h-8 bg-gray-200 my-auto"></div>
 
         {/* 3. Category Dropdown with Chevron */}
-        <div className="flex-1 w-full md:w-auto relative flex items-center px-4 py-2">
+        <div className="flex-1 w-full md:w-auto relative flex items-center px-4 py-2.5 md:py-2">
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
@@ -85,24 +86,24 @@ const SearchBanner = () => {
               Anchors & Entertainers
             </option>
           </select>
-          <ChevronDown className="w-4 h-4 text-gray-400 absolute right-6 pointer-events-none" />
+          <ChevronDown className="w-4 h-4 text-gray-400 absolute right-4 md:right-6 pointer-events-none" />
         </div>
 
         {/* 4. Orange Search Button */}
         <button
           type="submit"
-          className="w-full md:w-auto bg-[#f4a51c] hover:bg-[#e09414] text-white font-semibold text-base px-9 py-3.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:scale-102 active:scale-98 flex-shrink-0"
+          className="w-full md:w-auto mt-2 md:mt-0 bg-[#f4a51c] hover:bg-[#e09414] text-white font-semibold text-sm sm:text-base px-9 py-3 md:py-3.5 rounded-xl md:rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:scale-102 active:scale-98 flex-shrink-0"
         >
           Search
         </button>
       </form>
 
       {/* Featured Category Pills below search */}
-      <div className="mt-8 text-center">
-        <p className="text-sm font-medium text-gray-300 drop-shadow mb-3.5 tracking-wide">
+      <div className="mt-6 sm:mt-8 text-center">
+        <p className="text-xs sm:text-sm font-medium text-gray-300 drop-shadow mb-3 tracking-wide">
           Or browse featured categories:
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
           {featuredPills.map((pill, idx) => {
             const Icon = pill.icon;
             return (
@@ -110,9 +111,9 @@ const SearchBanner = () => {
                 key={idx}
                 type="button"
                 onClick={() => navigate(`/artists?category=${encodeURIComponent(pill.category)}`)}
-                className="flex items-center gap-2 px-5 py-2.5 bg-black/60 hover:bg-black/90 backdrop-blur-md text-white border border-white/20 hover:border-wom-gold rounded-full text-xs font-semibold transition-all duration-300 shadow-lg hover:scale-105 active:scale-95 group"
+                className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 bg-black/60 hover:bg-black/90 backdrop-blur-md text-white border border-white/20 hover:border-wom-gold rounded-full text-xs font-semibold transition-all duration-300 shadow-lg hover:scale-105 active:scale-95 group"
               >
-                <Icon className="w-4 h-4 text-gray-300 group-hover:text-wom-gold transition-colors" />
+                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-300 group-hover:text-wom-gold transition-colors" />
                 <span>{pill.name}</span>
               </button>
             );

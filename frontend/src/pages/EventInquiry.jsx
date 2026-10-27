@@ -62,76 +62,76 @@ const EventInquiry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-28 pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
       {/* Header Banner */}
-      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-12 px-4 mb-10 text-center">
+      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-9 sm:py-12 px-4 mb-8 sm:mb-10 text-center">
         <div className="max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-wom-gold/15 text-wom-gold border border-wom-gold/30 rounded-full text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
             Fast-Track Booking Inquiry
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold font-raleway text-white">
+          <h1 className="text-2xl sm:text-5xl font-extrabold font-raleway text-white">
             Send an Event Enquiry
           </h1>
-          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto">
+          <p className="text-xs sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
             Tell us about your event vision. Our talent curation team will check artist availability, provide customized quotes, and arrange complete performance coordination.
           </p>
         </div>
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 items-start">
           {/* Main Form (2 cols) */}
           <div className="lg:col-span-2">
-            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-6 sm:p-10 shadow-2xl">
+            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-5 sm:p-10 shadow-2xl">
               {successResponse ? (
-                <div className="text-center py-10 space-y-5 animate-fadeIn">
+                <div className="text-center py-8 sm:py-10 space-y-5 animate-fadeIn">
                   <div className="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mx-auto border border-green-500/40">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-raleway text-white">
+                  <h2 className="text-xl sm:text-3xl font-bold font-raleway text-white">
                     Inquiry Successfully Received!
                   </h2>
-                  <p className="text-sm text-gray-300 max-w-md mx-auto">
+                  <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
                     Thank you, <strong className="text-white">{formData.name}</strong>. Your inquiry has been routed to our artist coordination desk.
                   </p>
 
                   <div className="p-4 bg-[#181f2c] border border-wom-darkBorder rounded-xl max-w-sm mx-auto text-left space-y-1.5 text-xs">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between gap-2">
                       <span className="text-gray-400">Reference ID:</span>
                       <span className="font-mono font-bold text-wom-gold">
                         {successResponse.inquiryReference}
                       </span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between gap-2">
                       <span className="text-gray-400">Event Type:</span>
-                      <span className="text-white font-medium">{formData.eventType}</span>
+                      <span className="text-white font-medium text-right">{formData.eventType}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between gap-2">
                       <span className="text-gray-400">Event Date:</span>
                       <span className="text-white font-medium">{formData.eventDate}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between gap-2">
                       <span className="text-gray-400">City / Venue:</span>
-                      <span className="text-white font-medium">{formData.city}</span>
+                      <span className="text-white font-medium text-right">{formData.city}</span>
                     </div>
                   </div>
 
                   <p className="text-xs text-gray-400 max-w-md mx-auto">
                     We will get in touch with you at <strong className="text-white">{formData.phone}</strong> or{' '}
-                    <strong className="text-white">{formData.email}</strong> within 24 hours.
+                    <strong className="text-white break-all">{formData.email}</strong> within 24 hours.
                   </p>
 
-                  <div className="pt-4 flex justify-center gap-3">
+                  <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
                     <button
                       onClick={() => setSuccessResponse(null)}
-                      className="px-6 py-2.5 bg-[#181f2c] border border-wom-darkBorder hover:border-wom-gold text-white text-xs font-semibold rounded-xl transition"
+                      className="w-full sm:w-auto px-6 py-2.5 bg-[#181f2c] border border-wom-darkBorder hover:border-wom-gold text-white text-xs font-semibold rounded-xl transition"
                     >
                       Submit Another Inquiry
                     </button>
                     <Link
                       to="/artists"
-                      className="px-6 py-2.5 bg-wom-gold text-black font-bold text-xs rounded-xl shadow-gold transition"
+                      className="w-full sm:w-auto px-6 py-2.5 bg-wom-gold text-black font-bold text-xs rounded-xl shadow-gold transition text-center"
                     >
                       Browse More Artists
                     </Link>

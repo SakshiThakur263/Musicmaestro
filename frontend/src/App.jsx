@@ -31,10 +31,10 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <div className="flex flex-col min-h-screen bg-wom-dark text-slate-200 font-sans selection:bg-wom-gold selection:text-black">
+        <div className="flex flex-col min-h-screen overflow-x-hidden bg-wom-dark text-slate-200 font-sans selection:bg-wom-gold selection:text-black">
           <ScrollToTop />
           <Header />
-          <main className="flex-grow">
+          <main className="flex-grow w-full">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

@@ -40,6 +40,16 @@ const ArtistBank = () => {
   // Available locations in dataset
   const locationsList = ['All', 'Mumbai', 'Delhi', 'Jaipur', 'Pune', 'Goa', 'Bangalore'];
 
+  // Sync local filter state when URL query params change (e.g., from header/footer links)
+  useEffect(() => {
+    setKeyword(searchParams.get('search') || '');
+    setCategory(searchParams.get('category') || 'All');
+    setSubcategory(searchParams.get('subcategory') || 'All');
+    setLocation(searchParams.get('location') || 'All');
+    setSortBy(searchParams.get('sort') || 'rating');
+    setFeaturedOnly(searchParams.get('featured') === 'true');
+  }, [searchParams]);
+
   // Load categories
   useEffect(() => {
     const loadCategories = async () => {
@@ -119,16 +129,16 @@ const ArtistBank = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-28 pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
       {/* Top Titlebar matching WOM */}
-      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-10 px-4 mb-8">
+      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-8 sm:py-10 px-4 mb-6 sm:mb-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-wom-gold uppercase tracking-wider mb-1">
               <Music className="w-4 h-4" />
               Verified Artists & Entertainers
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold font-raleway text-white">
+            <h1 className="text-2xl sm:text-4xl font-extrabold font-raleway text-white">
               Artist Bank & Directory
             </h1>
             <p className="text-xs sm:text-sm text-gray-400 mt-1">
@@ -139,7 +149,7 @@ const ArtistBank = () => {
           <div className="flex items-center gap-3">
             <Link
               to="/event-inquiry"
-              className="px-5 py-2.5 bg-wom-gold hover:bg-wom-goldHover text-black text-xs font-bold rounded-lg transition shadow-gold-sm"
+              className="w-full sm:w-auto text-center px-5 py-2.5 bg-wom-gold hover:bg-wom-goldHover text-black text-xs font-bold rounded-lg transition shadow-gold-sm"
             >
               Custom Event Inquiry
             </Link>
@@ -251,15 +261,35 @@ const ArtistBank = () => {
 
           {/* Main Content Area */}
           <main className="flex-1 min-w-0">
+            {/* Mobile Quick Search Bar */}
+            <form onSubmit={handleSearchSubmit} className="lg:hidden mb-4 flex gap-2">
+              <div className="relative flex-1">
+                <input
+                  type="text"
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+                  placeholder="Search artist name, genre, city..."
+                  className="w-full pl-9 pr-3.5 py-2.5 bg-[#121622] border border-wom-darkBorder rounded-xl text-white text-xs focus:outline-none focus:border-wom-gold transition"
+                />
+                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              </div>
+              <button
+                type="submit"
+                className="px-4 py-2.5 bg-wom-gold text-black font-bold text-xs rounded-xl shadow-gold-sm flex-shrink-0"
+              >
+                Search
+              </button>
+            </form>
+
             {/* Top Bar with Count, Sort, and View Switcher */}
-            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
+            <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-3.5 sm:p-4 mb-6 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
+              <div className="flex items-center gap-2.5 sm:gap-3">
                 <button
                   onClick={() => setMobileFilterOpen(true)}
-                  className="lg:hidden flex items-center gap-2 px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-xs font-bold text-white hover:border-wom-gold transition"
+                  className="lg:hidden flex items-center gap-1.5 px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-xs font-bold text-white hover:border-wom-gold transition"
                 >
                   <Filter className="w-3.5 h-3.5 text-wom-gold" />
-                  Filters
+                  <span>Filters</span>
                 </button>
 
                 <span className="text-xs text-gray-300">
@@ -268,9 +298,9 @@ const ArtistBank = () => {
                 </span>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
                 {/* Sort selector */}
-                <div className="flex items-center gap-2 text-xs">
+                <div className="flex items-center gap-2 text-xs flex-1 sm:flex-initial">
                   <span className="text-gray-400 hidden sm:inline">Sort By:</span>
                   <select
                     value={sortBy}
@@ -278,7 +308,7 @@ const ArtistBank = () => {
                       setSortBy(e.target.value);
                       setCurrentPage(1);
                     }}
-                    className="px-3 py-1.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold transition cursor-pointer"
+                    className="w-full sm:w-auto px-3 py-2 sm:py-1.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold transition cursor-pointer"
                   >
                     <option value="rating">Highest Rated</option>
                     <option value="shows">Most Shows Done</option>
@@ -289,7 +319,7 @@ const ArtistBank = () => {
                 </div>
 
                 {/* View Mode Toggle */}
-                <div className="flex items-center border border-wom-darkBorder rounded-lg overflow-hidden bg-[#181f2c]">
+                <div className="flex items-center border border-wom-darkBorder rounded-lg overflow-hidden bg-[#181f2c] flex-shrink-0">
                   <button
                     onClick={() => setViewMode('grid')}
                     className={`p-2 transition ${
@@ -313,13 +343,21 @@ const ArtistBank = () => {
             </div>
 
             {/* Active Filters Pill Bar */}
-            {(category !== 'All' || location !== 'All' || keyword || featuredOnly) && (
+            {(category !== 'All' || subcategory !== 'All' || location !== 'All' || keyword || featuredOnly) && (
               <div className="flex flex-wrap items-center gap-2 mb-6">
                 <span className="text-xs text-gray-400 mr-1">Active filters:</span>
                 {category !== 'All' && (
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-wom-gold/15 text-wom-gold text-xs border border-wom-gold/30">
                     Category: {category}
                     <button onClick={() => setCategory('All')} className="hover:text-white">
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                )}
+                {subcategory !== 'All' && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-wom-gold/15 text-wom-gold text-xs border border-wom-gold/30">
+                    Style: {subcategory}
+                    <button onClick={() => setSubcategory('All')} className="hover:text-white">
                       <X className="w-3 h-3" />
                     </button>
                   </span>
@@ -368,7 +406,7 @@ const ArtistBank = () => {
                 ))}
               </div>
             ) : artists.length === 0 ? (
-              <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-12 text-center space-y-4">
+              <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-8 sm:p-12 text-center space-y-4">
                 <div className="w-16 h-16 mx-auto rounded-full bg-wom-gold/10 flex items-center justify-center text-wom-gold">
                   <Music className="w-8 h-8" />
                 </div>
@@ -387,19 +425,24 @@ const ArtistBank = () => {
               <div
                 className={
                   viewMode === 'grid'
-                    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
+                    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6'
                     : 'flex flex-col space-y-4'
                 }
               >
                 {artists.map((artist) => (
-                  <ArtistCard key={artist._id} artist={artist} compact={viewMode === 'grid'} />
+                  <ArtistCard
+                    key={artist._id}
+                    artist={artist}
+                    compact={viewMode === 'grid'}
+                    listView={viewMode === 'list'}
+                  />
                 ))}
               </div>
             )}
 
             {/* Pagination Controls */}
             {totalPages > 1 && (
-              <div className="mt-12 flex items-center justify-center gap-2">
+              <div className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-2">
                 <button
                   onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                   disabled={currentPage === 1}
@@ -442,41 +485,66 @@ const ArtistBank = () => {
             className="fixed inset-0 bg-black/80 backdrop-blur-sm"
             onClick={() => setMobileFilterOpen(false)}
           ></div>
-          <div className="fixed top-0 right-0 bottom-0 w-[300px] bg-[#121622] p-6 overflow-y-auto space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-wom-darkBorder">
-              <span className="font-bold text-white text-base">Filter Artists</span>
-              <button
-                onClick={() => setMobileFilterOpen(false)}
-                className="p-1 text-gray-400 hover:text-white"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
-                  Category
-                </label>
-                <select
-                  value={category}
-                  onChange={(e) => {
-                    setCategory(e.target.value);
-                    setCurrentPage(1);
-                  }}
-                  className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs"
+          <div className="fixed top-0 right-0 bottom-0 w-[85vw] max-w-[320px] bg-[#121622] border-l border-wom-darkBorder p-5 sm:p-6 overflow-y-auto flex flex-col justify-between space-y-6">
+            <div className="space-y-5">
+              <div className="flex items-center justify-between pb-4 border-b border-wom-darkBorder">
+                <span className="font-bold text-white text-base flex items-center gap-2">
+                  <Filter className="w-4 h-4 text-wom-gold" />
+                  Filter Artists
+                </span>
+                <button
+                  onClick={() => setMobileFilterOpen(false)}
+                  className="p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-white/5"
                 >
-                  {['All', 'Live Bands', 'Solo Performer', 'DJ Services', 'Others'].map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
+                  <X className="w-5 h-5" />
+                </button>
               </div>
 
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
-                  Location
+                  Keywords
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                    placeholder="Search name, genre..."
+                    className="w-full pl-9 pr-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                  />
+                  <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
+                  Main Category
+                </label>
+                <div className="space-y-1.5 text-xs">
+                  {['All', 'Live Bands', 'Solo Performer', 'DJ Services', 'Others'].map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => {
+                        setCategory(cat);
+                        setSubcategory('All');
+                        setCurrentPage(1);
+                      }}
+                      className={`w-full text-left px-3 py-2.5 rounded-lg transition flex items-center justify-between ${
+                        category === cat
+                          ? 'bg-wom-gold text-black font-bold shadow-sm'
+                          : 'bg-[#181f2c]/60 text-gray-300 hover:bg-white/5'
+                      }`}
+                    >
+                      <span>{cat}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
+                  Region / City
                 </label>
                 <select
                   value={location}
@@ -484,24 +552,51 @@ const ArtistBank = () => {
                     setLocation(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full px-3 py-2 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs"
+                  className="w-full px-3 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                 >
                   {locationsList.map((loc) => (
                     <option key={loc} value={loc}>
-                      {loc}
+                      {loc === 'All' ? 'All Regions in India' : loc}
                     </option>
                   ))}
                 </select>
               </div>
 
+              <div className="pt-1">
+                <label className="flex items-center gap-2.5 cursor-pointer text-xs text-gray-300">
+                  <input
+                    type="checkbox"
+                    checked={featuredOnly}
+                    onChange={(e) => {
+                      setFeaturedOnly(e.target.checked);
+                      setCurrentPage(1);
+                    }}
+                    className="w-4 h-4 rounded text-wom-gold focus:ring-wom-gold bg-[#181f2c] border-gray-600"
+                  />
+                  <span>Show Featured Talent Only</span>
+                </label>
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-wom-darkBorder space-y-2.5">
               <button
                 onClick={() => {
                   setMobileFilterOpen(false);
                   updateUrlParams();
                 }}
-                className="w-full py-3 bg-wom-gold text-black font-bold rounded-lg text-xs shadow-gold"
+                className="w-full py-3 bg-wom-gold text-black font-bold rounded-xl text-xs shadow-gold"
               >
                 Apply Filters
+              </button>
+              <button
+                onClick={() => {
+                  clearAllFilters();
+                  setMobileFilterOpen(false);
+                }}
+                className="w-full py-2.5 bg-[#181f2c] border border-wom-darkBorder text-gray-300 hover:text-white font-semibold rounded-xl text-xs flex items-center justify-center gap-1.5"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                Reset All
               </button>
             </div>
           </div>

@@ -6,9 +6,9 @@ import AuthModal from '../components/AuthModal';
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen bg-wom-dark text-slate-200 font-sans selection:bg-wom-gold selection:text-black">
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-wom-dark text-slate-200 font-sans selection:bg-wom-gold selection:text-black">
       <Header />
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow w-full">{children}</main>
       <Footer />
       <WhatsAppButton />
       <AuthModal />

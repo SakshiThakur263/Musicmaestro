@@ -24,22 +24,22 @@ const Footer = () => {
   return (
     <footer className="bg-[#07090e] border-t border-wom-darkBorder text-gray-400 text-sm">
       {/* Top Banner / Newsletter or Quick CTA */}
-      <div className="border-b border-wom-darkBorder/60 bg-gradient-to-r from-black via-[#111622] to-black py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="border-b border-wom-darkBorder/60 bg-gradient-to-r from-black via-[#111622] to-black py-7 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <div>
-            <h3 className="text-xl font-bold text-white">Elevate Your Vision With Music Maestro</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-white">Elevate Your Vision With Music Maestro</h3>
             <p className="text-xs text-gray-400 mt-1">Book world-class artists, live bands, and DJs for your next landmark event.</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full md:w-auto">
             <Link
               to="/event-inquiry"
-              className="px-6 py-2.5 bg-wom-gold hover:bg-wom-goldHover text-black font-bold text-xs rounded-lg transition shadow-gold"
+              className="w-full sm:w-auto text-center px-6 py-2.5 bg-wom-gold hover:bg-wom-goldHover text-black font-bold text-xs rounded-lg transition shadow-gold"
             >
               Send Event Enquiry
             </Link>
             <Link
               to="/add-listing"
-              className="px-6 py-2.5 bg-[#181f2c] hover:bg-white/10 text-white border border-wom-darkBorder font-semibold text-xs rounded-lg transition"
+              className="w-full sm:w-auto text-center px-6 py-2.5 bg-[#181f2c] hover:bg-white/10 text-white border border-wom-darkBorder font-semibold text-xs rounded-lg transition"
             >
               List As An Artist
             </Link>
@@ -47,8 +47,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {/* Col 1: About & Legal Disclaimer from reference site */}
           <div className="space-y-4">
             <Link to="/" className="inline-block">
@@ -202,7 +202,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-6 border-t border-wom-darkBorder flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+        <div className="mt-10 sm:mt-12 pt-6 pb-12 sm:pb-0 border-t border-wom-darkBorder flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4 text-center md:text-left">
           <p>
             Copyright © 2026 Music Maestro | Art of Performance & Celebration
           </p>
