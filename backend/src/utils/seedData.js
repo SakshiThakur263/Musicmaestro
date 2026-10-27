@@ -72,13 +72,13 @@ const artistsData = [
     videos: [
       {
         title: 'Manmeet Live at Grand Wedding Showcase',
-        url: 'https://www.youtube.com/watch?v=GqkMjSBppiQ',
-        embedUrl: 'https://www.youtube.com/embed/GqkMjSBppiQ',
+        url: 'https://www.youtube.com/watch?v=doi_Ss4WaT0',
+        embedUrl: 'https://www.youtube.com/embed/doi_Ss4WaT0',
       },
       {
         title: 'High Voltage Punjabi & Bollywood Mashup',
-        url: 'https://www.youtube.com/watch?v=TstpVkI5lOE',
-        embedUrl: 'https://www.youtube.com/embed/TstpVkI5lOE',
+        url: 'https://www.youtube.com/watch?v=P-Ay-ThLric',
+        embedUrl: 'https://www.youtube.com/embed/P-Ay-ThLric',
       },
     ],
     audioSamples: [
@@ -117,8 +117,8 @@ const artistsData = [
     videos: [
       {
         title: 'Palchang Live Concert Montage',
-        url: 'https://www.youtube.com/watch?v=3jhVnOmybEg',
-        embedUrl: 'https://www.youtube.com/embed/3jhVnOmybEg',
+        url: 'https://www.youtube.com/watch?v=_dgNRR8Tpew',
+        embedUrl: 'https://www.youtube.com/embed/_dgNRR8Tpew',
       },
     ],
     audioSamples: [
@@ -213,8 +213,8 @@ const artistsData = [
     videos: [
       {
         title: 'DJ Saggy Sangeet Live Madness',
-        url: 'https://www.youtube.com/watch?v=2KhCzhCWtB0',
-        embedUrl: 'https://www.youtube.com/embed/2KhCzhCWtB0',
+        url: 'https://www.youtube.com/watch?v=OLQ9bBcydLs',
+        embedUrl: 'https://www.youtube.com/embed/OLQ9bBcydLs',
       },
     ],
     rating: 4.9,

@@ -275,28 +275,28 @@ const CITY_REGIONS = [
 
 const POPULAR_VIDEOS = [
   {
-    id: '3jhVnOmybEg',
-    title: 'Junglee Games Rocks Goa – Corporate Event Highlight',
+    id: 'HqJzui2afNw',
+    title: 'Do Dil x Ek Ladki Ko – Live Unplugged Bollywood Mashup',
   },
   {
     id: 'jeUZm0jnKOs',
-    title: 'Anup Jalota Live Concert – Soulful Evening',
-  },
-  {
-    id: 'HqJzui2afNw',
-    title: 'Do Dil x Ek Ladki Ko – Live Acoustic Mashup',
+    title: 'Anup Jalota Live Concert – Soulful Ghazal & Bhajan Evening',
   },
   {
     id: 'OLQ9bBcydLs',
-    title: 'Shankar Mahadevan Classical Fusion Performance',
+    title: 'Shankar Mahadevan Classical Fusion Live Performance',
   },
   {
-    id: '2KhCzhCWtB0',
-    title: 'Bajaj IBU Business Conference – Grand Gala Night',
+    id: 'doi_Ss4WaT0',
+    title: 'Pratibha Singh Baghel Live at Jazbaat – Soulful Ghazals & Music',
   },
   {
-    id: 'RsCZ5nBIx38',
-    title: 'Blissful Mussoorie Corporate Retreat Live Band',
+    id: 'P-Ay-ThLric',
+    title: 'Jazbaat Live Musical Concert – Classical & Bollywood Symphony',
+  },
+  {
+    id: '_dgNRR8Tpew',
+    title: 'Madhur Live Band – High-Energy Bollywood & Sufi Medley',
   },
 ];
 
@@ -504,7 +504,7 @@ const Home = () => {
       {/* =====================================================================
           1. HERO SECTION WITH FULLSCREEN VIDEO & LIVE TYPED HEADLINE
       ====================================================================== */}
-      <section className="relative min-h-[92svh] sm:min-h-[100svh] flex items-center justify-center pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 overflow-hidden">
+      <section className="relative min-h-[95svh] sm:min-h-[100svh] flex items-center justify-center pt-36 sm:pt-40 lg:pt-32 pb-16 sm:pb-24 px-4 overflow-hidden">
         {/* Fullscreen Video Background */}
         <video
           ref={videoRef}
@@ -516,25 +516,26 @@ const Home = () => {
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none brightness-75 scale-105"
         />
 
-        {/* Dark Stage Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/45 to-[#121212] z-[1]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.65)_100%)] z-[1]" />
+        {/* Deep Royal Concert Blue Stage Vignette Overlay matching Screenshot 1 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#040928]/85 via-[#071344]/60 to-[#121212] z-[1]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(29,78,216,0.32)_0%,transparent_60%)] z-[1]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,6,23,0.65)_100%)] z-[1]" />
 
-        <div className="relative max-w-5xl mx-auto text-center z-10 w-full mt-2 sm:mt-4">
-          {/* Dynamic Typed Headline matching worldofmusicians.com */}
-          <div className="min-h-[84px] sm:min-h-[100px] md:min-h-[116px] flex items-center justify-center px-2">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-raleway tracking-tight text-white uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] leading-tight break-words">
+        <div className="relative max-w-5xl mx-auto text-center z-10 w-full mt-1 sm:mt-4">
+          {/* Dynamic Typed Headline matching Screenshot 1 */}
+          <div className="min-h-[64px] sm:min-h-[92px] md:min-h-[108px] flex items-center justify-center px-2">
+            <h1 className="text-[28px] sm:text-4xl md:text-5xl lg:text-6xl font-normal sm:font-medium font-raleway tracking-[0.04em] text-white uppercase drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] leading-tight break-words">
               <span>{currentText}</span>
-              <span className="inline-block w-1 sm:w-1.5 h-6 sm:h-10 md:h-12 bg-[#f4a51c] ml-1.5 align-middle animate-pulse" />
+              <span className="inline-block w-0.5 sm:w-1 h-6 sm:h-10 md:h-12 bg-white/80 ml-1 align-middle animate-pulse" />
             </h1>
           </div>
 
-          {/* Subtitle */}
-          <h4 className="text-base sm:text-2xl md:text-3xl font-bold tracking-[0.18em] sm:tracking-[0.25em] text-gray-100 uppercase mt-2 mb-7 sm:mb-9 drop-shadow-[0_2px_15px_rgba(0,0,0,0.95)] font-raleway">
+          {/* Subtitle matching Screenshot 1 */}
+          <h4 className="text-[17px] sm:text-2xl md:text-[26px] font-light tracking-[0.12em] sm:tracking-[0.2em] text-gray-300/95 uppercase mt-1 mb-6 sm:mb-8 drop-shadow-[0_2px_15px_rgba(0,0,0,0.95)] font-raleway">
             MUSIC MAESTRO!
           </h4>
 
-          {/* White Pill Search Banner + Highlighted Category Boxes */}
+          {/* Search Banner + Featured Category Pills */}
           <SearchBanner />
         </div>
 
@@ -914,10 +915,11 @@ const Home = () => {
             >
               <div className="aspect-video w-full bg-black relative">
                 <iframe
-                  src={`https://www.youtube.com/embed/${vid.id}`}
+                  src={`https://www.youtube.com/embed/${vid.id}?rel=0`}
                   title={vid.title}
                   className="w-full h-full border-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   loading="lazy"
                 />

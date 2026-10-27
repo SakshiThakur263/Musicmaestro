@@ -23,8 +23,8 @@ export const ARTISTS_CATALOG = [
     videos: [
       {
         title: 'Palchang Live Concert Montage',
-        url: 'https://www.youtube.com/watch?v=3jhVnOmybEg',
-        embedUrl: 'https://www.youtube.com/embed/3jhVnOmybEg',
+        url: 'https://www.youtube.com/watch?v=_dgNRR8Tpew',
+        embedUrl: 'https://www.youtube.com/embed/_dgNRR8Tpew',
       },
     ],
     audioSamples: [
@@ -64,8 +64,8 @@ export const ARTISTS_CATALOG = [
     videos: [
       {
         title: 'Manmeet Live at Grand Wedding Showcase',
-        url: 'https://www.youtube.com/watch?v=3jhVnOmybEg',
-        embedUrl: 'https://www.youtube.com/embed/3jhVnOmybEg',
+        url: 'https://www.youtube.com/watch?v=doi_Ss4WaT0',
+        embedUrl: 'https://www.youtube.com/embed/doi_Ss4WaT0',
       },
     ],
     audioSamples: [
@@ -353,8 +353,8 @@ export const ARTISTS_CATALOG = [
     videos: [
       {
         title: 'DJ Saggy Live Gala Night',
-        url: 'https://www.youtube.com/watch?v=2KhCzhCWtB0',
-        embedUrl: 'https://www.youtube.com/embed/2KhCzhCWtB0',
+        url: 'https://www.youtube.com/watch?v=P-Ay-ThLric',
+        embedUrl: 'https://www.youtube.com/embed/P-Ay-ThLric',
       },
     ],
     rating: 4.9,

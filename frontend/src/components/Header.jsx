@@ -111,8 +111,8 @@ const Header = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-black/95 backdrop-blur-md shadow-2xl border-b border-white/10 py-2.5 sm:py-3'
-            : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-3 sm:py-4'
+            ? 'bg-[#05091e]/95 backdrop-blur-md shadow-2xl border-b border-white/10 py-2.5 sm:py-3'
+            : 'bg-gradient-to-b from-[#040822]/90 via-[#040822]/55 to-transparent py-3 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -122,7 +122,7 @@ const Header = () => {
               <img
                 src="/music-maestro-logo.png"
                 alt="Music Maestro — Art of Performance & Celebration"
-                className="h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg border border-[#f4a51c]/30 shadow-[0_2px_14px_rgba(244,165,28,0.25)] group-hover:scale-105 transition-transform duration-200"
+                className="h-12 sm:h-14 w-auto object-contain rounded-lg border border-[#f4a51c]/30 shadow-[0_2px_14px_rgba(244,165,28,0.25)] group-hover:scale-105 transition-transform duration-200"
               />
             </Link>
 
@@ -304,34 +304,44 @@ const Header = () => {
               )}
             </div>
 
-            {/* Mobile Quick Sign-In & Hamburger Trigger */}
-            <div className="lg:hidden flex items-center gap-2">
-              {!isAuthenticated ? (
-                <button
-                  onClick={() => openAuthModal('login', 'client')}
-                  className="bg-white/95 hover:bg-white text-gray-900 px-3.5 py-1.5 rounded-full font-semibold text-xs flex items-center gap-1.5 shadow-sm transition"
-                >
-                  <LogIn className="w-3.5 h-3.5 text-gray-700" />
-                  <span>Sign In</span>
-                </button>
-              ) : (
-                <Link
-                  to="/add-listing"
-                  className="w-8 h-8 rounded-full bg-wom-gold text-black flex items-center justify-center font-bold text-xs shadow-sm"
-                  title={user?.username}
-                >
-                  {user?.username?.charAt(0).toUpperCase() || 'U'}
-                </Link>
-              )}
-
+            {/* Mobile Hamburger Trigger (Row 1 Right: Dark Slate-Blue Square Rounded Button matching Screenshot 1) */}
+            <div className="lg:hidden flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-gray-200 hover:text-white rounded-lg hover:bg-white/10 transition"
+                className="w-11 h-11 rounded-md bg-[#222c4a] hover:bg-[#2c385c] text-white flex items-center justify-center shadow-md transition"
                 aria-label="Toggle navigation"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
+          </div>
+
+          {/* Mobile Row 2: Divider Line + Left-Aligned White Pill Sign In Button (matching Screenshot 1) */}
+          <div
+            className={`${
+              isScrolled ? 'hidden' : 'flex'
+            } lg:hidden border-t border-white/15 mt-2.5 pt-2.5 items-center justify-start`}
+          >
+            {!isAuthenticated ? (
+              <button
+                onClick={() => openAuthModal('login', 'client')}
+                className="bg-white hover:bg-gray-100 text-gray-800 px-5 py-2 rounded-full font-normal text-sm flex items-center gap-2 shadow-md transition"
+              >
+                <LogIn className="w-4 h-4 text-gray-700" />
+                <span>Sign In</span>
+              </button>
+            ) : (
+              <Link
+                to="/add-listing"
+                className="bg-white hover:bg-gray-100 text-gray-800 px-4 py-1.5 rounded-full font-medium text-xs flex items-center gap-2 shadow-md transition"
+                title={user?.username}
+              >
+                <span className="w-5 h-5 rounded-full bg-wom-gold text-black flex items-center justify-center font-bold text-[11px]">
+                  {user?.username?.charAt(0).toUpperCase() || 'U'}
+                </span>
+                <span>{user?.username}</span>
+              </Link>
+            )}
           </div>
         </div>
       </header>
