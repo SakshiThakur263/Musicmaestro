@@ -113,7 +113,7 @@ const AddListing = () => {
             Add Your Artist Listing
           </h1>
           <p className="text-xs sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
-            Join World of Musicians. Connect with event organizers, luxury wedding planners, and corporate bookers across India.
+            Join Music Maestro. Connect with event organizers, luxury wedding planners, and corporate bookers across India.
           </p>
         </div>
       </div>
@@ -129,7 +129,7 @@ const AddListing = () => {
                 Congratulations, {successArtist.name}!
               </h2>
               <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
-                Your artist profile has been published and is now live in the World of Musicians Artist Bank.
+                Your artist profile has been published and is now live in the Music Maestro Artist Bank.
               </p>
 
               <div className="p-4 bg-[#181f2c] border border-wom-darkBorder rounded-xl max-w-sm mx-auto text-left space-y-2 text-xs">

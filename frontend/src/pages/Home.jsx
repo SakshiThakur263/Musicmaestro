@@ -146,7 +146,7 @@ const Home = () => {
 
           {/* Subtitle from Reference Screenshot */}
           <h2 className="text-sm sm:text-2xl md:text-3xl font-bold tracking-[0.15em] sm:tracking-[0.25em] text-gray-200 uppercase mb-6 sm:mb-8 drop-shadow-[0_2px_15px_rgba(0,0,0,0.95)] font-raleway">
-            WORLD OF MUSICIANS!
+            MUSIC MAESTRO!
           </h2>
 
           {/* Search Box Component */}
@@ -185,15 +185,15 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 2. WELCOME TO WORLD OF MUSICIANS SECTION */}
+      {/* 2. WELCOME TO MUSIC MAESTRO SECTION */}
       <section className="py-14 sm:py-20 px-4 border-y border-wom-darkBorder bg-[#0e1219]">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block w-12 h-1 bg-wom-gold mb-5 sm:mb-6 rounded-full"></div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-raleway text-white mb-5 sm:mb-6 leading-tight">
-            Welcome to World of Musicians – Your Premier Destination to Hire Artists for Events
+            Welcome to Music Maestro – Your Premier Destination to Hire Artists for Events
           </h2>
           <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-8 max-w-3xl mx-auto">
-            Welcome to World of Musicians, where your quest to hire artists for events, musicians, and top entertainers comes to a fulfilling end. Whether you are planning a corporate event, a private party, a wedding, or a grand concert, we provide a seamless and exhilarating musician booking experience.
+            Welcome to Music Maestro, where your quest to hire artists for events, musicians, and top entertainers comes to a fulfilling end. Whether you are planning a corporate event, a private party, a wedding, or a grand concert, we provide a seamless and exhilarating musician booking experience.
             <br className="hidden sm:inline" />
             Our extensive network features the world’s best artists, from renowned music bands to versatile DJs, ensuring that every event is an unforgettable musical journey.
           </p>
@@ -405,7 +405,7 @@ const Home = () => {
               Where Productivity Meets Play: Crafting the Ideal Corporate Entertainment
             </h2>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Planning a corporate event for team building, an annual conference, or a grand product launch? World of Musicians offers an extensive roster of artists who provide the perfect backdrop for networking, client appreciation, and high-impact celebration.
+              Planning a corporate event for team building, an annual conference, or a grand product launch? Music Maestro offers an extensive roster of artists who provide the perfect backdrop for networking, client appreciation, and high-impact celebration.
             </p>
             <p className="text-xs text-gray-400">
               Trusted by corporate clients such as Junglee Games (Goa Retreat), Bajaj IBU Business Conference, and SKIL Events for unforgettable entertainment production.
@@ -494,7 +494,7 @@ const Home = () => {
               Browse or Add Listing
             </h3>
             <p className="text-xs text-gray-400 leading-relaxed">
-              Explore 500+ curated artist profiles with video clips, audio demos, and real pricing, or submit your own artist portfolio to the WOM directory.
+              Explore 500+ curated artist profiles with video clips, audio demos, and real pricing, or submit your own artist portfolio to the Music Maestro directory.
             </p>
           </div>
 
@@ -513,15 +513,15 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 8. WHY CHOOSE WORLD OF MUSICIANS */}
+      {/* 8. WHY CHOOSE MUSIC MAESTRO */}
       <section className="py-14 sm:py-20 px-4 bg-[#0e1219] border-y border-wom-darkBorder">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
             <h2 className="text-2xl sm:text-4xl font-extrabold font-raleway text-white mb-3">
-              Why Choose World of Musicians?
+              Why Choose Music Maestro?
             </h2>
             <p className="text-xs sm:text-sm text-gray-400">
-              Choosing the right entertainment for your event can be daunting, but World of Musicians simplifies the entire process.
+              Choosing the right entertainment for your event can be daunting, but Music Maestro simplifies the entire process.
             </p>
           </div>
 
@@ -596,7 +596,7 @@ const Home = () => {
             Elevate Your Vision: Book Now and Transform Your Event
           </h2>
           <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Ready to make your event unforgettable? Hire musicians and top entertainers from World of Musicians today. Explore artist profiles, listen to audio samples, and submit your inquiry with confidence.
+            Ready to make your event unforgettable? Hire musicians and top entertainers from Music Maestro today. Explore artist profiles, listen to audio samples, and submit your inquiry with confidence.
           </p>
           <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
             <Link

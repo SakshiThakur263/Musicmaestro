@@ -31,7 +31,7 @@ const WhatsAppButton = () => {
         target="_blank"
         rel="noopener noreferrer"
         className="relative group w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.45)] hover:shadow-[0_6px_28px_rgba(37,211,102,0.7)] hover:scale-110 active:scale-95 transition-all duration-300"
-        aria-label="Chat with World of Musicians on WhatsApp"
+        aria-label="Chat with Music Maestro on WhatsApp"
       >
         {/* Soft pulsing halo ring */}
         <span className="absolute -inset-1 rounded-full bg-[#25D366]/30 animate-pulse -z-10 group-hover:scale-125 transition-transform duration-500"></span>

@@ -151,7 +151,7 @@ const Footer = () => {
             </h4>
             <div className="flex items-start gap-2.5 text-xs">
               <MapPin className="w-4 h-4 text-wom-gold flex-shrink-0 mt-0.5" />
-              <span>Lotus Corporate Park, G wing, 801 Off Western Express Highway, Near Jai Coach, Mumbai, MH, 400063</span>
+              <span>202/19, Oshiwara Andheri West, Mumbai</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs">
               <Phone className="w-4 h-4 text-wom-gold flex-shrink-0" />

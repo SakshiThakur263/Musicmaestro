@@ -383,7 +383,7 @@ const EventInquiry = () => {
             <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-6 space-y-4">
               <h3 className="text-base font-bold text-white font-raleway flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-wom-gold" />
-                The WOM Booking Assurance
+                The Music Maestro Booking Assurance
               </h3>
               <ul className="space-y-3 text-xs text-gray-300">
                 <li className="flex items-start gap-2">
@@ -413,7 +413,7 @@ const EventInquiry = () => {
                 Corporate Office
               </h4>
               <p className="text-xs text-gray-400 leading-relaxed">
-                Lotus Corporate Park, G wing, 801 Off Western Express Highway, Near Jai Coach, Mumbai, MH, 400063
+                202/19, Oshiwara Andheri West, Mumbai
               </p>
               <div className="pt-2 text-xs space-y-1">
                 <div>

@@ -218,7 +218,7 @@ const Contact = () => {
                   <div>
                     <strong className="text-white block mb-0.5">Mumbai Office</strong>
                     <p className="text-gray-400 leading-relaxed">
-                      Lotus Corporate Park, G wing, 801 Off Western Express Highway, Near Jai Coach, Mumbai, MH, 400063
+                      202/19, Oshiwara Andheri West, Mumbai
                     </p>
                   </div>
                 </div>
@@ -279,15 +279,15 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Google Map Mock/Embed representation matching WOM */}
+            {/* Google Map Location */}
             <div className="bg-[#121622] border border-wom-darkBorder rounded-2xl p-4 overflow-hidden">
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block mb-2">
                 Map Location
               </span>
               <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-900 border border-wom-darkBorder">
                 <iframe
-                  title="Lotus Corporate Park Mumbai Location"
-                  src="https://maps.google.com/maps?q=Lotus%20Corporate%20Park,%20Goregaon,%20Mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  title="202/19, Oshiwara Andheri West, Mumbai Location"
+                  src="https://maps.google.com/maps?q=202%2F19,%20Oshiwara,%20Andheri%20West,%20Mumbai&t=&z=14&ie=UTF8&iwloc=&output=embed"
                   className="w-full h-full border-0 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition duration-300"
                   loading="lazy"
                 ></iframe>

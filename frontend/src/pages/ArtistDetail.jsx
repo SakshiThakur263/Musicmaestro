@@ -208,7 +208,7 @@ const ArtistDetail = () => {
             <h1 className="text-2xl sm:text-4xl font-extrabold font-raleway text-white flex items-center gap-2">
               <span>{artist.name}</span>
               {artist.verified && (
-                <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-wom-gold flex-shrink-0" title="Verified Artist by WOM" />
+                <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-wom-gold flex-shrink-0" title="Verified Artist by Music Maestro" />
               )}
             </h1>
 
@@ -682,7 +682,7 @@ const ArtistDetail = () => {
                     </strong>
                   </p>
                   <p className="text-[11px] text-gray-400">
-                    A World of Musicians artist coordinator will call you back within 24 hours with exact availability and rider details.
+                    A Music Maestro artist coordinator will call you back within 24 hours with exact availability and rider details.
                   </p>
                   <button
                     onClick={() => setBookingSuccess(null)}

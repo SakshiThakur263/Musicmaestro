@@ -64,7 +64,7 @@ const About = () => {
               Bridging the Stage Between Extraordinary Talent and Unforgettable Audiences
             </h2>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              Founded in Mumbai, World of Musicians (WOM) was born out of a profound passion for live music and a recognition that event organizers needed a reliable, transparent way to book world-class artists.
+              Founded in Mumbai, Music Maestro was born out of a profound passion for live music and a recognition that event organizers needed a reliable, transparent way to book world-class artists.
             </p>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
               Whether you are organizing a 700-delegate corporate retreat in Goa, an intimate Sufi sangeet in Udaipur, or a massive college cultural festival, our platform takes the guesswork out of entertainment. We handle everything from artist curation and contract negotiations to technical rider coordination and soundcheck verification.
@@ -139,7 +139,7 @@ const About = () => {
         <div className="space-y-8 sm:space-y-10">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-extrabold font-raleway text-white mb-2.5 sm:mb-3">
-              Why Event Planners Trust WOM
+              Why Event Planners Trust Music Maestro
             </h2>
             <p className="text-xs sm:text-sm text-gray-400">
               Our standard of excellence ensures your audience is thoroughly entertained with zero stress on the host.
