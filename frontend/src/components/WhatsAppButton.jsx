@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const phoneNumber = '917710046478';
+  const phoneNumber = '919009999434';
   const prefilledMessage = encodeURIComponent(
     'Hello, Music Maestro! I would like to enquire about artist booking for an upcoming event.'
   );
@@ -22,7 +22,7 @@ const WhatsAppButton = () => {
         }`}
       >
         <span className="w-2 h-2 rounded-full bg-[#25d366] animate-ping"></span>
-        Chat on WhatsApp
+        Chat on WhatsApp (+91 9009999434)
       </div>
 
       {/* Official WhatsApp Button with green ripple pulse */}

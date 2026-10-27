@@ -230,12 +230,8 @@ const Contact = () => {
                   <div>
                     <strong className="text-white block mb-0.5">Telephone</strong>
                     <p className="text-gray-300">
-                      <a href="tel:+917710046478" className="hover:text-wom-gold transition">
-                        +91 7710046478
-                      </a>{' '}
-                      /{' '}
-                      <a href="tel:9167968516" className="hover:text-wom-gold transition">
-                        9167968516
+                      <a href="tel:+919009999434" className="hover:text-wom-gold transition">
+                        +91 9009999434
                       </a>
                     </p>
                   </div>
@@ -272,13 +268,13 @@ const Contact = () => {
               {/* Direct WhatsApp Callout */}
               <div className="pt-4 border-t border-wom-darkBorder">
                 <a
-                  href="https://wa.me/917710046478"
+                  href="https://wa.me/919009999434"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3 bg-[#25d366] hover:bg-[#20ba59] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-lg"
                 >
                   <MessageCircle className="w-4 h-4 fill-current" />
-                  Instant WhatsApp Chat
+                  Instant WhatsApp Chat (+91 9009999434)
                 </a>
               </div>
             </div>

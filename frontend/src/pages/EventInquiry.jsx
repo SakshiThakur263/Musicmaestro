@@ -417,9 +417,9 @@ const EventInquiry = () => {
               </p>
               <div className="pt-2 text-xs space-y-1">
                 <div>
-                  <span className="text-gray-400">Phone: </span>
-                  <a href="tel:+917710046478" className="text-wom-gold font-bold hover:underline">
-                    +91 7710046478
+                  <span className="text-gray-400">Phone / WhatsApp: </span>
+                  <a href="https://wa.me/919009999434" target="_blank" rel="noopener noreferrer" className="text-wom-gold font-bold hover:underline">
+                    +91 9009999434
                   </a>
                 </div>
                 <div>

@@ -828,7 +828,14 @@ const ArtistDetail = () => {
                 Talk directly to our artist booking desk in Mumbai:
               </p>
               <div className="text-xs font-bold text-wom-gold">
-                Call / WhatsApp: +91 7710046478
+                <a
+                  href="https://wa.me/919009999434"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
+                  Call / WhatsApp: +91 9009999434
+                </a>
               </div>
             </div>
           </div>
