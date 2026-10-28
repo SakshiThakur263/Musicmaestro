@@ -5,7 +5,7 @@ const LegalPage = ({ type = 'privacy' }) => {
   const isPrivacy = type === 'privacy';
 
   return (
-    <div className="min-h-screen bg-[#181818] pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 text-white">
+    <div className="min-h-screen bg-[#181818] pt-24 sm:pt-28 pb-16 sm:pb-24 px-4 text-white">
       <div className="max-w-4xl mx-auto bg-[#222222] border border-white/10 rounded-2xl p-6 sm:p-10 space-y-6 shadow-2xl">
         <h1 className="text-2xl sm:text-4xl font-extrabold font-raleway text-[#f4a51c]">
           {isPrivacy ? 'Privacy Policy' : 'Terms and Conditions'}

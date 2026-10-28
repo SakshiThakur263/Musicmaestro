@@ -104,7 +104,7 @@ const AuthPage = ({ defaultTab = 'login' }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#181818] pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 text-white flex items-center justify-center">
+    <div className="min-h-screen bg-[#181818] pt-24 sm:pt-28 pb-16 sm:pb-24 px-4 text-white flex items-center justify-center">
       <div className="w-full max-w-lg">
         {/* Page Heading */}
         <div className="text-center mb-8">

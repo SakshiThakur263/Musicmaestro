@@ -101,7 +101,7 @@ const AddListing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-16 sm:pt-20 pb-16 sm:pb-20 text-white">
       {/* Banner */}
       <div className="bg-[#0e121a] border-b border-wom-darkBorder py-9 sm:py-12 px-4 text-center">
         <div className="max-w-3xl mx-auto space-y-3">

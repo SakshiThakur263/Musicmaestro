@@ -109,31 +109,31 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 h-16 sm:h-20 flex items-center transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#05091e]/95 backdrop-blur-md shadow-2xl border-b border-white/10 py-2.5 sm:py-3'
-            : 'bg-gradient-to-b from-[#040822]/90 via-[#040822]/55 to-transparent py-3 sm:py-4'
+            ? 'bg-[#05091e]/98 backdrop-blur-md shadow-2xl border-b border-white/10'
+            : 'bg-[#05091e]/90 backdrop-blur-md border-b border-white/10'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-2">
             {/* Music Maestro Logo */}
             <Link to="/" className="flex items-center group flex-shrink-0">
               <img
                 src="/music-maestro-logo.png"
                 alt="Music Maestro — Art of Performance & Celebration"
-                className="h-12 sm:h-14 md:h-16 w-auto object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)] group-hover:scale-105 transition-transform duration-200"
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)] group-hover:scale-105 transition-transform duration-200"
               />
             </Link>
 
-            {/* Desktop Navigation matching Screenshot */}
-            <nav className="hidden lg:flex items-center gap-1.5">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5">
               <NavLink
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? 'px-5 py-2 text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition'
-                    : 'px-4 py-2 text-sm font-medium text-gray-200 hover:text-white transition'
+                    ? 'px-3.5 xl:px-5 py-2 text-xs xl:text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition whitespace-nowrap'
+                    : 'px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium text-gray-200 hover:text-white transition whitespace-nowrap'
                 }
               >
                 Home
@@ -143,8 +143,8 @@ const Header = () => {
                 to="/about"
                 className={({ isActive }) =>
                   isActive
-                    ? 'px-5 py-2 text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition'
-                    : 'px-4 py-2 text-sm font-medium text-gray-200 hover:text-white transition'
+                    ? 'px-3.5 xl:px-5 py-2 text-xs xl:text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition whitespace-nowrap'
+                    : 'px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium text-gray-200 hover:text-white transition whitespace-nowrap'
                 }
               >
                 About Us
@@ -159,9 +159,9 @@ const Header = () => {
                 <NavLink
                   to="/artists"
                   className={({ isActive }) =>
-                    `px-4 py-2 text-sm font-medium transition flex items-center gap-1.5 ${
+                    `px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium transition flex items-center gap-1.5 whitespace-nowrap ${
                       isActive
-                        ? 'px-5 py-2 font-semibold rounded-full bg-[#f4a51c] text-white shadow-md'
+                        ? 'px-3.5 xl:px-5 py-2 font-semibold rounded-full bg-[#f4a51c] text-white shadow-md'
                         : 'text-gray-200 hover:text-white'
                     }`
                   }
@@ -176,7 +176,7 @@ const Header = () => {
 
                 {/* Mega Menu Overlay */}
                 {artistBankDropdownOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[720px] animate-fadeIn">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[680px] xl:w-[720px] max-w-[calc(100vw-2rem)] animate-fadeIn">
                     <div className="bg-[#121622]/98 border border-white/10 rounded-2xl p-6 shadow-2xl backdrop-blur-2xl">
                       <div className="grid grid-cols-4 gap-6">
                         {megaMenuCategories.map((catGroup, idx) => {
@@ -184,7 +184,7 @@ const Header = () => {
                           return (
                             <div key={idx} className="space-y-3">
                               <div className="flex items-center gap-2 pb-2 border-b border-white/10">
-                                <IconComp className="w-4 h-4 text-wom-gold" />
+                                <IconComp className="w-4 h-4 text-wom-gold flex-shrink-0" />
                                 <h4 className="text-xs font-bold uppercase tracking-wider text-wom-gold">
                                   {catGroup.group}
                                 </h4>
@@ -227,8 +227,8 @@ const Header = () => {
                 to="/contact"
                 className={({ isActive }) =>
                   isActive
-                    ? 'px-5 py-2 text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition'
-                    : 'px-4 py-2 text-sm font-medium text-gray-200 hover:text-white transition'
+                    ? 'px-3.5 xl:px-5 py-2 text-xs xl:text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition whitespace-nowrap'
+                    : 'px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium text-gray-200 hover:text-white transition whitespace-nowrap'
                 }
               >
                 Contact Us
@@ -238,44 +238,44 @@ const Header = () => {
                 to="/add-listing"
                 className={({ isActive }) =>
                   isActive
-                    ? 'px-5 py-2 text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition'
-                    : 'px-4 py-2 text-sm font-medium text-gray-200 hover:text-white transition'
+                    ? 'px-3.5 xl:px-5 py-2 text-xs xl:text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition whitespace-nowrap'
+                    : 'px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium text-gray-200 hover:text-white transition whitespace-nowrap'
                 }
               >
-                I'm an artist
+                I&apos;m an artist
               </NavLink>
 
               <NavLink
                 to="/event-inquiry"
                 className={({ isActive }) =>
                   isActive
-                    ? 'px-5 py-2 text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition'
-                    : 'px-4 py-2 text-sm font-medium text-gray-200 hover:text-white transition'
+                    ? 'px-3.5 xl:px-5 py-2 text-xs xl:text-sm font-semibold rounded-full bg-[#f4a51c] text-white shadow-md transition whitespace-nowrap'
+                    : 'px-3 xl:px-4 py-2 text-xs xl:text-sm font-medium text-gray-200 hover:text-white transition whitespace-nowrap'
                 }
               >
                 Event Inquiry
               </NavLink>
             </nav>
 
-            {/* Right Side: Sign In Pill Button matching Screenshot */}
-            <div className="hidden lg:flex items-center gap-3">
+            {/* Right Side Desktop: Sign In Pill Button */}
+            <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
               {isAuthenticated ? (
                 <div className="relative">
                   <button
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center gap-2 py-1.5 px-3.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm text-sm text-white transition hover:bg-white/20"
+                    className="flex items-center gap-2 py-1.5 px-3.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm text-sm text-white transition hover:bg-white/20 whitespace-nowrap"
                   >
                     <div className="w-6 h-6 rounded-full bg-wom-gold text-black flex items-center justify-center font-bold text-xs">
                       {user?.username?.charAt(0).toUpperCase() || 'U'}
                     </div>
-                    <span className="font-medium text-xs">{user?.username}</span>
+                    <span className="font-medium text-xs max-w-[110px] truncate">{user?.username}</span>
                     <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                   </button>
 
                   {userDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-[#131822] border border-white/10 rounded-2xl shadow-2xl py-2 z-50">
                       <div className="px-4 py-2 border-b border-white/10 text-xs text-gray-400">
-                        Signed in as <strong className="text-white block">{user?.email}</strong>
+                        Signed in as <strong className="text-white block truncate">{user?.email}</strong>
                       </div>
                       <Link
                         to="/add-listing"
@@ -296,7 +296,7 @@ const Header = () => {
               ) : (
                 <button
                   onClick={() => openAuthModal('login', 'client')}
-                  className="bg-white hover:bg-gray-100 text-gray-900 px-5 py-2 rounded-full font-medium text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-102 active:scale-98"
+                  className="bg-white hover:bg-gray-100 text-gray-900 px-4 xl:px-5 py-2 rounded-full font-medium text-xs xl:text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 whitespace-nowrap"
                 >
                   <LogIn className="w-4 h-4 text-gray-700" />
                   <span>Sign In</span>
@@ -304,44 +304,37 @@ const Header = () => {
               )}
             </div>
 
-            {/* Mobile Hamburger Trigger (Row 1 Right: Dark Slate-Blue Square Rounded Button matching Screenshot 1) */}
-            <div className="lg:hidden flex items-center">
+            {/* Mobile Right Controls: Single-Row Sign In + Hamburger Trigger (No 2nd row overlap) */}
+            <div className="lg:hidden flex items-center gap-2 sm:gap-2.5 flex-shrink-0">
+              {!isAuthenticated ? (
+                <button
+                  onClick={() => openAuthModal('login', 'client')}
+                  className="bg-white hover:bg-gray-100 text-gray-900 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm flex items-center gap-1.5 shadow-md transition whitespace-nowrap"
+                >
+                  <LogIn className="w-3.5 h-3.5 text-gray-700" />
+                  <span>Sign In</span>
+                </button>
+              ) : (
+                <Link
+                  to="/add-listing"
+                  className="bg-white hover:bg-gray-100 text-gray-900 px-3 py-1.5 rounded-full font-medium text-xs flex items-center gap-1.5 shadow-md transition max-w-[130px]"
+                  title={user?.username}
+                >
+                  <span className="w-5 h-5 rounded-full bg-wom-gold text-black flex items-center justify-center font-bold text-[11px] flex-shrink-0">
+                    {user?.username?.charAt(0).toUpperCase() || 'U'}
+                  </span>
+                  <span className="truncate">{user?.username}</span>
+                </Link>
+              )}
+
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="w-11 h-11 rounded-md bg-[#222c4a] hover:bg-[#2c385c] text-white flex items-center justify-center shadow-md transition"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-[#222c4a] hover:bg-[#2c385c] text-white flex items-center justify-center shadow-md transition flex-shrink-0"
                 aria-label="Toggle navigation"
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
               </button>
             </div>
-          </div>
-
-          {/* Mobile Row 2: Divider Line + Left-Aligned White Pill Sign In Button (matching Screenshot 1) */}
-          <div
-            className={`${
-              isScrolled ? 'hidden' : 'flex'
-            } lg:hidden border-t border-white/15 mt-2.5 pt-2.5 items-center justify-start`}
-          >
-            {!isAuthenticated ? (
-              <button
-                onClick={() => openAuthModal('login', 'client')}
-                className="bg-white hover:bg-gray-100 text-gray-800 px-5 py-2 rounded-full font-normal text-sm flex items-center gap-2 shadow-md transition"
-              >
-                <LogIn className="w-4 h-4 text-gray-700" />
-                <span>Sign In</span>
-              </button>
-            ) : (
-              <Link
-                to="/add-listing"
-                className="bg-white hover:bg-gray-100 text-gray-800 px-4 py-1.5 rounded-full font-medium text-xs flex items-center gap-2 shadow-md transition"
-                title={user?.username}
-              >
-                <span className="w-5 h-5 rounded-full bg-wom-gold text-black flex items-center justify-center font-bold text-[11px]">
-                  {user?.username?.charAt(0).toUpperCase() || 'U'}
-                </span>
-                <span>{user?.username}</span>
-              </Link>
-            )}
           </div>
         </div>
       </header>

@@ -27,8 +27,39 @@ import {
 
 const ArtistDetail = () => {
   const { slug } = useParams();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const buildCatalogFallback = (targetSlug) => {
+    const catArtist = findCatalogArtistBySlug(targetSlug);
+    if (!catArtist) return null;
+    const similar = ARTISTS_CATALOG.filter(
+      (a) =>
+        a.slug !== catArtist.slug &&
+        (a.category === catArtist.category || a.location === catArtist.location)
+    ).slice(0, 4);
+    return {
+      artist: catArtist,
+      reviews: [
+        {
+          _id: 'rev-1',
+          reviewerName: 'Aarav Mehta (Corporate Event Head)',
+          rating: 5,
+          eventType: 'Corporate Gala',
+          comment: `${catArtist.name} delivered an electrifying performance! Every guest was thoroughly entertained.`,
+        },
+        {
+          _id: 'rev-2',
+          reviewerName: 'Priya & Rohan Singhania',
+          rating: 5,
+          eventType: 'Destination Wedding',
+          comment: 'Superb stage energy, punctual team, and seamless coordination through Music Maestro.',
+        },
+      ],
+      similarArtists: similar,
+    };
+  };
+
+  const initialFallback = buildCatalogFallback(slug);
+  const [data, setData] = useState(initialFallback);
+  const [loading, setLoading] = useState(!initialFallback);
   const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'gallery' | 'video' | 'audio' | 'reviews'
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
@@ -41,7 +72,7 @@ const ArtistDetail = () => {
     phone: '',
     eventType: 'Wedding',
     eventDate: '',
-    city: '',
+    city: initialFallback?.artist?.location || '',
     guestCount: '100-300',
     budget: 'Rs. 50,000 - 1,00,000',
     notes: '',
@@ -99,7 +130,18 @@ const ArtistDetail = () => {
     };
 
     const loadArtist = async () => {
-      setLoading(true);
+      const localFallback = buildCatalogFallback(slug);
+      if (localFallback) {
+        setData(localFallback);
+        setBookingForm((prev) => ({
+          ...prev,
+          city: localFallback.artist.location || '',
+        }));
+        setLoading(false);
+      } else {
+        setLoading(true);
+      }
+
       try {
         const res = await fetchArtistBySlug(slug);
         if (res.success && res.data?.artist) {
@@ -108,25 +150,9 @@ const ArtistDetail = () => {
             ...prev,
             city: res.data.artist.location || '',
           }));
-        } else {
-          const fallback = buildCatalogFallback(slug);
-          if (fallback) {
-            setData(fallback);
-            setBookingForm((prev) => ({
-              ...prev,
-              city: fallback.artist.location || '',
-            }));
-          }
         }
       } catch (err) {
-        const fallback = buildCatalogFallback(slug);
-        if (fallback) {
-          setData(fallback);
-          setBookingForm((prev) => ({
-            ...prev,
-            city: fallback.artist.location || '',
-          }));
-        } else {
+        if (!localFallback) {
           console.error('Error fetching artist:', err);
         }
       } finally {
@@ -244,7 +270,7 @@ const ArtistDetail = () => {
   const allImages = artist.images && artist.images.length > 0 ? artist.images : [artist.featuredImage];
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-16 sm:pt-20 pb-16 sm:pb-20 text-white">
       {/* 1. Header Titlebar matching WOM */}
       <div className="bg-[#0e121a] border-b border-wom-darkBorder py-6 sm:py-8 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">

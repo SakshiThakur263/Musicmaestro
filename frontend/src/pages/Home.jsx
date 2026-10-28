@@ -553,7 +553,7 @@ const Home = () => {
       {/* =====================================================================
           1. HERO SECTION WITH FULLSCREEN VIDEO & LIVE TYPED HEADLINE
       ====================================================================== */}
-      <section className="relative min-h-[95svh] sm:min-h-[100svh] flex items-center justify-center pt-36 sm:pt-40 lg:pt-32 pb-16 sm:pb-24 px-4 overflow-hidden bg-[#050b24]">
+      <section className="relative min-h-[92svh] sm:min-h-[100svh] flex items-center justify-center pt-24 sm:pt-28 lg:pt-28 pb-16 sm:pb-24 px-4 overflow-hidden bg-[#050b24]">
         {/* Fullscreen Video Background (Works on Mobile & Desktop with Audio on Unmute) */}
         <video
           ref={videoRef}
@@ -688,7 +688,7 @@ const Home = () => {
           <button
             type="button"
             onClick={() => scrollCarousel(exclusiveCarouselRef, 'left')}
-            className="flex absolute left-1 sm:-left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
+            className="flex absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
             aria-label="Previous artists"
           >
             <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -696,7 +696,7 @@ const Home = () => {
           <button
             type="button"
             onClick={() => scrollCarousel(exclusiveCarouselRef, 'right')}
-            className="flex absolute right-1 sm:-right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
+            className="flex absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
             aria-label="Next artists"
           >
             <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -852,7 +852,7 @@ const Home = () => {
           <button
             type="button"
             onClick={() => scrollCarousel(speakersCarouselRef, 'left')}
-            className="flex absolute left-1 sm:-left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
+            className="flex absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
             aria-label="Scroll speakers left"
           >
             <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -860,7 +860,7 @@ const Home = () => {
           <button
             type="button"
             onClick={() => scrollCarousel(speakersCarouselRef, 'right')}
-            className="flex absolute right-1 sm:-right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
+            className="flex absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/80 hover:bg-[#f4a51c] text-white hover:text-black border border-white/20 items-center justify-center shadow-xl transition"
             aria-label="Scroll speakers right"
           >
             <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />

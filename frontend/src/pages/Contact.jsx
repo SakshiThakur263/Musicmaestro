@@ -61,7 +61,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-16 sm:pt-20 pb-16 sm:pb-20 text-white">
       {/* Header Banner */}
       <div className="bg-[#0e121a] border-b border-wom-darkBorder py-10 sm:py-14 px-4 text-center">
         <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">

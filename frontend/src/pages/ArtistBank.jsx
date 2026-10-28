@@ -37,14 +37,57 @@ const ArtistBank = () => {
   const [featuredOnly, setFeaturedOnly] = useState(searchParams.get('featured') === 'true');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'list'
 
-  // Data & loading states
-  const [artists, setArtists] = useState([]);
+  // Helper to filter and sort local catalog for instant display & fallback
+  const filterLocalCatalog = (
+    catVal = category,
+    subVal = subcategory,
+    locVal = location,
+    kwVal = keyword,
+    featVal = featuredOnly,
+    sortVal = sortBy
+  ) => {
+    const filtered = ARTISTS_CATALOG.filter((item) => {
+      if (featVal && !item.featured) return false;
+      if (catVal && catVal !== 'All') {
+        if (item.category.toLowerCase() !== catVal.toLowerCase()) return false;
+      }
+      if (subVal && subVal !== 'All') {
+        const subNeedle = subVal.toLowerCase().replace(/s$/, '');
+        const itemSub = (item.subcategory || '').toLowerCase();
+        const itemGenres = (item.genres || []).join(' ').toLowerCase();
+        if (!itemSub.includes(subNeedle) && !itemGenres.includes(subNeedle)) {
+          return false;
+        }
+      }
+      if (locVal && locVal !== 'All') {
+        if (!item.location.toLowerCase().includes(locVal.toLowerCase())) return false;
+      }
+      if (kwVal.trim()) {
+        const kw = kwVal.trim().toLowerCase();
+        const hay = `${item.name} ${item.category} ${item.subcategory} ${item.location} ${item.bio} ${(item.genres || []).join(' ')}`.toLowerCase();
+        if (!hay.includes(kw)) return false;
+      }
+      return true;
+    });
+
+    return filtered.sort((a, b) => {
+      if (sortVal === 'price-low') return (a.priceStarting || 0) - (b.priceStarting || 0);
+      if (sortVal === 'price-high') return (b.priceStarting || 0) - (a.priceStarting || 0);
+      if (sortVal === 'shows') return (b.showsCompleted || 0) - (a.showsCompleted || 0);
+      if (sortVal === 'name-asc') return (a.name || '').localeCompare(b.name || '');
+      return (b.rating || 4.9) - (a.rating || 4.9);
+    });
+  };
+
+  // Data & loading states (initialized immediately from local catalog so 0 artists is never shown while API loads)
+  const initialMatches = filterLocalCatalog();
+  const [artists, setArtists] = useState(initialMatches);
   const [categories, setCategories] = useState([]);
   const [groupedCategories, setGroupedCategories] = useState({});
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalCount, setTotalCount] = useState(initialMatches.length);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   // Available locations in dataset (including all 6 Home page cities)
@@ -94,38 +137,20 @@ const ArtistBank = () => {
     loadCategories();
   }, []);
 
-  // Helper to filter local catalog for enrichment/fallback
-  const filterLocalCatalog = () => {
-    return ARTISTS_CATALOG.filter((item) => {
-      if (featuredOnly && !item.featured) return false;
-      if (category && category !== 'All') {
-        if (item.category.toLowerCase() !== category.toLowerCase()) return false;
-      }
-      if (subcategory && subcategory !== 'All') {
-        const subNeedle = subcategory.toLowerCase().replace(/s$/, '');
-        const itemSub = (item.subcategory || '').toLowerCase();
-        const itemGenres = (item.genres || []).join(' ').toLowerCase();
-        if (!itemSub.includes(subNeedle) && !itemGenres.includes(subNeedle)) {
-          return false;
-        }
-      }
-      if (location && location !== 'All') {
-        if (!item.location.toLowerCase().includes(location.toLowerCase())) return false;
-      }
-      if (keyword.trim()) {
-        const kw = keyword.trim().toLowerCase();
-        const hay = `${item.name} ${item.category} ${item.subcategory} ${item.location} ${item.bio} ${(item.genres || []).join(' ')}`.toLowerCase();
-        if (!hay.includes(kw)) return false;
-      }
-      return true;
-    });
-  };
-
   // Fetch artists when filters or page change
   useEffect(() => {
     const loadArtists = async () => {
-      setLoading(true);
       const localMatches = filterLocalCatalog();
+      // Display local catalog matches immediately so user never sees "0 of 0" while backend cold-starts
+      if (localMatches.length > 0) {
+        setArtists(localMatches);
+        setTotalCount(localMatches.length);
+        setTotalPages(1);
+        setLoading(false);
+      } else {
+        setLoading(true);
+      }
+
       try {
         const queryParams = {
           page: currentPage,
@@ -195,9 +220,9 @@ const ArtistBank = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] pt-20 sm:pt-28 pb-16 sm:pb-20 text-white">
+    <div className="min-h-screen bg-[#0b0e14] pt-16 sm:pt-20 pb-16 sm:pb-20 text-white">
       {/* Top Titlebar matching WOM */}
-      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-8 sm:py-10 px-4 mb-6 sm:mb-8">
+      <div className="bg-[#0e121a] border-b border-wom-darkBorder py-7 sm:py-10 px-4 mb-6 sm:mb-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-wom-gold uppercase tracking-wider mb-1">

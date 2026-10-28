@@ -64,10 +64,7 @@ const EventInquiry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#2b2b2b] text-white">
-      {/* Top solid black header spacer matching screenshot */}
-      <div className="h-20 sm:h-24 bg-black w-full"></div>
-
+    <div className="min-h-screen bg-[#2b2b2b] pt-16 sm:pt-20 text-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         {/* Heading & Subtitle matching reference screenshot */}
         <div className="text-center mb-8 sm:mb-10">
