@@ -16,15 +16,16 @@ const contactSchema = new mongoose.Schema(
     phone: {
       type: String,
       default: '',
+      trim: true,
     },
     subject: {
       type: String,
-      required: [true, 'Subject is required'],
+      default: '',
       trim: true,
     },
     message: {
       type: String,
-      required: [true, 'Message is required'],
+      default: '',
       trim: true,
     },
     isRead: {

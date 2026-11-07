@@ -41,7 +41,7 @@ const AddListing = () => {
   const sampleImageOptions = [
     { label: 'Acoustic / Singer', url: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80' },
     { label: 'Live Band Stage', url: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80' },
-    { label: 'DJ Console', url: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?auto=format&fit=crop&w=800&q=80' },
+    { label: 'DJ Console', url: '/artists/artist-7.jpg' },
     { label: 'Violin / Classical', url: 'https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=800&q=80' },
     { label: 'Anchor / Speaker', url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80' },
   ];

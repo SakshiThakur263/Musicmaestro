@@ -106,6 +106,98 @@ const NAV_TABS = [
   { id: 'mission', label: 'Mission & Vision' },
 ];
 
+
+const KEY_METRICS = [
+  { target: 500, suffix: '+', label: 'Verified Artists' },
+  { target: 2000, suffix: '+', label: 'Events Curated' },
+  { target: 35, suffix: '+', label: 'Cities Covered' },
+  { target: 99, suffix: '%', label: 'Client Satisfaction' },
+];
+
+const StatCounterCard = ({ target, suffix = '', label, delay = 0 }) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    let observer = null;
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window && cardRef.current) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            if (observer) observer.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(cardRef.current);
+    } else {
+      setIsVisible(true);
+    }
+
+    return () => {
+      if (observer) observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime = null;
+    let animationFrameId = null;
+    const duration = 1800;
+
+    const timer = setTimeout(() => {
+      const step = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Smooth cubic ease out
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentVal = Math.floor(easeOut * target);
+
+        setCount(currentVal);
+
+        if (progress < 1) {
+          animationFrameId = requestAnimationFrame(step);
+        } else {
+          setCount(target);
+        }
+      };
+
+      animationFrameId = requestAnimationFrame(step);
+    }, delay);
+
+    return () => {
+      clearTimeout(timer);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, [isVisible, target, delay]);
+
+  return (
+    <div
+      ref={cardRef}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={`group relative overflow-hidden bg-white/[0.07] hover:bg-white/[0.12] backdrop-blur-md border border-white/15 hover:border-[#f4a51c]/60 rounded-2xl py-3.5 px-4 text-center shadow-lg hover:shadow-[0_8px_25px_rgba(244,165,28,0.25)] hover:-translate-y-1 transition-all duration-500 transform ${
+        isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'
+      }`}
+    >
+      {/* Subtle top ambient glow accent line on hover */}
+      <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#f4a51c]/0 group-hover:via-[#f4a51c]/80 to-transparent transition-all duration-500" />
+
+      <div className="font-raleway text-xl sm:text-2xl font-bold text-[#f4a51c] tracking-tight group-hover:scale-105 transition-transform duration-300">
+        <span>{count.toLocaleString()}</span>
+        <span>{suffix}</span>
+      </div>
+      <div className="text-[11px] sm:text-xs text-gray-300 group-hover:text-white uppercase tracking-wider font-medium mt-0.5 transition-colors duration-300">
+        {label}
+      </div>
+    </div>
+  );
+};
+
 const About = () => {
   const [activeLogoSlide, setActiveLogoSlide] = useState(0);
   const [activeTab, setActiveTab] = useState('global');
@@ -202,25 +294,16 @@ const About = () => {
             </p>
           </div>
 
-          {/* Executive Key Metrics Strip */}
+          {/* Executive Key Metrics Strip with Animated Counters */}
           <div className="mt-10 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-4xl mx-auto">
-            {[
-              { value: '500+', label: 'Verified Artists' },
-              { value: '2,000+', label: 'Events Curated' },
-              { value: '35+', label: 'Cities Covered' },
-              { value: '99%', label: 'Client Satisfaction' },
-            ].map((stat, idx) => (
-              <div
+            {KEY_METRICS.map((stat, idx) => (
+              <StatCounterCard
                 key={idx}
-                className="bg-white/[0.07] backdrop-blur-md border border-white/15 rounded-2xl py-3.5 px-4 text-center shadow-lg"
-              >
-                <div className="font-raleway text-xl sm:text-2xl font-bold text-[#f4a51c]">
-                  {stat.value}
-                </div>
-                <div className="text-[11px] sm:text-xs text-gray-300 uppercase tracking-wider font-medium mt-0.5">
-                  {stat.label}
-                </div>
-              </div>
+                target={stat.target}
+                suffix={stat.suffix}
+                label={stat.label}
+                delay={idx * 120}
+              />
             ))}
           </div>
         </div>

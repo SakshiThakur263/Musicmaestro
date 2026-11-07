@@ -9,7 +9,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  timeout: 25000,
 });
 
 // Interceptor to inject token if present
@@ -29,6 +29,8 @@ export const fetchArtists = async (params = {}) => {
   const response = await api.get('/artists', { params });
   return response.data;
 };
+
+export const getArtists = fetchArtists;
 
 export const fetchFeaturedArtists = async () => {
   const response = await api.get('/artists/featured');

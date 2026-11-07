@@ -146,7 +146,7 @@ const artistsData = [
     featuredImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
     images: [
       'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1445985543470-41fdd6ce388d?auto=format&fit=crop&w=1200&q=80',
+      '/artists/artist-6.jpg',
     ],
     videos: [
       {
@@ -205,9 +205,9 @@ const artistsData = [
     bio: 'DJ Saggy is known for driving dance floors into a frenzy with irresistible Bollywood dance mixes, commercial deep house, UK Punjabi, and festival-grade EDM drops. Resident at elite nightclubs and a favorite at big-fat Indian sangeets across Delhi, Goa, and Dubai.',
     priceStarting: 45000,
     priceRange: 'Rs. 45,000 - 90,000',
-    featuredImage: 'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?auto=format&fit=crop&w=800&q=80',
+    featuredImage: '/artists/artist-7.jpg',
     images: [
-      'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?auto=format&fit=crop&w=1200&q=80',
+      '/artists/artist-1.jpg',
       'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
     ],
     videos: [
@@ -374,9 +374,9 @@ const artistsData = [
     bio: 'Ishita produces heavenly flute melodies combining Hindustani ragas with contemporary world ambient tones. Ideal for peaceful wedding welcome rituals, introspective corporate ceremonies, and cultural exhibits.',
     priceStarting: 30000,
     priceRange: 'Rs. 30,000 - 55,000',
-    featuredImage: 'https://images.unsplash.com/photo-1519744346361-8b2737675549?auto=format&fit=crop&w=800&q=80',
+    featuredImage: '/artists/artist-7.jpg',
     images: [
-      'https://images.unsplash.com/photo-1519744346361-8b2737675549?auto=format&fit=crop&w=1200&q=80',
+      '/artists/artist-13.jpg',
     ],
     rating: 4.8,
     reviewCount: 14,

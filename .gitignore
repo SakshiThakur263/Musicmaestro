@@ -30,3 +30,7 @@ Thumbs.db
 
 # Root raw media download (hero video is served from frontend/public/hero-video.mp4)
 /*.mp4
+
+# Local fallback data
+data/
+backend/data/

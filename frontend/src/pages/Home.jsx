@@ -32,7 +32,7 @@ const EXCLUSIVE_TALENT_FALLBACK = [
     priceStarting: 75000,
     featured: true,
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/10/0f8b421d-19e5-46a2-8e24-564a349b6e81-520x397.jpg',
+      '/artists/artist-5.jpg',
   },
   {
     _id: 'ex-2',
@@ -44,7 +44,7 @@ const EXCLUSIVE_TALENT_FALLBACK = [
     priceStarting: 85000,
     featured: true,
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-07-at-4.28.14-PM-520x397.jpeg',
+      '/artists/artist-6.jpg',
   },
   {
     _id: 'ex-3',
@@ -56,7 +56,7 @@ const EXCLUSIVE_TALENT_FALLBACK = [
     priceStarting: 90000,
     featured: true,
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-24-at-4.57.13-PM-520x397.jpeg',
+      '/artists/artist-11.jpg',
   },
   {
     _id: 'ex-4',
@@ -68,7 +68,7 @@ const EXCLUSIVE_TALENT_FALLBACK = [
     priceStarting: 65000,
     featured: true,
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2025/11/IMG_20251108_165952810_HDR2-1-520x397.jpg',
+      '/artists/artist-4.jpg',
   },
   {
     _id: 'ex-5',
@@ -80,7 +80,7 @@ const EXCLUSIVE_TALENT_FALLBACK = [
     priceStarting: 110000,
     featured: true,
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-31-at-4.15.35-PM-520x397.jpeg',
+      '/artists/artist-4.jpg',
   },
   {
     _id: 'ex-6',
@@ -92,7 +92,7 @@ const EXCLUSIVE_TALENT_FALLBACK = [
     priceStarting: 60000,
     featured: true,
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-24-at-3.12.18-PM-520x397.jpeg',
+      '/artists/artist-7.jpg',
   },
 ];
 
@@ -103,7 +103,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'blessing-celestial',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-23-at-3.41.56-PM-1024x518.jpeg',
+      '/artists/artist-6.jpg',
   },
   {
     name: 'Taj Sufi Night – Sufi & Qawwali Band',
@@ -111,7 +111,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Delhi',
     slug: 'taj-sufi-night',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/1002534641-1200x1591.jpg',
+      '/artists/artist-6.jpg',
   },
   {
     name: 'Palak B',
@@ -119,7 +119,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'palak-b',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-05-at-4.30.53-PM-1-768x622.jpeg',
+      '/artists/artist-14.jpg',
   },
   {
     name: 'Singer Diamond',
@@ -127,7 +127,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'singer-diamond',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/07/diamond-1-600x600.png',
+      '/artists/artist-1.jpg',
   },
   {
     name: 'DJ Saggy',
@@ -135,7 +135,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'dj-saggy',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/dj-saggy-1.png',
+      '/artists/artist-4.jpg',
   },
   {
     name: 'Jaipur Beats Fusion Band',
@@ -143,7 +143,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Jaipur',
     slug: 'jaipur-beats-fusion-band',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/jaipur-1.png',
+      '/artists/artist-4.jpg',
   },
   {
     name: 'Beats of Music – Sufi Bollywood Fusion',
@@ -151,7 +151,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'beats-of-music',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/b-of-mu-1.png',
+      '/artists/artist-8.jpg',
   },
   {
     name: 'OORJA THE BAND',
@@ -159,7 +159,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Delhi',
     slug: 'oorja-the-band',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/orja-11.png',
+      '/artists/artist-5.jpg',
   },
   {
     name: 'Roohani Live Band',
@@ -167,7 +167,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'roohani-live-band',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/rohani-1.png',
+      '/artists/artist-10.jpg',
   },
   {
     name: 'The Taqdeer Collective',
@@ -175,7 +175,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'the-taqdeer-collective',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/taqdeer-1.png',
+      '/artists/artist-9.jpg',
   },
   {
     name: 'Papon',
@@ -183,7 +183,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'papon',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-21-at-1.25.08-PM-1.jpeg',
+      '/artists/artist-12.jpg',
   },
   {
     name: 'VDJ SOUL | DJ Sourabh',
@@ -191,7 +191,7 @@ const WIDE_SHOWCASE_ITEMS = [
     location: 'Mumbai',
     slug: 'vdj-soul',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/dj-soul-1.png',
+      '/artists/artist-13.jpg',
   },
 ];
 
@@ -202,7 +202,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
     role: 'Celebrity Anchor & Emcee',
     location: 'Mumbai',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/saloni-2-520x397.png',
+      '/artists/artist-4.jpg',
   },
   {
     name: 'Emcee Shaina Khan',
@@ -210,7 +210,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
     role: 'Corporate & Wedding Host',
     location: 'Mumbai',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/saina-khan-1-520x397.png',
+      '/artists/artist-8.jpg',
   },
   {
     name: 'Ajay Dhol',
@@ -218,7 +218,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
     role: 'Percussion & Wedding Dhol',
     location: 'Delhi',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-1.07.47-PM-520x397.jpeg',
+      '/artists/artist-9.jpg',
   },
   {
     name: 'Arush',
@@ -226,7 +226,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
     role: 'Live Entertainer & Host',
     location: 'Mumbai',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-12.45.49-PM-520x397.jpeg',
+      '/artists/artist-2.jpg',
   },
   {
     name: 'Kapil',
@@ -234,7 +234,7 @@ const SPEAKERS_ANCHORS_ITEMS = [
     role: 'Standup Comedian & Anchor',
     location: 'Bangalore',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-12.16.39-PM-520x397.jpeg',
+      '/artists/artist-6.jpg',
   },
   {
     name: 'Karan',
@@ -242,34 +242,34 @@ const SPEAKERS_ANCHORS_ITEMS = [
     role: 'Stage Host & Performer',
     location: 'Jaipur',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-02-at-2.27.02-PM-2-520x397.jpeg',
+      '/artists/artist-11.jpg',
   },
 ];
 
 const CITY_REGIONS = [
   {
     name: 'Mumbai',
-    icon: 'https://worldofmusicians.com/wp-content/uploads/2023/11/mumbai-1.png',
+    icon: '/artists/artist-10.jpg',
   },
   {
     name: 'Delhi',
-    icon: 'https://worldofmusicians.com/wp-content/uploads/2023/11/new-delhi.png',
+    icon: '/artists/artist-15.jpg',
   },
   {
     name: 'Amritsar',
-    icon: 'https://worldofmusicians.com/wp-content/uploads/2023/11/Untitled-design-53.png',
+    icon: '/artists/artist-4.jpg',
   },
   {
     name: 'Bangalore',
-    icon: 'https://worldofmusicians.com/wp-content/uploads/2023/11/bangalore.png',
+    icon: '/artists/artist-11.jpg',
   },
   {
     name: 'Jaipur',
-    icon: 'https://worldofmusicians.com/wp-content/uploads/2023/10/Untitled-design-41.png',
+    icon: '/artists/artist-14.jpg',
   },
   {
     name: 'Agra',
-    icon: 'https://worldofmusicians.com/wp-content/uploads/2023/11/taj-mahal.png',
+    icon: '/artists/artist-6.jpg',
   },
 ];
 
@@ -278,27 +278,27 @@ const POPULAR_VIDEOS = [
     id: 'HqJzui2afNw',
     title: 'Do Dil x Ek Ladki Ko – Live Unplugged Bollywood Mashup',
     mp4Url: '/videos/live-band.mp4',
-    fallbackMp4: 'https://worldofmusicians.com/wp-content/uploads/2024/04/dance-YJLive.mp4',
+    fallbackMp4: '/artists/artist-14.jpg',
     poster: 'https://i.ytimg.com/vi/HqJzui2afNw/hqdefault.jpg',
   },
   {
     id: 'jeUZm0jnKOs',
     title: 'Anup Jalota Live Concert – Soulful Ghazal & Bhajan Evening',
-    mp4Url: 'https://worldofmusicians.com/wp-content/uploads/2024/04/Kartik.mp4',
+    mp4Url: '/artists/artist-5.jpg',
     fallbackMp4: '/videos/live-band.mp4',
     poster: 'https://i.ytimg.com/vi/jeUZm0jnKOs/hqdefault.jpg',
   },
   {
     id: 'OLQ9bBcydLs',
     title: 'Shankar Mahadevan Classical Fusion Live Performance',
-    mp4Url: 'https://worldofmusicians.com/wp-content/uploads/2024/04/Rohan.mp4',
+    mp4Url: '/artists/artist-13.jpg',
     fallbackMp4: '/videos/live-band.mp4',
     poster: 'https://i.ytimg.com/vi/OLQ9bBcydLs/hqdefault.jpg',
   },
   {
     id: 'doi_Ss4WaT0',
     title: 'Pratibha Singh Baghel Live at Jazbaat – Soulful Ghazals & Music',
-    mp4Url: 'https://worldofmusicians.com/wp-content/uploads/2024/04/Soham.mp4',
+    mp4Url: '/artists/artist-9.jpg',
     fallbackMp4: '/videos/live-band.mp4',
     poster: 'https://i.ytimg.com/vi/doi_Ss4WaT0/hqdefault.jpg',
   },
@@ -306,13 +306,13 @@ const POPULAR_VIDEOS = [
     id: 'P-Ay-ThLric',
     title: 'Jazbaat Live Musical Concert – Classical & Bollywood Symphony',
     mp4Url: '/videos/dj-concert.mp4',
-    fallbackMp4: 'https://worldofmusicians.com/wp-content/uploads/2024/06/dj-concert-hd-no-copyright-video.mp4',
+    fallbackMp4: '/artists/artist-10.jpg',
     poster: 'https://i.ytimg.com/vi/P-Ay-ThLric/hqdefault.jpg',
   },
   {
     id: '_dgNRR8Tpew',
     title: 'Madhur Live Band – High-Energy Bollywood & Sufi Medley',
-    mp4Url: 'https://worldofmusicians.com/wp-content/uploads/2024/04/dance-YJLive.mp4',
+    mp4Url: '/artists/artist-14.jpg',
     fallbackMp4: '/videos/dj-concert.mp4',
     poster: 'https://i.ytimg.com/vi/_dgNRR8Tpew/hqdefault.jpg',
   },
@@ -327,7 +327,7 @@ const ENTERTAINMENT_NEWS = [
     excerpt:
       'Your wedding day is one of the most special occasions in your life, and it deserves to be nothing short of extraordinary. Discover how to curate the perfect sangeet, cocktail, and reception lineup.',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2024/08/Untitled-design-2024-08-17T133522.328-577x321.png',
+      '/artists/artist-11.jpg',
   },
   {
     title: 'Make Your Corporate Event Shine with Music Maestro',
@@ -336,7 +336,7 @@ const ENTERTAINMENT_NEWS = [
     excerpt:
       'When it comes to organizing a corporate event that leaves a lasting impression, the right live band, emcee, or celebrity performer elevates networking and brand celebration.',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2024/08/Add-a-heading-8-577x321.png',
+      '/artists/artist-14.jpg',
   },
   {
     title:
@@ -346,7 +346,7 @@ const ENTERTAINMENT_NEWS = [
     excerpt:
       'In the vibrant tapestry of Indian cinema, where tradition meets innovation, one name that resonates with audiences across generations is lyricist and storyteller Manoj Muntashir.',
     image:
-      'https://worldofmusicians.com/wp-content/uploads/2024/08/images-1.jpeg',
+      '/artists/artist-7.jpg',
   },
 ];
 
@@ -377,19 +377,19 @@ const CLIENT_TESTIMONIALS = [
 const BRAND_LOGOS = [
   {
     name: 'Partner Brand 1',
-    logo: 'https://worldofmusicians.com/wp-content/uploads/2024/02/unnamed-1.webp',
+    logo: '/artists/artist-8.jpg',
   },
   {
     name: 'Partner Brand 2',
-    logo: 'https://worldofmusicians.com/wp-content/uploads/2024/08/Untitled-design-2024-08-12T133414.281.png',
+    logo: '/artists/artist-6.jpg',
   },
   {
     name: 'Partner Brand 3',
-    logo: 'https://worldofmusicians.com/wp-content/uploads/2024/02/OIP.webp',
+    logo: '/artists/artist-10.jpg',
   },
   {
     name: 'Partner Brand 4',
-    logo: 'https://worldofmusicians.com/wp-content/uploads/2024/02/Gal.webp',
+    logo: '/artists/artist-10.jpg',
   },
 ];
 
@@ -1283,7 +1283,7 @@ const Home = () => {
           <div className="lg:col-span-6 flex items-center justify-center">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-[#1a1a1a] p-6">
               <img
-                src="https://worldofmusicians.com/wp-content/uploads/2021/09/web-search-svg.svg"
+                src="/artists/artist-2.jpg"
                 alt="How Music Maestro Works"
                 className="w-full max-w-md mx-auto h-auto object-contain"
                 loading="lazy"
@@ -1308,7 +1308,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-[#222222] border border-white/10 hover:border-[#f4a51c] p-7 rounded-2xl flex flex-col items-center text-center transition">
               <img
-                src="https://worldofmusicians.com/wp-content/uploads/2024/07/Untitled-design-2024-07-22T010902.314.png"
+                src="/artists/artist-8.jpg"
                 alt="Extensive Network of Artists"
                 className="w-20 h-20 object-contain mb-5"
                 loading="lazy"
@@ -1323,7 +1323,7 @@ const Home = () => {
 
             <div className="bg-[#222222] border border-white/10 hover:border-[#f4a51c] p-7 rounded-2xl flex flex-col items-center text-center transition">
               <img
-                src="https://worldofmusicians.com/wp-content/uploads/2024/07/Untitled-design-2024-07-22T011248.570.png"
+                src="/artists/artist-10.jpg"
                 alt="Easy Booking Process"
                 className="w-20 h-20 object-contain mb-5"
                 loading="lazy"
@@ -1338,7 +1338,7 @@ const Home = () => {
 
             <div className="bg-[#222222] border border-white/10 hover:border-[#f4a51c] p-7 rounded-2xl flex flex-col items-center text-center transition">
               <img
-                src="https://worldofmusicians.com/wp-content/uploads/2024/07/Untitled-design-2024-07-22T011608.211.png"
+                src="/artists/artist-8.jpg"
                 alt="Tailored Entertainment Solutions"
                 className="w-20 h-20 object-contain mb-5"
                 loading="lazy"

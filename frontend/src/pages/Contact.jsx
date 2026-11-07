@@ -156,12 +156,12 @@ const Contact = () => {
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-1">
-                      Subject *
+                      Subject
                     </label>
                     <input
                       type="text"
                       name="subject"
-                      required
+                      
                       placeholder="e.g. Artist Inquiry for Udaipur Sangeet"
                       value={formData.subject}
                       onChange={handleChange}
@@ -172,11 +172,11 @@ const Contact = () => {
 
                 <div>
                   <label className="block text-xs font-semibold text-gray-300 mb-1">
-                    Your Message *
+                    Your Message
                   </label>
                   <textarea
                     name="message"
-                    required
+                    
                     rows="5"
                     placeholder="Describe your event details, artist preferences, date, or any specific questions..."
                     value={formData.message}

@@ -14,9 +14,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 60000,
     priceRange: 'Rs. 60,000 - 1,20,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/10/0f8b421d-19e5-46a2-8e24-564a349b6e81-520x397.jpg',
+      '/artists/artist-5.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2024/10/0f8b421d-19e5-46a2-8e24-564a349b6e81-520x397.jpg',
+      '/artists/artist-5.jpg',
       'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1200&q=80',
     ],
@@ -55,9 +55,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 75000,
     priceRange: 'Rs. 75,000 - 1,50,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-07-at-4.28.14-PM-520x397.jpeg',
+      '/artists/artist-6.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-07-at-4.28.14-PM-520x397.jpeg',
+      '/artists/artist-6.jpg',
       'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80',
     ],
@@ -96,9 +96,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 45000,
     priceRange: 'Rs. 45,000 - 85,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-24-at-4.57.13-PM-520x397.jpeg',
+      '/artists/artist-11.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-24-at-4.57.13-PM-520x397.jpeg',
+      '/artists/artist-11.jpg',
       'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
     ],
     videos: [
@@ -129,9 +129,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 65000,
     priceRange: 'Rs. 65,000 - 1,20,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2025/11/IMG_20251108_165952810_HDR2-1-520x397.jpg',
+      '/artists/artist-4.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2025/11/IMG_20251108_165952810_HDR2-1-520x397.jpg',
+      '/artists/artist-4.jpg',
       'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80',
     ],
     videos: [
@@ -162,9 +162,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 85000,
     priceRange: 'Rs. 85,000 - 1,50,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-31-at-4.15.35-PM-520x397.jpeg',
+      '/artists/artist-4.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-31-at-4.15.35-PM-520x397.jpeg',
+      '/artists/artist-4.jpg',
       'https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=1200&q=80',
     ],
     videos: [
@@ -195,9 +195,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 45000,
     priceRange: 'Rs. 45,000 - 75,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-24-at-3.12.18-PM-520x397.jpeg',
+      '/artists/artist-7.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-24-at-3.12.18-PM-520x397.jpeg',
+      '/artists/artist-7.jpg',
     ],
     rating: 4.8,
     reviewCount: 19,
@@ -220,9 +220,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 95000,
     priceRange: 'Rs. 95,000 - 1,80,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-23-at-3.41.56-PM-1024x518.jpeg',
+      '/artists/artist-6.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-23-at-3.41.56-PM-1024x518.jpeg',
+      '/artists/artist-6.jpg',
     ],
     rating: 4.9,
     reviewCount: 26,
@@ -245,9 +245,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 80000,
     priceRange: 'Rs. 80,000 - 1,60,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/1002534641-1200x1591.jpg',
+      '/artists/artist-6.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/1002534641-1200x1591.jpg',
+      '/artists/artist-6.jpg',
     ],
     rating: 4.9,
     reviewCount: 33,
@@ -270,9 +270,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 50000,
     priceRange: 'Rs. 50,000 - 95,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-05-at-4.30.53-PM-1-768x622.jpeg',
+      '/artists/artist-14.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-05-at-4.30.53-PM-1-768x622.jpeg',
+      '/artists/artist-14.jpg',
     ],
     rating: 4.8,
     reviewCount: 18,
@@ -295,9 +295,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 55000,
     priceRange: 'Rs. 55,000 - 1,10,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/07/diamond-1-600x600.png',
+      '/artists/artist-1.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/07/diamond-1-600x600.png',
+      '/artists/artist-1.jpg',
     ],
     rating: 4.9,
     reviewCount: 25,
@@ -320,9 +320,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 45000,
     priceRange: 'Rs. 45,000 - 80,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-07-at-12.15.35-PM-768x581.jpeg',
+      '/artists/artist-1.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-07-at-12.15.35-PM-768x581.jpeg',
+      '/artists/artist-1.jpg',
     ],
     rating: 4.9,
     reviewCount: 22,
@@ -345,10 +345,10 @@ export const ARTISTS_CATALOG = [
     priceStarting: 50000,
     priceRange: 'Rs. 50,000 - 1,00,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/dj-saggy-1.png',
+      '/artists/artist-4.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/dj-saggy-1.png',
-      'https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?auto=format&fit=crop&w=1200&q=80',
+      '/artists/artist-4.jpg',
+      '/artists/artist-1.jpg',
     ],
     videos: [
       {
@@ -378,9 +378,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 85000,
     priceRange: 'Rs. 85,000 - 1,75,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/jaipur-1.png',
+      '/artists/artist-4.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/jaipur-1.png',
+      '/artists/artist-4.jpg',
     ],
     rating: 4.9,
     reviewCount: 29,
@@ -403,9 +403,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 90000,
     priceRange: 'Rs. 90,000 - 1,80,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/b-of-mu-1.png',
+      '/artists/artist-8.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/b-of-mu-1.png',
+      '/artists/artist-8.jpg',
     ],
     rating: 4.9,
     reviewCount: 31,
@@ -428,9 +428,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 85000,
     priceRange: 'Rs. 85,000 - 1,65,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/orja-11.png',
+      '/artists/artist-5.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/orja-11.png',
+      '/artists/artist-5.jpg',
     ],
     rating: 4.9,
     reviewCount: 27,
@@ -453,9 +453,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 75000,
     priceRange: 'Rs. 75,000 - 1,50,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/rohani-1.png',
+      '/artists/artist-10.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/rohani-1.png',
+      '/artists/artist-10.jpg',
     ],
     rating: 4.8,
     reviewCount: 23,
@@ -478,9 +478,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 85000,
     priceRange: 'Rs. 85,000 - 2,00,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/taqdeer-1.png',
+      '/artists/artist-9.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/taqdeer-1.png',
+      '/artists/artist-9.jpg',
     ],
     rating: 4.9,
     reviewCount: 27,
@@ -503,9 +503,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 1800000,
     priceRange: 'Rs. 18,00,000+',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-21-at-1.25.08-PM-1.jpeg',
+      '/artists/artist-12.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-21-at-1.25.08-PM-1.jpeg',
+      '/artists/artist-12.jpg',
     ],
     videos: [
       {
@@ -535,9 +535,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 55000,
     priceRange: 'Rs. 55,000 - 1,10,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/dj-soul-1.png',
+      '/artists/artist-13.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/dj-soul-1.png',
+      '/artists/artist-13.jpg',
     ],
     rating: 4.9,
     reviewCount: 32,
@@ -560,9 +560,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 45000,
     priceRange: 'Rs. 45,000 - 85,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/saloni-2-520x397.png',
+      '/artists/artist-4.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/saloni-2-520x397.png',
+      '/artists/artist-4.jpg',
     ],
     rating: 4.9,
     reviewCount: 34,
@@ -585,9 +585,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 45000,
     priceRange: 'Rs. 45,000 - 90,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/saina-khan-1-520x397.png',
+      '/artists/artist-8.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/saina-khan-1-520x397.png',
+      '/artists/artist-8.jpg',
     ],
     rating: 4.9,
     reviewCount: 29,
@@ -610,9 +610,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 30000,
     priceRange: 'Rs. 30,000 - 60,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-1.07.47-PM-520x397.jpeg',
+      '/artists/artist-9.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-1.07.47-PM-520x397.jpeg',
+      '/artists/artist-9.jpg',
     ],
     rating: 4.8,
     reviewCount: 21,
@@ -635,9 +635,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 35000,
     priceRange: 'Rs. 35,000 - 70,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-12.45.49-PM-520x397.jpeg',
+      '/artists/artist-2.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-12.45.49-PM-520x397.jpeg',
+      '/artists/artist-2.jpg',
     ],
     rating: 4.8,
     reviewCount: 17,
@@ -660,9 +660,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 50000,
     priceRange: 'Rs. 50,000 - 1,00,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-12.16.39-PM-520x397.jpeg',
+      '/artists/artist-6.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-10-at-12.16.39-PM-520x397.jpeg',
+      '/artists/artist-6.jpg',
     ],
     rating: 4.9,
     reviewCount: 28,
@@ -685,9 +685,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 55000,
     priceRange: 'Rs. 55,000 - 1,10,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-02-at-2.27.02-PM-2-520x397.jpeg',
+      '/artists/artist-11.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-02-at-2.27.02-PM-2-520x397.jpeg',
+      '/artists/artist-11.jpg',
     ],
     rating: 4.9,
     reviewCount: 22,
@@ -760,9 +760,9 @@ export const ARTISTS_CATALOG = [
     priceStarting: 65000,
     priceRange: 'Rs. 65,000 - 1,30,000',
     featuredImage:
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/E7B89D32-6522-4063-8C53-6B2A15B53598-1200x800.png',
+      '/artists/artist-8.jpg',
     images: [
-      'https://worldofmusicians.com/wp-content/uploads/2026/04/E7B89D32-6522-4063-8C53-6B2A15B53598-1200x800.png',
+      '/artists/artist-8.jpg',
     ],
     rating: 4.9,
     reviewCount: 20,
