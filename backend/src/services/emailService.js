@@ -1,10 +1,48 @@
 const nodemailer = require('nodemailer');
 
 /**
- * Configure nodemailer transporter from environment variables.
- * Supports standard SMTP (e.g., Gmail, Outlook, AWS SES, or custom SMTP).
+ * Brevo (free: 300 emails/day) HTTP API transport.
+ * Uses HTTPS (port 443), so it works on hosts that block SMTP ports -
+ * e.g. Render's free plan blocks ports 465/587, which breaks Gmail SMTP.
+ * Exposes the same sendMail() shape as nodemailer.
+ */
+const parseAddress = (value) => {
+  const match = /^\s*"?([^"<]*)"?\s*<([^>]+)>\s*$/.exec(value || '');
+  return match ? { name: match[1].trim() || undefined, email: match[2].trim() } : { email: String(value).trim() };
+};
+
+const createBrevoTransport = (apiKey) => ({
+  sendMail: async ({ from, to, replyTo, subject, text, html }) => {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'api-key': apiKey, 'Content-Type': 'application/json', accept: 'application/json' },
+      body: JSON.stringify({
+        sender: parseAddress(from),
+        to: [parseAddress(to)],
+        ...(replyTo ? { replyTo: parseAddress(replyTo) } : {}),
+        subject,
+        htmlContent: html,
+        textContent: text,
+      }),
+      signal: AbortSignal.timeout(15000),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data?.message || `Brevo API HTTP ${res.status}`);
+    return { messageId: data.messageId };
+  },
+});
+
+/**
+ * Pick the email transport from environment variables:
+ *  1. BREVO_API_KEY set           -> Brevo HTTP API (use this on Render free plan)
+ *  2. EMAIL_USER + EMAIL_PASS set -> SMTP (Gmail by default; fine for local dev / paid hosts)
+ *  3. neither                     -> null (emails are only logged to the console)
  */
 const getTransporter = () => {
+  if (process.env.BREVO_API_KEY) {
+    return createBrevoTransport(process.env.BREVO_API_KEY);
+  }
+
   const host = process.env.EMAIL_HOST || 'smtp.gmail.com';
   const port = parseInt(process.env.EMAIL_PORT, 10) || 587;
   const secure = process.env.EMAIL_SECURE === 'true' || port === 465;
@@ -36,7 +74,7 @@ const getTransporter = () => {
  */
 const sendContactEmails = async ({ name, email, phone, subject, message }) => {
   const adminEmail = process.env.ADMIN_EMAIL || 'musicmaestroevent@gmail.com';
-  const senderEmail = process.env.EMAIL_USER || adminEmail;
+  const senderEmail = process.env.EMAIL_FROM || process.env.EMAIL_USER || adminEmail;
   const cleanSubject = subject && subject.trim() ? subject.trim() : 'General Inquiry';
   const cleanMessage = message && message.trim() ? message.trim() : 'No additional message provided.';
   const cleanPhone = phone && phone.trim() ? phone.trim() : 'Not provided';
@@ -189,7 +227,7 @@ const sendContactEmails = async ({ name, email, phone, subject, message }) => {
  */
 const sendRegistrationEmails = async (user) => {
   const adminEmail = process.env.ADMIN_EMAIL || 'musicmaestroevent@gmail.com';
-  const senderEmail = process.env.EMAIL_USER || adminEmail;
+  const senderEmail = process.env.EMAIL_FROM || process.env.EMAIL_USER || adminEmail;
   const isArtist = user.role === 'artist';
   const roleLabel = isArtist ? 'Artist' : 'Client';
   const fullName = [user.firstName, user.lastName].filter(Boolean).join(' ') || user.username;
@@ -328,7 +366,7 @@ const waButton = (url, label) =>
  */
 const sendInquiryEmails = async (inquiry) => {
   const adminEmail = process.env.ADMIN_EMAIL || 'musicmaestroevent@gmail.com';
-  const senderEmail = process.env.EMAIL_USER || adminEmail;
+  const senderEmail = process.env.EMAIL_FROM || process.env.EMAIL_USER || adminEmail;
   const ref = inquiry.referenceId;
   const artist = inquiry.artistName || 'General Entertainment Query';
   const time = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
