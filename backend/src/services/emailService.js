@@ -33,12 +33,41 @@ const createBrevoTransport = (apiKey) => ({
 });
 
 /**
+ * Resend (free: 3,000 emails/month, 100/day) HTTP API transport.
+ * Requires a verified domain (e.g. musicmaestro.in) - EMAIL_FROM must use it.
+ */
+const createResendTransport = (apiKey) => ({
+  sendMail: async ({ from, to, replyTo, subject, text, html }) => {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        ...(replyTo ? { reply_to: replyTo } : {}),
+        subject,
+        html,
+        text,
+      }),
+      signal: AbortSignal.timeout(15000),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data?.message || `Resend API HTTP ${res.status}`);
+    return { messageId: data.id };
+  },
+});
+
+/**
  * Pick the email transport from environment variables:
- *  1. BREVO_API_KEY set           -> Brevo HTTP API (use this on Render free plan)
- *  2. EMAIL_USER + EMAIL_PASS set -> SMTP (Gmail by default; fine for local dev / paid hosts)
- *  3. neither                     -> null (emails are only logged to the console)
+ *  1. RESEND_API_KEY set          -> Resend HTTP API (works on Render free plan)
+ *  2. BREVO_API_KEY set           -> Brevo HTTP API (works on Render free plan)
+ *  3. EMAIL_USER + EMAIL_PASS set -> SMTP (Gmail by default; fine for local dev / paid hosts)
+ *  4. none                        -> null (emails are only logged to the console)
  */
 const getTransporter = () => {
+  if (process.env.RESEND_API_KEY) {
+    return createResendTransport(process.env.RESEND_API_KEY);
+  }
   if (process.env.BREVO_API_KEY) {
     return createBrevoTransport(process.env.BREVO_API_KEY);
   }
