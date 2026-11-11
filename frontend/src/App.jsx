@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import AuthModal from './components/AuthModal';
+import RegistrationWhatsAppPrompt from './components/RegistrationWhatsAppPrompt';
 
 // Pages
 import Home from './pages/Home';
@@ -64,6 +65,7 @@ function App() {
           <Footer />
           <WhatsAppButton />
           <AuthModal />
+          <RegistrationWhatsAppPrompt />
         </div>
       </AuthProvider>
     </Router>

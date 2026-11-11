@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { submitContactMessage } from '../services/api';
+import WhatsAppConfirmButton from '../components/WhatsAppConfirmButton';
 import {
   MapPin,
   Phone,
@@ -23,6 +24,8 @@ const Contact = () => {
 
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
+  // Snapshot of the submitted message (form is cleared after success)
+  const [submitted, setSubmitted] = useState(null);
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -40,6 +43,7 @@ const Contact = () => {
     try {
       const res = await submitContactMessage(formData);
       if (res.success) {
+        setSubmitted(formData);
         setSuccessMsg(
           'Thank you for reaching out! Your message has been sent successfully. Our team will contact you shortly.'
         );
@@ -97,6 +101,21 @@ const Contact = () => {
                   <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <span>{successMsg}</span>
                 </div>
+              )}
+
+              {successMsg && submitted && (
+                <WhatsAppConfirmButton
+                  message={[
+                    'Hi Music Maestro! 👋',
+                    'I just sent a message on musicmaestro.in.',
+                    '',
+                    `Name: ${submitted.name}`,
+                    submitted.phone ? `Phone: ${submitted.phone}` : null,
+                    `Email: ${submitted.email}`,
+                    submitted.subject ? `Subject: ${submitted.subject}` : null,
+                    submitted.message ? `Message: ${submitted.message}` : null,
+                  ]}
+                />
               )}
 
               {error && (

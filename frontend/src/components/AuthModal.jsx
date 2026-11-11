@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { X, Lock, Mail, User as UserIcon, Briefcase, Eye, EyeOff, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { X, Lock, Mail, User as UserIcon, Briefcase, Eye, EyeOff, AlertCircle, CheckCircle2, Phone } from 'lucide-react';
 
 const AuthModal = () => {
   const { isAuthModalOpen, authModalConfig, closeAuthModal, login, register } = useAuth();
@@ -16,6 +16,7 @@ const AuthModal = () => {
     password: '',
     firstName: '',
     lastName: '',
+    phone: '',
     agreeTerms: true,
   });
 
@@ -69,6 +70,7 @@ const AuthModal = () => {
           password: formData.password,
           firstName: formData.firstName,
           lastName: formData.lastName,
+          phone: formData.phone,
           role,
         });
         setSuccessMsg('Account registered successfully!');
@@ -227,6 +229,30 @@ const AuthModal = () => {
                     />
                   </div>
                 </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-300 mb-1">
+                    WhatsApp Number *
+                  </label>
+                  <div className="relative">
+                    <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      inputMode="tel"
+                      autoComplete="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+91 98765 43210"
+                      className="w-full pl-10 pr-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-sm focus:outline-none focus:border-wom-gold transition"
+                    />
+                  </div>
+                  <p className="mt-1 text-[11px] text-gray-400">
+                    Used to confirm your registration on WhatsApp.
+                  </p>
+                </div>
+
               </>
             )}
 

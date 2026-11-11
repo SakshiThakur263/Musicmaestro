@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import AuthModal from '../components/AuthModal';
+import RegistrationWhatsAppPrompt from '../components/RegistrationWhatsAppPrompt';
 
 const MainLayout = ({ children }) => {
   return (
@@ -12,6 +13,7 @@ const MainLayout = ({ children }) => {
       <Footer />
       <WhatsAppButton />
       <AuthModal />
+      <RegistrationWhatsAppPrompt />
     </div>
   );
 };

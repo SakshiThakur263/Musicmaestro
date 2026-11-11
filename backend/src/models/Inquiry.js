@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const inquirySchema = new mongoose.Schema(
   {
+    // Public reference shared with the client, e.g. WOM-3F9A1C
+    referenceId: {
+      type: String,
+      index: true,
+    },
     name: {
       type: String,
       required: [true, 'Full name is required'],

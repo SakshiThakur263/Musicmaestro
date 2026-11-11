@@ -30,6 +30,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    // WhatsApp-enabled mobile number in E.164 digits (e.g. 919876543210)
+    phone: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     role: {
       type: String,
       enum: ['client', 'artist', 'admin'],

@@ -47,6 +47,7 @@ async function run() {
     username: 'pooja_' + ts,
     email,
     password: 'Password@123',
+    phone: '+91 98765 43210',
     role: 'client'
   });
   console.log('Register status:', reg.status, 'User:', reg.data?.data?.user?.email);

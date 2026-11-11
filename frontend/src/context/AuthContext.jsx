@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('wom_token') || null);
   const [loading, setLoading] = useState(true);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  // Newly registered user -> shows the free WhatsApp confirmation prompt
+  const [welcomeUser, setWelcomeUser] = useState(null);
   const [authModalConfig, setAuthModalConfig] = useState({
     defaultTab: 'login', // 'login' | 'register'
     defaultRole: 'client', // 'client' | 'artist'
@@ -53,6 +55,7 @@ export const AuthProvider = ({ children }) => {
       setToken(res.data.token);
       setUser(res.data);
       setIsAuthModalOpen(false);
+      setWelcomeUser(res.data);
       return res;
     }
     throw new Error(res.message || 'Registration failed');
@@ -73,6 +76,8 @@ export const AuthProvider = ({ children }) => {
     setIsAuthModalOpen(false);
   };
 
+  const dismissWelcome = () => setWelcomeUser(null);
+
   return (
     <AuthContext.Provider
       value={{
@@ -87,6 +92,8 @@ export const AuthProvider = ({ children }) => {
         authModalConfig,
         openAuthModal,
         closeAuthModal,
+        welcomeUser,
+        dismissWelcome,
       }}
     >
       {children}

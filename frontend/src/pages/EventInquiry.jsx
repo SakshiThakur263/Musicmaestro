@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { submitInquiry } from '../services/api';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
+import WhatsAppConfirmButton from '../components/WhatsAppConfirmButton';
+import { inquiryWhatsAppMessage } from '../utils/whatsapp';
 
 const EventInquiry = () => {
   const [searchParams] = useSearchParams();
@@ -108,6 +110,21 @@ const EventInquiry = () => {
                 <span className="text-white font-medium text-right">{formData.guestCount}</span>
               </div>
             </div>
+
+            <WhatsAppConfirmButton
+              className="max-w-sm mx-auto pt-1"
+              message={inquiryWhatsAppMessage({
+                reference: successResponse.inquiryReference,
+                name: successResponse.fullName,
+                phone: formData.phone,
+                email: formData.email,
+                artistName: searchParams.get('artist'),
+                eventType: formData.eventType,
+                city: formData.address,
+                guestCount: formData.guestCount,
+                notes: formData.notes,
+              })}
+            />
 
             <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
               <button

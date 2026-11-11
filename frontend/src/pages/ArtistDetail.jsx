@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchArtistBySlug, submitInquiry, submitArtistReview } from '../services/api';
+import WhatsAppConfirmButton from '../components/WhatsAppConfirmButton';
+import { inquiryWhatsAppMessage } from '../utils/whatsapp';
 import ArtistCard from '../components/ArtistCard';
 import { ARTISTS_CATALOG, findCatalogArtistBySlug } from '../utils/artistsCatalog';
 import {
@@ -764,6 +766,22 @@ const ArtistDetail = () => {
                   <p className="text-[11px] text-gray-400">
                     A Music Maestro artist coordinator will call you back within 24 hours with exact availability and rider details.
                   </p>
+                  <WhatsAppConfirmButton
+                    className="pt-1"
+                    message={inquiryWhatsAppMessage({
+                      reference: bookingSuccess.inquiryReference,
+                      name: bookingForm.name,
+                      phone: bookingForm.phone,
+                      email: bookingForm.email,
+                      artistName: data.artist.name,
+                      eventType: bookingForm.eventType,
+                      eventDate: bookingForm.eventDate,
+                      city: bookingForm.city,
+                      guestCount: bookingForm.guestCount,
+                      budget: bookingForm.budget,
+                      notes: bookingForm.notes,
+                    })}
+                  />
                   <button
                     onClick={() => setBookingSuccess(null)}
                     className="text-xs text-wom-gold hover:underline pt-2 block mx-auto"

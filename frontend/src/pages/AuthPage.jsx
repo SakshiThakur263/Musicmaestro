@@ -13,6 +13,7 @@ import {
   ArrowRight,
   LogOut,
   PlusCircle,
+  Phone,
 } from 'lucide-react';
 
 const AuthPage = ({ defaultTab = 'login' }) => {
@@ -32,6 +33,7 @@ const AuthPage = ({ defaultTab = 'login' }) => {
     password: '',
     firstName: '',
     lastName: '',
+    phone: '',
     rememberMe: true,
     agreePrivacy: true,
     agreeTerms: true,
@@ -85,6 +87,7 @@ const AuthPage = ({ defaultTab = 'login' }) => {
           password: formData.password,
           firstName: formData.firstName,
           lastName: formData.lastName,
+          phone: formData.phone,
           role,
         });
         setSuccessMsg('Account registered successfully! Redirecting...');
@@ -290,6 +293,30 @@ const AuthPage = ({ defaultTab = 'login' }) => {
                         />
                       </div>
                     </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-300 mb-1">
+                        WhatsApp Number *
+                      </label>
+                      <div className="relative">
+                        <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input
+                          type="tel"
+                          name="phone"
+                          required
+                          inputMode="tel"
+                          autoComplete="tel"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="+91 98765 43210"
+                          className="w-full pl-10 pr-3.5 py-2.5 bg-[#181818] border border-white/15 rounded-lg text-white text-sm focus:outline-none focus:border-[#f4a51c]"
+                        />
+                      </div>
+                      <p className="mt-1 text-[11px] text-gray-400">
+                        Used to confirm your registration on WhatsApp.
+                      </p>
+                    </div>
+
                   </>
                 )}
 
