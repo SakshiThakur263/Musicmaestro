@@ -485,9 +485,112 @@ const sendInquiryEmails = async (inquiry) => {
   return { success: results.some((r) => r.status === 'fulfilled') };
 };
 
+/**
+ * Artist listing ("I'm an artist" / Add Listing) emails:
+ *  1. Owner alert with the profile details + "Reply on WhatsApp" to the artist
+ *  2. Artist confirmation (live link, or "under review" if pending)
+ * Never throws.
+ */
+const sendArtistListingEmails = async (listing) => {
+  const adminEmail = process.env.ADMIN_EMAIL || 'musicmaestroevent@gmail.com';
+  const senderEmail = process.env.EMAIL_FROM || process.env.EMAIL_USER || adminEmail;
+  const siteUrl = (process.env.SITE_URL || 'https://musicmaestro.in').replace(/\/$/, '');
+  const e = escapeHtml;
+  const profileUrl = listing.pending ? null : `${siteUrl}/artist/${listing.slug}`;
+  const fee = listing.priceStarting ? `Rs. ${Number(listing.priceStarting).toLocaleString('en-IN')}` : '';
+
+  const rows = [
+    ['Artist / Band', e(listing.name)],
+    ['Category', e([listing.category, listing.subcategory].filter(Boolean).join(' - '))],
+    ['City', e(listing.location)],
+    ['Starting Fee', e(fee)],
+    ['Status', listing.pending ? '<span style="color:#f4a51c;">Pending - saved while database was offline</span>' : 'Published'],
+    ['Profile', profileUrl ? `<a href="${profileUrl}" style="color:#f4a51c;">${profileUrl}</a>` : ''],
+  ];
+
+  const artistWaText =
+    `Hi ${listing.name}, this is Music Maestro 🎵\n` +
+    `Thank you for listing your profile with us! ` +
+    (profileUrl ? `It is live here: ${profileUrl}\n` : `Our team is reviewing it and will publish it shortly.\n`) +
+    `Please share your best performance videos to help us get you more bookings.`;
+  const artistWaLink = listing.whatsapp
+    ? `https://wa.me/${listing.whatsapp}?text=${encodeURIComponent(artistWaText)}`
+    : null;
+  const ownerWaLink = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(
+    `Hi Music Maestro! I just listed my artist profile "${listing.name}" on your website.`
+  )}`;
+
+  const adminHtml = emailShell(
+    'New Artist Listing',
+    `<h2 style="color: #f4a51c; font-size: 18px; margin: 0 0 14px;">🎤 New artist profile: ${e(listing.name)}</h2>
+     ${detailRows([
+       ['Email', `<a href="mailto:${e(listing.contactEmail)}" style="color:#f4a51c;">${e(listing.contactEmail)}</a>`],
+       ['Phone', `<a href="tel:${e(listing.contactPhone)}" style="color:#f4a51c;">${e(listing.contactPhone)}</a>`],
+       ...rows,
+     ])}
+     ${
+       listing.bio
+         ? `<div style="background-color: #121622; padding: 14px 18px; border-radius: 8px; border: 1px solid #1f2633; margin-top: 14px;"><p style="margin: 0 0 6px; color: #f4a51c; font-weight: bold;">Bio</p><p style="margin: 0; white-space: pre-wrap; color: #e2e8f0; font-size: 14px;">${e(listing.bio)}</p></div>`
+         : ''
+     }
+     ${artistWaLink ? waButton(artistWaLink, `Reply to ${e(listing.name)} on WhatsApp`) : ''}`
+  );
+
+  const artistHtml = emailShell(
+    listing.pending ? 'Artist Profile Received' : 'Your Artist Profile is Live',
+    `<p style="font-size: 15px; color: #ffffff;">Dear <strong>${e(listing.name)}</strong>,</p>
+     <p style="font-size: 14px; color: #cbd5e1; line-height: 1.6;">
+       ${
+         listing.pending
+           ? 'Thank you for joining <strong>Music Maestro</strong>! We have received your artist profile. Our team will review and publish it shortly.'
+           : 'Congratulations! Your artist profile is now <strong>live</strong> in the Music Maestro Artist Bank, where event organisers can discover and book you.'
+       }
+     </p>
+     ${detailRows(rows)}
+     ${profileUrl ? `<p style="text-align: center; margin: 20px 0 0;"><a href="${profileUrl}" style="display: inline-block; background: #f4a51c; color: #000; padding: 12px 22px; border-radius: 8px; text-decoration: none; font-weight: bold;">View your profile</a></p>` : ''}
+     ${waButton(ownerWaLink, 'Chat with us on WhatsApp')}`
+  );
+
+  const transporter = getTransporter();
+  if (!transporter) {
+    console.log('[EmailService]: Email not configured. Artist listing email simulation:');
+    console.log(`  -> Owner (${adminEmail}): "New Artist Listing: ${listing.name}"`);
+    console.log(`  -> Artist (${listing.contactEmail}): "${listing.pending ? 'We received' : 'Your profile is live'}"`);
+    return { simulated: true };
+  }
+
+  const results = await Promise.allSettled([
+    transporter.sendMail({
+      from: `"Music Maestro Platform" <${senderEmail}>`,
+      to: adminEmail,
+      replyTo: listing.contactEmail,
+      subject: `New Artist Listing: ${listing.name} (${listing.category || 'Artist'}, ${listing.location || ''})`,
+      text: `New artist listing\nName: ${listing.name}\nEmail: ${listing.contactEmail}\nPhone: ${listing.contactPhone}\nCategory: ${listing.category} - ${listing.subcategory}\nCity: ${listing.location}\nFee: ${fee}\nStatus: ${listing.pending ? 'Pending' : 'Published'}${profileUrl ? `\nProfile: ${profileUrl}` : ''}`,
+      html: adminHtml,
+    }),
+    transporter.sendMail({
+      from: `"Music Maestro" <${senderEmail}>`,
+      to: listing.contactEmail,
+      subject: listing.pending
+        ? `We received your artist profile, ${listing.name}!`
+        : `Your artist profile is live on Music Maestro!`,
+      text: `Dear ${listing.name},\n\n${listing.pending ? 'We received your artist profile and will publish it shortly.' : `Your profile is live: ${profileUrl}`}\n\nWhatsApp us: https://wa.me/${OWNER_WHATSAPP}\n\nTeam Music Maestro`,
+      html: artistHtml,
+    }),
+  ]);
+
+  results.forEach((r, i) => {
+    const who = i === 0 ? `owner (${adminEmail})` : `artist (${listing.contactEmail})`;
+    if (r.status === 'fulfilled') console.log(`[EmailService]: Artist listing email sent to ${who}`);
+    else console.error(`[EmailService]: Artist listing email to ${who} failed:`, r.reason?.message);
+  });
+  return { success: results.some((r) => r.status === 'fulfilled') };
+};
+
 module.exports = {
   sendContactEmails,
   sendRegistrationEmails,
   sendInquiryEmails,
+  sendArtistListingEmails,
 };
 

@@ -108,6 +108,10 @@ const artistSchema = new mongoose.Schema(
       youtube: { type: String, default: '' },
       spotify: { type: String, default: '' },
     },
+    // Private contact details of the artist who submitted the listing.
+    // select:false keeps them out of every public API response.
+    contactEmail: { type: String, default: '', trim: true, lowercase: true, select: false },
+    contactPhone: { type: String, default: '', trim: true, select: false },
   },
   { timestamps: true }
 );

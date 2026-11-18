@@ -1,5 +1,9 @@
+const mongoose = require('mongoose');
 const Artist = require('../models/Artist');
 const Review = require('../models/Review');
+const { sendArtistListingEmails } = require('../services/emailService');
+const { normalizePhone } = require('../services/whatsappService');
+const { saveToLocalBackup } = require('../utils/localBackup');
 
 // Helper to create clean slug
 const slugify = (text) => {
@@ -174,7 +178,51 @@ const createArtist = async (req, res, next) => {
       languages,
       performanceTypes,
       socialLinks,
+      contactEmail,
+      contactPhone,
     } = req.body;
+
+    const contact = {
+      contactEmail: String(contactEmail).trim().toLowerCase(),
+      contactPhone: String(contactPhone).trim(),
+    };
+    const notify = (listing, pending) =>
+      sendArtistListingEmails({
+        ...listing,
+        ...contact,
+        whatsapp: normalizePhone(contact.contactPhone),
+        pending,
+      }).catch((err) => console.error('[Artist]: Listing email error:', err.message));
+
+    // Database unavailable: keep the submission safe locally and confirm
+    // receipt instead of failing - the team publishes it once the DB is back.
+    if (mongoose.connection.readyState !== 1) {
+      const pendingListing = {
+        name,
+        slug: slugify(name),
+        category,
+        subcategory,
+        location,
+        bio,
+        priceStarting: priceStarting ? Number(priceStarting) : 25000,
+        featuredImage,
+        tagline,
+        genres,
+        languages,
+        performanceTypes,
+        videos,
+        socialLinks,
+      };
+      saveToLocalBackup('artist-listings', { ...pendingListing, ...contact });
+      notify(pendingListing, true);
+      return res.status(202).json({
+        success: true,
+        pending: true,
+        message:
+          'Thank you! Your artist profile has been received. Our team will review and publish it shortly.',
+        data: pendingListing,
+      });
+    }
 
     let baseSlug = slugify(name);
     let slug = baseSlug;
@@ -185,6 +233,7 @@ const createArtist = async (req, res, next) => {
     }
 
     const newArtist = await Artist.create({
+      ...contact,
       name,
       slug,
       tagline: tagline || `${subcategory} in ${location}`,
@@ -208,10 +257,17 @@ const createArtist = async (req, res, next) => {
       verified: true,
     });
 
+    // Strip private contact details before sending the profile back
+    const publicArtist = newArtist.toObject();
+    delete publicArtist.contactEmail;
+    delete publicArtist.contactPhone;
+
+    notify(publicArtist, false);
+
     res.status(201).json({
       success: true,
       message: 'Artist profile created successfully and listed in Artist Bank',
-      data: newArtist,
+      data: publicArtist,
     });
   } catch (error) {
     next(error);

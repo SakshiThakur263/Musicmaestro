@@ -10,6 +10,7 @@ const fs = require('fs');
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const connectDB = require('./config/db');
+const { getDbStatus } = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
 // Route imports
@@ -22,9 +23,9 @@ const statsRoutes = require('./routes/statsRoutes');
 
 const app = express();
 
-// Connect to Database
-connectDB().then(async () => {
-  // Auto-seed if database has no artists
+// Connect to Database (retries automatically until it succeeds).
+// Auto-seed runs once the connection is established.
+connectDB(async () => {
   try {
     const Artist = require('./models/Artist');
     const count = await Artist.countDocuments();
@@ -61,9 +62,18 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
+  const database = getDbStatus();
   res.json({
-    status: 'ok',
+    status: database.state === 'connected' ? 'ok' : 'degraded',
     service: 'World of Musicians API',
+    database,
+    email: process.env.RESEND_API_KEY
+      ? 'resend'
+      : process.env.BREVO_API_KEY
+        ? 'brevo'
+        : process.env.EMAIL_USER && process.env.EMAIL_PASS
+          ? 'smtp'
+          : 'not configured',
     timestamp: new Date().toISOString(),
   });
 });

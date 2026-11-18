@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createArtistListing } from '../services/api';
+import WhatsAppConfirmButton from '../components/WhatsAppConfirmButton';
 import {
   Music,
   PlusCircle,
@@ -32,6 +33,8 @@ const AddListing = () => {
     performanceTypes: 'Weddings, Corporate Events, Cocktails',
     videoUrl: '',
     instagram: '',
+    contactEmail: '',
+    contactPhone: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -85,11 +88,18 @@ const AddListing = () => {
         socialLinks: {
           instagram: formData.instagram,
         },
+        contactEmail: formData.contactEmail,
+        contactPhone: formData.contactPhone,
       };
 
       const res = await createArtistListing(payload);
       if (res.success) {
-        setSuccessArtist(res.data);
+        setSuccessArtist({
+          ...res.data,
+          pending: Boolean(res.pending),
+          contactEmail: formData.contactEmail,
+          contactPhone: formData.contactPhone,
+        });
       }
     } catch (err) {
       setError(
@@ -129,7 +139,9 @@ const AddListing = () => {
                 Congratulations, {successArtist.name}!
               </h2>
               <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
-                Your artist profile has been published and is now live in the Music Maestro Artist Bank.
+                {successArtist.pending
+                  ? 'Your artist profile has been received. Our team will review and publish it shortly - we have emailed you a confirmation.'
+                  : 'Your artist profile has been published and is now live in the Music Maestro Artist Bank. A confirmation has been sent to your email.'}
               </p>
 
               <div className="p-4 bg-[#181f2c] border border-wom-darkBorder rounded-xl max-w-sm mx-auto text-left space-y-2 text-xs">
@@ -149,13 +161,31 @@ const AddListing = () => {
                 </div>
               </div>
 
+              <WhatsAppConfirmButton
+                className="max-w-sm mx-auto"
+                message={[
+                  'Hi Music Maestro! 👋',
+                  `I just listed my artist profile on musicmaestro.in.`,
+                  '',
+                  `Artist / Band: ${successArtist.name}`,
+                  `Category: ${successArtist.category}${successArtist.subcategory ? ` - ${successArtist.subcategory}` : ''}`,
+                  `City: ${successArtist.location}`,
+                  `Starting fee: Rs. ${Number(successArtist.priceStarting).toLocaleString('en-IN')}`,
+                  `Email: ${successArtist.contactEmail}`,
+                  `Phone: ${successArtist.contactPhone}`,
+                  successArtist.pending ? null : `Profile: ${window.location.origin}/artist/${successArtist.slug}`,
+                ]}
+              />
+
               <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
-                <Link
-                  to={`/artist/${successArtist.slug}`}
-                  className="w-full sm:w-auto px-6 py-3 bg-wom-gold text-black font-extrabold text-xs rounded-xl shadow-gold transition text-center"
-                >
-                  View Live Profile
-                </Link>
+                {!successArtist.pending && (
+                  <Link
+                    to={`/artist/${successArtist.slug}`}
+                    className="w-full sm:w-auto px-6 py-3 bg-wom-gold text-black font-extrabold text-xs rounded-xl shadow-gold transition text-center"
+                  >
+                    View Live Profile
+                  </Link>
+                )}
                 <button
                   onClick={() => {
                     setSuccessArtist(null);
@@ -173,6 +203,8 @@ const AddListing = () => {
                       performanceTypes: 'Weddings, Corporate Events',
                       videoUrl: '',
                       instagram: '',
+                      contactEmail: '',
+                      contactPhone: '',
                     });
                   }}
                   className="w-full sm:w-auto px-6 py-3 bg-[#181f2c] border border-wom-darkBorder hover:border-wom-gold text-white text-xs font-semibold rounded-xl transition"
@@ -403,6 +435,50 @@ const AddListing = () => {
                       value={formData.instagram}
                       onChange={handleChange}
                       placeholder="@artist_official"
+                      className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact details (private) */}
+              <div className="space-y-4 pt-2">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-wom-gold border-b border-wom-darkBorder pb-2">
+                  4. Your Contact Details
+                </h3>
+                <p className="text-[11px] text-gray-400 -mt-2">
+                  Kept private - only the Music Maestro team uses these to send you booking requests.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      name="contactEmail"
+                      required
+                      autoComplete="email"
+                      value={formData.contactEmail}
+                      onChange={handleChange}
+                      placeholder="you@example.com"
+                      className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">
+                      WhatsApp Number *
+                    </label>
+                    <input
+                      type="tel"
+                      name="contactPhone"
+                      required
+                      inputMode="tel"
+                      autoComplete="tel"
+                      value={formData.contactPhone}
+                      onChange={handleChange}
+                      placeholder="+91 98765 43210"
                       className="w-full px-3.5 py-2.5 bg-[#181f2c] border border-wom-darkBorder rounded-lg text-white text-xs focus:outline-none focus:border-wom-gold"
                     />
                   </div>
