@@ -37,6 +37,14 @@ connectDB(async () => {
   } catch (err) {
     console.log('[Server]: Auto-seed check finished with note:', err.message);
   }
+
+  // Publish artist listings / inquiries / messages saved while the DB was offline
+  try {
+    const { syncLocalBackups } = require('./utils/syncBackups');
+    await syncLocalBackups();
+  } catch (err) {
+    console.log('[Server]: Backup sync finished with note:', err.message);
+  }
 });
 
 // Middleware

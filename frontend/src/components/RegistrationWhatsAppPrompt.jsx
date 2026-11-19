@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { CheckCircle2, MessageCircle, X } from 'lucide-react';
+import { CheckCircle2, MessageCircle, X, PlusCircle } from 'lucide-react';
 import { buildWhatsAppLink } from '../utils/whatsapp';
 
 /**
@@ -13,6 +14,7 @@ import { buildWhatsAppLink } from '../utils/whatsapp';
 const RegistrationWhatsAppPrompt = () => {
   const { welcomeUser, dismissWelcome } = useAuth();
   const [opened, setOpened] = useState(false);
+  const navigate = useNavigate();
 
   if (!welcomeUser) return null;
 
@@ -70,6 +72,26 @@ const RegistrationWhatsAppPrompt = () => {
             ? ' Just tap Send in WhatsApp to complete your confirmation.'
             : ' Confirm on WhatsApp to get your welcome message and talk directly with our team.'}
         </p>
+
+        {isArtist && (
+          <div className="mt-5 p-3.5 rounded-xl bg-wom-gold/10 border border-wom-gold/30 text-left">
+            <p className="text-xs text-gray-200 leading-relaxed">
+              <strong className="text-wom-gold">Next step:</strong> create your artist profile so event
+              organisers can find and book you in the Artist Bank.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                dismissWelcome();
+                navigate('/add-listing');
+              }}
+              className="mt-3 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-wom-gold hover:bg-wom-goldHover text-black font-extrabold text-sm transition"
+            >
+              <PlusCircle className="w-4 h-4" />
+              Create my artist profile
+            </button>
+          </div>
+        )}
 
         <a
           href={whatsappUrl}

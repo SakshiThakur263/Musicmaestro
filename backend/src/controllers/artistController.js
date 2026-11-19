@@ -4,6 +4,20 @@ const Review = require('../models/Review');
 const { sendArtistListingEmails } = require('../services/emailService');
 const { normalizePhone } = require('../services/whatsappService');
 const { saveToLocalBackup } = require('../utils/localBackup');
+const { uniqueSlug } = require('../utils/syncBackups');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+
+// If the request carries a valid login token, return that user's id (optional auth)
+const getOptionalUserId = (req) => {
+  const header = req.headers?.authorization || '';
+  if (!header.startsWith('Bearer ')) return null;
+  try {
+    return jwt.verify(header.slice(7), process.env.JWT_SECRET || 'wom_super_secret_jwt_key_2026').id;
+  } catch {
+    return null;
+  }
+};
 
 // Helper to create clean slug
 const slugify = (text) => {
@@ -78,7 +92,8 @@ const getArtists = async (req, res, next) => {
 
     // Sorting
     let sortOption = { createdAt: -1 };
-    if (sort === 'rating') sortOption = { rating: -1, reviewCount: -1 };
+    // Newest first among equal ratings so freshly listed artists are visible on page 1
+    if (sort === 'rating') sortOption = { rating: -1, createdAt: -1 };
     else if (sort === 'price-low') sortOption = { priceStarting: 1 };
     else if (sort === 'price-high') sortOption = { priceStarting: -1 };
     else if (sort === 'name-asc') sortOption = { name: 1 };
@@ -224,13 +239,7 @@ const createArtist = async (req, res, next) => {
       });
     }
 
-    let baseSlug = slugify(name);
-    let slug = baseSlug;
-    let count = 1;
-    while (await Artist.findOne({ slug })) {
-      slug = `${baseSlug}-${count}`;
-      count++;
-    }
+    const slug = await uniqueSlug(Artist, name);
 
     const newArtist = await Artist.create({
       ...contact,
@@ -256,6 +265,14 @@ const createArtist = async (req, res, next) => {
       featured: false,
       verified: true,
     });
+
+    // Link the profile to the logged-in artist account (if any)
+    const userId = getOptionalUserId(req);
+    if (userId) {
+      User.findByIdAndUpdate(userId, { artistProfileId: newArtist._id, role: 'artist' }).catch((err) =>
+        console.warn('[Artist]: Could not link profile to user:', err.message)
+      );
+    }
 
     // Strip private contact details before sending the profile back
     const publicArtist = newArtist.toObject();
